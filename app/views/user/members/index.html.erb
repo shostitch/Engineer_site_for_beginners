@@ -1,3 +1,18 @@
-<% @members.each do |member| %>
+<h2>参加者の一覧</h2>
+<table>
+  <thead>
+    <tr>
+      <th>ニックネーム</th>
+      <th>フルネーム</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @members.each do |member| %>
+      <tr>
+        <td><%= link_to member.nickname,member_path(member.id) %></td>
+        <td></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-<% end %>

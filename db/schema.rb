@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 2022_07_04_031447) do
   end
 
   create_table "posts", force: :cascade do |t|
+    t.integer "member_id", null: false
     t.string "title", null: false
     t.text "content", null: false
     t.datetime "created_at", precision: 6, null: false

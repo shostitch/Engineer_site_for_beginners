@@ -1,2 +1,27 @@
-<h1>User::Members#show</h1>
-<p>Find me in app/views/user/members/show.html.erb</p>
+<table>
+  <tbody>
+    <% if current_member.id == @member.id %>
+      <h2>マイページ</h2>
+    <% else %>
+      <h2><%= @member.nickname %>さんのページ</h2>
+    <% end %>
+    <tr>
+      <th>名前</th>
+      <td><%= @member.full_name %></td>
+    </tr>
+    <tr>
+      <th>ニックネーム</th>
+      <td><%= @member.nickname %></td>
+    </tr>
+    <tr>
+      <th>自己紹介</th>
+      <td><%= @member.introduction %></td>
+    </tr>
+  </tbody>
+</table>
+
+<%= link_to "投稿者一覧へ",members_path,class: 'btn btn-primary' %>
+<% if current_member.id == @member.id %>
+  <%= link_to '新規投稿する', new_post_path,class: 'btn btn-success' %>
+  <%= link_to '編集する', edit_member_path(@member.id),class: 'btn btn-success' %>
+<% end %>

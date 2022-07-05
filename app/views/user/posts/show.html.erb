@@ -1,2 +1,11 @@
-<h1>User::Posts#show</h1>
-<p>Find me in app/views/user/posts/show.html.erb</p>
+<h2><%= @post.title %></h2>
+
+<%= @post.content %>
+
+
+<h4>わからないところは聞いてみよう！</h4>
+<%= link_to '質問する',question_path,class: 'btn btn-primary' %>
+
+<% if current_member.id == @post.member_id %>
+  <%= link_to '編集する', edit_post_path(@post.id),class: 'btn btn-success' %>
+<% end %>

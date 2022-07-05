@@ -1,2 +1,15 @@
-<h1>User::Posts#edit</h1>
-<p>Find me in app/views/user/posts/edit.html.erb</p>
+<h2>投稿編集ページ</h2>
+
+<%= form_with model: @post, url: post_path(@post.id) do |f| %>
+  <div>
+    <%= f.label :title, 'タイトル' %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <%= f.label :content, '内容' %>
+    <%= f.text_field :content %>
+  </div>
+
+  <%= f.submit '更新する', class: 'btn btn-success' %>
+<% end %>

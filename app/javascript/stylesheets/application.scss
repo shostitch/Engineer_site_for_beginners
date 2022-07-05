@@ -1,1 +1,43 @@
 @import '~bootstrap/scss/bootstrap';
+
+header {
+    height: 70px;
+    background-color: #000;
+}
+
+.header-icon {
+    float: left;
+    line-height: 70px;
+    margin-left: 30px;
+    padding: 0 20px;
+}
+
+ul {
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+    line-height: 70px;
+    margin-right: 30px;
+    margin-bottom: 0;
+}
+
+.header-item {
+    display: block;
+    color: #fff;
+    width: 120px;
+    text-align: center;
+
+
+}
+
+a:hover {
+    color: #AAA;
+    text-decoration: none;
+}
+
+
+
+footer {
+    background-color: black;
+    height: 50px;
+}

@@ -1,13 +1,42 @@
-<%= link_to 'ホーム画面', root_path %>
+<header>
+    <%= link_to 'ホーム画面', root_path, class: 'header-item header-icon' %>
+  <ul>
+    <% if member_signed_in? %>
 
-<% if member_signed_in? %>
-  <%= link_to 'About', about_path %>
-  <%= link_to 'マイページ', member_path(current_member.id) %>
-  <%= link_to '投稿一覧', posts_path %>
-  <%= link_to 'ログアウト', destroy_member_session_path, method: :delete %>
-<% else %>
-  <%= link_to 'ゲストログイン', about_path %>
-  <%= link_to 'About', about_path %>
-  <%= link_to '新規登録', new_member_registration_path %>
-  <%= link_to 'ログイン', new_member_session_path %>
-<% end %>
+      <li>
+        <%= link_to 'About', about_path, class: 'header-item' %>
+      </li>
+
+      <li>
+        <%= link_to 'マイページ', member_path(current_member.id), class: 'header-item' %>
+      </li>
+
+      <li>
+        <%= link_to '投稿一覧', posts_path, class: 'header-item' %>
+      </li>
+
+      <li>
+        <%= link_to 'ログアウト', destroy_member_session_path, method: :delete, class: 'header-item' %>
+      </li>
+
+    <% else %>
+
+      <li>
+      <%= link_to 'ゲストログイン', about_path, class: 'header-item' %>
+      </li>
+
+      <li>
+      <%= link_to 'About', about_path, class: 'header-item' %>
+      </li>
+
+      <li>
+      <%= link_to '新規登録', new_member_registration_path, class: 'header-item' %>
+      </li>
+
+      <li>
+      <%= link_to 'ログイン', new_member_session_path, class: 'header-item' %>
+      </li>
+
+    <% end %>
+  </ul>
+</header>

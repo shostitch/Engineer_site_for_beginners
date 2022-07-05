@@ -1,11 +1,11 @@
 <h2>新規投稿</h2>
 <%= form_with model: @post,url: posts_path do |f| %>
   <div>
-    <%= f.label :title, 'タイトル' %>
+    <%= f.label :title, 'タイトル' %><br />
     <%= f.text_field :title %>
   </div>
   <div>
-    <%= f.label :content, '内容' %>
+    <%= f.label :content, '内容' %><br />
     <%= f.text_field :content %>
   </div>
   <div>

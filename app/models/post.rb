@@ -6,4 +6,7 @@ class Post < ApplicationRecord
   has_many    :post_tags,                 dependent: :destroy
   has_many    :tags, through: :post_tags, dependent: :destroy
 
+  validates :title, length: { maximum: 50 },  presence: true
+  validates :content,                         presence: true
+
 end

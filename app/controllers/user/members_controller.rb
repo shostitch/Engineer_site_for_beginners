@@ -22,6 +22,12 @@ before_action :correct_member,only: [:edit,:update]
   def check
   end
 
+  def withdrawal
+    current_member.update(is_active: false)
+    reset_session
+    redirect_to root_path
+  end
+
   private
 
   def member_params

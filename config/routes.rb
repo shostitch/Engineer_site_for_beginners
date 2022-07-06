@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     get 'followings' => 'relationships#followings', as: 'followings'
     get 'followers' => 'relationships#followers', as: 'followers'
     get 'members/check' =>  'members#check', as: 'check'
+    patch 'members/withdrawal' => 'members#withdrawal', as: 'withdrawal'
     resources :members, only:[:index,:show,:edit,:update]
   end
 

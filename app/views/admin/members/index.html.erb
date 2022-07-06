@@ -1,2 +1,28 @@
-<h1>Admin::Members#index</h1>
-<p>Find me in app/views/admin/members/index.html.erb</p>
+<table>
+  <thead>
+    <tr>
+      <th>お名前</th>
+      <th>ニックネーム</th>
+      <th>自己紹介</th>
+      <th>メールアドレス</th>
+      <th>ステータス</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @members.each do |member| %>
+      <tr>
+        <td><%= link_to member.full_name, admin_member_path(member.id) %></td>
+        <td><%= member.nickname %></td>
+        <td><%= member.introduction %></td>
+        <td><%= member.email %></td>
+        <td>
+          <% if member.is_active  %>
+            <div>有効</div>
+          <% else %>
+            <div>退会</div>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

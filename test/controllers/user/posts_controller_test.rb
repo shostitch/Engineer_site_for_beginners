@@ -21,8 +21,4 @@ class User::PostsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get question" do
-    get user_posts_question_url
-    assert_response :success
-  end
 end

@@ -10,18 +10,24 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
+  devise_scope :member do
+    post 'guest_sign_in', to: 'user/sessions#guest_sign_in'
+  end
 
   scope module: :user do
     get root to: 'homes#top',as: 'root'
     get 'about' => 'homes#about',as: 'about'
     resources :posts, only:[:index,:new,:create,:show,:edit,:update,:destroy] do
       resources :post_comments, only:[:create,:destroy]
+      resource :likes, only: [:create, :destroy]
     end
-    get 'followings' => 'relationships#followings', as: 'followings'
-    get 'followers' => 'relationships#followers', as: 'followers'
     get 'members/check' =>  'members#check', as: 'check'
     patch 'members/withdrawal' => 'members#withdrawal', as: 'withdrawal'
-    resources :members, only:[:index,:show,:edit,:update]
+    resources :members, only:[:index,:show,:edit,:update] do
+      resource :relationships, only: [:create, :destroy]
+      get 'followings' => 'relationships#followings', as: 'followings'
+      get 'followers' => 'relationships#followers', as: 'followers'
+    end
   end
 
 

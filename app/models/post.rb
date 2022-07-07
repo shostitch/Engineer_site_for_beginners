@@ -7,4 +7,9 @@ class Post < ApplicationRecord
   validates :title, length: { maximum: 50 },  presence: true
   validates :content,                         presence: true
 
+
+  def liked_by?(member)
+     likes.exists?(member_id: member.id)
+  end
+
 end

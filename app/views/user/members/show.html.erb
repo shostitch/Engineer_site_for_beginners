@@ -26,3 +26,12 @@
   <%= link_to '編集する', edit_member_path(@member.id),class: 'btn btn-success' %>
   <%= link_to '退会する',check_path,class: 'btn btn-danger' %>
 <% end %>
+<div>
+<h3>フォロー</h3>
+<%= link_to @member.followings.count, member_followings_path(@member.id) %>
+</div>
+<div>
+  <h3>フォロワー</h3>
+  <%= link_to @member.followers.count, member_followers_path(@member.id) %>
+</div>
+<%= render 'user/relationships/btn', member: @member %>

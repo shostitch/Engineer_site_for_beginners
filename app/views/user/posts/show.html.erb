@@ -1,6 +1,6 @@
 <h2>タイトル: <%= @post.title %></h2>
 
-<%= @post.content %>
+<h4>投稿内容: <%= @post.content %></h4>
 
 <% if current_member.id == @post.member_id %>
   <%= link_to '編集する', edit_post_path(@post.id),class: 'btn btn-success' %>
@@ -10,6 +10,21 @@
     <%= f.text_area :comment, rows: '5', placeholder: 'コメントしてみよう！' %>
     <%= f.submit 'コメントを投稿する' %>
   <% end %>
+  
+  <% if @post.liked_by?(current_member) %>
+  <p>
+    <%= link_to post_likes_path(@post.id), method: :delete do %>
+      ♥<%= @post.likes.count %> いいね
+    <% end %>
+  </p>
+  <% else %>
+  <p>
+    <%= link_to post_likes_path(@post.id), method: :post do %>
+      ♡<%= @post.likes.count %> いいね
+    <% end %>
+  </p>
+<% end %>
+
 <% end %>
 
 <div>コメント<%= @post.post_comments.count %>件</div>
@@ -20,4 +35,5 @@
     <%= link_to '削除する', post_post_comment_path(post_comment.post.id, post_comment.id), method: :delete %>
   <% end %>
 <% end %>
+
 

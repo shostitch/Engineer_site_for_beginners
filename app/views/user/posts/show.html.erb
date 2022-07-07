@@ -1,11 +1,23 @@
-<h2><%= @post.title %></h2>
+<h2>タイトル: <%= @post.title %></h2>
 
 <%= @post.content %>
 
-
-<h4>わからないところは聞いてみよう！</h4>
-<%= link_to '質問する',question_path,class: 'btn btn-primary' %>
-
 <% if current_member.id == @post.member_id %>
   <%= link_to '編集する', edit_post_path(@post.id),class: 'btn btn-success' %>
+  <%= link_to '削除する', post_path(@post.id),method: :delete,class: 'btn btn-danger' %>
+<% else %>
+  <%= form_with model: [@post,@post_comment] do |f| %>
+    <%= f.text_area :comment, rows: '5', placeholder: 'コメントしてみよう！' %>
+    <%= f.submit 'コメントを投稿する' %>
+  <% end %>
 <% end %>
+
+<div>コメント<%= @post.post_comments.count %>件</div>
+
+<% @post.post_comments.each do |post_comment| %>
+  <%= post_comment.comment %>
+  <% if post_comment.member_id == current_member.id %>
+    <%= link_to '削除する', post_post_comment_path(post_comment.post.id, post_comment.id), method: :delete %>
+  <% end %>
+<% end %>
+

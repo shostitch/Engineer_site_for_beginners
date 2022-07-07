@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
 
   devise_for :members,skip: [:passwords], controllers: {
-    registrations: "user/registrations",
+    registrations: 'user/registrations',
     sessions: 'user/sessions'
   }
 
@@ -14,8 +14,9 @@ Rails.application.routes.draw do
   scope module: :user do
     get root to: 'homes#top',as: 'root'
     get 'about' => 'homes#about',as: 'about'
-    get 'posts/question' => 'posts#question',as: 'question'
-    resources :posts, only:[:index,:new,:create,:show,:edit,:update,:destroy]
+    resources :posts, only:[:index,:new,:create,:show,:edit,:update,:destroy] do
+      resources :post_comments, only:[:create,:destroy]
+    end
     get 'followings' => 'relationships#followings', as: 'followings'
     get 'followers' => 'relationships#followers', as: 'followers'
     get 'members/check' =>  'members#check', as: 'check'

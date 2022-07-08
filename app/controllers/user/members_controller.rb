@@ -1,5 +1,5 @@
 class User::MembersController < ApplicationController
-before_action :find_member,only: [:show,:edit,:update]
+before_action :find_member,only: [:show,:edit,:update,:likes]
 
   def index
     @members = Member.all
@@ -9,14 +9,20 @@ before_action :find_member,only: [:show,:edit,:update]
   end
 
   def edit
-    if current_member.id != @member.id
+    if @member.full_name == "guest member"
+      redirect_to member_path(current_member) , notice: 'ゲストユーザーはプロフィール編集画面へ遷移できません。'
+    elsif current_member.id != @member.id
       redirect_to members_path
     end
   end
 
   def update
-    @member.update(member_params)
-    redirect_to member_path(@member.id)
+    if @member.update(member_params)
+      flash[:notice] = '変更完了'
+      redirect_to member_path(@member.id)
+    else
+      render :edit
+    end
   end
 
   def check
@@ -26,6 +32,11 @@ before_action :find_member,only: [:show,:edit,:update]
     current_member.update(is_active: false)
     reset_session
     redirect_to root_path
+  end
+
+  def likes
+    @member = Member.find(params[:id])
+    @likes = Like.where(member_id: @member.id)
   end
 
   private

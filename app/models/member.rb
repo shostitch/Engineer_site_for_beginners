@@ -43,4 +43,14 @@ class Member < ApplicationRecord
     followings.include?(member)
   end
 
+  def self.guest
+    find_or_create_by!(last_name: 'guest',first_name: 'member' ,email: 'guest@example.com',nickname: 'ゲスト') do |member|
+      member.password = SecureRandom.urlsafe_base64
+      member.last_name = 'guest'
+      member.first_name = 'member'
+      member.nickname = 'ゲスト'
+    end
+  end
+
+
 end

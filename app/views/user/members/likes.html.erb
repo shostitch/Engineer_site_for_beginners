@@ -1,0 +1,5 @@
+<% @likes.each do |like|%>
+  <% post = Post.find_by(id: like.post_id) %>
+  <%= link_to post.member.last_name, member_path(post.member_id) %>
+  <%= link_to post.content, post_path(post.id) %>
+<% end %>

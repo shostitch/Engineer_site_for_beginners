@@ -1,4 +1,7 @@
+<div><%= render 'layouts/errors', obj: @member %></div>
+
 <%= form_with model: @member,url: member_path(@member.id) do |f| %>
+
     <div>
       <%= f.label '名前' %><span>必須</span>
       <%= f.text_field :last_name, autofocus: true %>

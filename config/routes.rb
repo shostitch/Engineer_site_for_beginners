@@ -19,10 +19,11 @@ Rails.application.routes.draw do
     get 'about' => 'homes#about',as: 'about'
     resources :posts, only:[:index,:new,:create,:show,:edit,:update,:destroy] do
       resources :post_comments, only:[:create,:destroy]
-      resource :likes, only: [:create, :destroy]
+      resource :likes, only: [:create,:destroy]
     end
     get 'members/check' =>  'members#check', as: 'check'
     patch 'members/withdrawal' => 'members#withdrawal', as: 'withdrawal'
+    get 'members/:id/likes' => 'members#likes',as: 'likes_member'
     resources :members, only:[:index,:show,:edit,:update] do
       resource :relationships, only: [:create, :destroy]
       get 'followings' => 'relationships#followings', as: 'followings'

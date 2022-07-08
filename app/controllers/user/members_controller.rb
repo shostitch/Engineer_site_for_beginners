@@ -1,4 +1,5 @@
 class User::MembersController < ApplicationController
+before_action :authenticate_member!
 before_action :find_member,only: [:show,:edit,:update,:likes]
 
   def index

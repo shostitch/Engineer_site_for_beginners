@@ -11,7 +11,8 @@ before_action :find_member,only: [:show,:edit,:update,:likes]
 
   def edit
     if @member.full_name == "guest member"
-      redirect_to member_path(current_member) , notice: 'ゲストユーザーはプロフィール編集画面へ遷移できません。'
+      flash[:notice] = 'ゲストユーザーはプロフィール編集画面へ遷移できません。'
+      redirect_to member_path(current_member)
     elsif current_member.id != @member.id
       redirect_to members_path
     end

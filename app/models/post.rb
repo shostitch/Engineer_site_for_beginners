@@ -13,4 +13,12 @@ class Post < ApplicationRecord
      likes.exists?(member_id: member.id)
   end
 
+  def self.search_for(content, method)
+    if method == 'perfect'
+      Post.where(title: content)
+    else
+      Post.where('title LIKE ?', '%'+content+'%')
+    end
+  end
+
 end

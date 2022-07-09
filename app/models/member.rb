@@ -43,6 +43,10 @@ class Member < ApplicationRecord
     followings.include?(member)
   end
 
+  def guest?
+    full_name != "guest member"
+  end
+
   def self.guest
     find_or_create_by!(last_name: 'guest',first_name: 'member' ,email: 'guest@example.com',nickname: 'ゲスト') do |member|
       member.password = SecureRandom.urlsafe_base64
@@ -52,5 +56,12 @@ class Member < ApplicationRecord
     end
   end
 
+  def self.search_for(content, method)
+    if method == 'perfect'
+      Member.where(nickname: content)
+    else
+      Member.where('nickname LIKE ?', '%' + content + '%')
+    end
+  end
 
 end

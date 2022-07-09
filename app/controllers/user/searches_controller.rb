@@ -1,13 +1,14 @@
 class User::SearchesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_member!
 
   def search
-    @range = params[:range]
-
-    if @range == "Member"
-      @members = Member.looks(params[:search], params[:word])
-    else
-      @books = Book.looks(params[:search], params[:word])
-    end
-  end
+		@model = params[:model]
+		@content = params[:content]
+		@method = params[:method]
+		if @model == 'member'
+			@records = Member.search_for(@content, @method)
+		else
+			@records = Post.search_for(@content, @method)
+		end
+	end
 end

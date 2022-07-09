@@ -7,12 +7,6 @@
     </tr>
   </thead>
   <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= link_to post.member.nickname, member_path(post.member_id) %></td>
-        <td><%= link_to post.title, post_path(post.id) %></td>
-        <td><%= post.content.truncate(30) %></td>
-      </tr>
-    <% end %>
+    <%= render 'user/posts/index', posts: @posts %>
   </tbody>
 </table>

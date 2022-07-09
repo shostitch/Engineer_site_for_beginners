@@ -1,4 +1,5 @@
 <h2>新規投稿</h2>
+<%= render 'layouts/errors', obj: @post %>
 <%= form_with model: @post,url: posts_path do |f| %>
   <div>
     <%= f.label :title, 'タイトル' %><br />
@@ -7,6 +8,9 @@
   <div>
     <%= f.label :content, '内容' %><br />
     <%= f.text_field :content %>
+  </div>
+  <div>
+    <%= f.select :status, Post.statuses.keys.map{ |k| [t("enums.post.status.#{k}"),k]},{} %>
   </div>
   <div>
     <%= f.submit '投稿',class: 'btn btn-success' %>

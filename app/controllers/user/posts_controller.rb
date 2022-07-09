@@ -1,8 +1,12 @@
 class User::PostsController < ApplicationController
+  before_action :authenticate_member!,except:[:index]
   before_action :find_post,only: [:show,:edit,:update,:destroy]
 
   def new
     @post = Post.new
+    if current_member.full_name == 'guest member'
+      redirect_to posts_path
+    end
   end
 
   def create

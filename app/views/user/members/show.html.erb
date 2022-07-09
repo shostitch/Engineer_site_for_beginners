@@ -21,13 +21,14 @@
 </table>
 
 <%= link_to "投稿者一覧へ",members_path,class: 'btn btn-primary' %>
-<% if current_member.full_name != "guest member" %>
-  <% if current_member.id == @member.id %>
+<% if current_member.guest? && current_member.id == @member.id %>
     <%= link_to '新規投稿する', new_post_path, class: 'btn btn-success' %>
     <%= link_to '編集する', edit_member_path(@member.id), class: 'btn btn-success' %>
     <%= link_to '退会する',check_path,class: 'btn btn-danger' %>
     <%= link_to "いいねした投稿", likes_member_path(@member) %>
-  <% end %>
+<% end %>
+
+<% if current_member.guest? %>
   <div>
     <h3>フォロー</h3>
     <%= link_to @member.followings.count, member_followings_path(@member.id) %>
@@ -37,5 +38,5 @@
     <%= link_to @member.followers.count, member_followers_path(@member.id) %>
   </div>
 
-  <%= render 'user/relationships/btn', member: @member %>
-<% end %>
+  <%= render 'user/relationships/follow_btn', member: @member %>
+  <% end %>

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   scope module: :user do
     get root to: 'homes#top',as: 'root'
     get 'about' => 'homes#about',as: 'about'
+    get 'search' => 'searches#search', as: 'search'
     resources :posts, only:[:index,:new,:create,:show,:edit,:update,:destroy] do
       resources :post_comments, only:[:create,:destroy]
       resource :likes, only: [:create,:destroy]

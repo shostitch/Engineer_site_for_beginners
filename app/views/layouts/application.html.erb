@@ -15,6 +15,7 @@
     <% if flash[:notice] %>
       <%= flash[:notice] %>
     <% end %>
+    <%= render '/user/searches/form' %>
     <%= yield %>
     <%= render '/layouts/footer' %>
   </body>

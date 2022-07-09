@@ -35,19 +35,23 @@
     <% else %>
 
       <li>
-      <%= link_to 'ゲストログイン', guest_sign_in_path, method: :post, class: 'header-item' %>
+        <%= link_to 'ゲストログイン', guest_sign_in_path, method: :post, class: 'header-item' %>
       </li>
 
       <li>
-      <%= link_to 'About', about_path, class: 'header-item' %>
+        <%= link_to 'About', about_path, class: 'header-item' %>
       </li>
 
       <li>
-      <%= link_to '新規登録', new_member_registration_path, class: 'header-item' %>
+        <%= link_to '投稿一覧', posts_path, class: 'header-item' %>
       </li>
 
       <li>
-      <%= link_to 'ログイン', new_member_session_path, class: 'header-item' %>
+        <%= link_to '新規登録', new_member_registration_path, class: 'header-item' %>
+      </li>
+
+      <li>
+        <%= link_to 'ログイン', new_member_session_path, class: 'header-item' %>
       </li>
 
     <% end %>

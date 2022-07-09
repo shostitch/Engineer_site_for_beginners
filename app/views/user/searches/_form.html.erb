@@ -1,0 +1,8 @@
+<% if member_signed_in? %>
+  <%= form_with url: search_path, method: :get, local: true do |f| %>
+    <%= f.text_field :content %>
+    <%= f.select :model, options_for_select({ "ニックネームで探す" => "member", "投稿を探す" => "post" }) %>
+    <%= f.select :method, options_for_select({ "完全一致" => "perfect", "部分一致" => "partial" }) %>
+    <%= f.submit '検索' %>
+  <% end %>
+<% end %>

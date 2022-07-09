@@ -11,5 +11,7 @@
     <%= f.text_field :content %>
   </div>
 
+  <%= f.select :status, Post.statuses.keys.map { |k| [t("enums.post.status.#{k}"),k]}, {}, {class: "custom-select w-25"} %>
+
   <%= f.submit '更新する', class: 'btn btn-success' %>
 <% end %>

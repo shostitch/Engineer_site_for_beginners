@@ -19,8 +19,13 @@ class User::PostsController < ApplicationController
     end
   end
 
+  def confirm
+    @posts = current_member.posts.draft.reverse_order
+  end
+
   def index
-    @posts = Post.all
+    @posts = Post.published.reverse_order
+    @posts = @posts.where('title LIKE ?', "%#{params[:search]}%") if params[:search].present?
   end
 
   def show
@@ -47,7 +52,7 @@ class User::PostsController < ApplicationController
   private
 
   def  post_params
-    params.require(:post).permit(:title, :content)
+    params.require(:post).permit(:title, :content,:status)
   end
 
   def find_post

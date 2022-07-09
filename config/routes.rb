@@ -21,6 +21,9 @@ Rails.application.routes.draw do
     resources :posts, only:[:index,:new,:create,:show,:edit,:update,:destroy] do
       resources :post_comments, only:[:create,:destroy]
       resource :likes, only: [:create,:destroy]
+      collection do
+        get 'confirm'
+      end
     end
     get 'members/check' =>  'members#check', as: 'check'
     patch 'members/withdrawal' => 'members#withdrawal', as: 'withdrawal'

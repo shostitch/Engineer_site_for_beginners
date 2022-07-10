@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     get root to: 'homes#top',as: 'root'
     get 'about' => 'homes#about',as: 'about'
     get 'search' => 'searches#search', as: 'search'
+    get 'sort' => 'posts#sort', as: 'sort'
     resources :posts, only:[:index,:new,:create,:show,:edit,:update,:destroy] do
       resources :post_comments, only:[:create,:destroy]
       resource :likes, only: [:create,:destroy]

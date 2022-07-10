@@ -47,6 +47,10 @@ class Member < ApplicationRecord
     full_name != "guest member"
   end
 
+  def guest_member
+    full_name == "guest member"
+  end
+
   def self.guest
     find_or_create_by!(last_name: 'guest',first_name: 'member' ,email: 'guest@example.com',nickname: 'ゲスト') do |member|
       member.password = SecureRandom.urlsafe_base64

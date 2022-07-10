@@ -48,6 +48,12 @@ class User::PostsController < ApplicationController
     redirect_to posts_path
   end
 
+  def sort
+    selection = params[:keyword]
+    @posts = Post.sort(selection)
+
+  end
+
 
   private
 

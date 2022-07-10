@@ -1,0 +1,45 @@
+<h1>検索結果</h1>
+
+<%= form_with url: sort_path, method: :get, local: true do |f| %>
+  <%= f.select :keyword, [ ['投稿が新しい順', 'new'],
+                            ['投稿が古い順', 'old'],
+                            ['いいねが多い順', 'likes'],
+                            ['いいねが少ない順', 'dislikes'],
+                          ]
+  %>
+  <%= f.submit 'タグ検索' %>
+<% end %>
+
+<table class='table'>
+  <thead>
+    <tr>
+      <th>投稿者</th>
+      <th>タイトル</th>
+      <th>投稿日</th>
+      <th>いいね</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= link_to post.member.email, member_path(post.member.id) %></td>
+
+        <td><%= link_to post.title, post_path(post.id) %></td>
+
+        <td><%= l post.created_at %></td>
+
+        <td>
+          <% if post.liked_by?(current_member) &&  member_signed_in? %>
+            <%= link_to "いいね: #{post.likes.count}", post_likes_path(post.id), method: :delete %>
+          <% else %>
+            <%= link_to "いいね: #{post.likes.count}", post_likes_path(post.id), method: :post %>
+          <% end %>
+
+          <% if current_member.guest_member %>
+            <%= post.likes.count %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

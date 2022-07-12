@@ -6,7 +6,7 @@ class Post < ApplicationRecord
   has_many    :post_comments,             dependent: :destroy
   has_many    :likes,                     dependent: :destroy
   has_many    :post_tags,                 dependent: :destroy
-  has_many    :posts,through: :post_tags
+  has_many    :tags,through: :post_tags
 
   validates :title, length: { maximum: 50 },  presence: true
   validates :content,                         presence: true
@@ -25,9 +25,9 @@ class Post < ApplicationRecord
 
   def self.sort(selection)
     if selection == 'new'
-      all.order(created_at: :DESC)
+      all.published.order(created_at: :DESC)
     elsif selection == 'old'
-      all.order(created_at: :ASC)
+      all.published.order(created_at: :ASC)
     elsif selection == 'likes'
       find(Like.group(:post_id).order(Arel.sql('count(post_id) desc')).pluck(:post_id))
     elsif selection == 'dislikes'
@@ -35,4 +35,18 @@ class Post < ApplicationRecord
     end
   end
 
+  def save_tag(sent_tags)
+    current_tags = self.tags.pluck(:name) unless self.tags.nil?
+    old_tags = current_tags - sent_tags
+    new_tags = sent_tags - current_tags
+
+    old_tags.each do |old|
+      self.tags.delete Tag.find_by(name: old)
+    end
+
+    new_tags.each do |new|
+      new_post_tag = Tag.find_or_create_by(name: new)
+      self.tags << new_post_tag
+    end
+  end
 end

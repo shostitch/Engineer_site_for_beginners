@@ -17,5 +17,22 @@
                             ['いいねが多い順', 'likes'],
                             ['いいねが少ない順', 'dislikes']
                           ] %>
-  <%= f.submit 'タグ検索' %>
+  <%= f.submit '並び替え' %>
+<% end %>
+
+<table>
+  <tbody>
+    <% @tag_lists.each do |list| %>
+      <% if list.posts.published.count != 0 %>
+        <tr>
+          <td><%=link_to list.name, tag_posts_path(tag_id: list.id) %></td>
+          <td><%= "(#{list.posts.published.count})" %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<% @posts.each do |post| %>
+  <%= post.tags.map(&:name).join(',') %>
 <% end %>

@@ -10,9 +10,10 @@ class User::PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
-    @post.member_id = current_member.id
+    @post = current_member.posts.new(post_params)
+    tag_list = params[:post][:name].split(/[,、 　]/)#全角半角スペース込み
     if @post.save
+      @post.save_tag(tag_list)
       redirect_to  posts_path
     else
       render :new
@@ -26,21 +27,40 @@ class User::PostsController < ApplicationController
   def index
     @posts = Post.published.reverse_order
     @posts = @posts.where('title LIKE ?', "%#{params[:search]}%") if params[:search].present?
+    @tag_lists = Tag.all
+  end
+
+  def search_tag
+    @tag_list=Tag.all
+    @tag=Tag.find(params[:tag_id])
+    @posts=@tag.posts
   end
 
   def show
     @post_comment = PostComment.new
+    @post_tags = @post.tags
   end
 
   def edit
     if current_member.id != @post.member_id
       redirect_to posts_path
     end
+    @tag_list=@post.tags.pluck(:name).join(',')
+    @post_status = @post.status == 'draft'
   end
 
   def update
-    @post.update(post_params)
-    redirect_to post_path(@post.id)
+    tag_list=params[:post][:name].split(/[,、 　]/)
+    if @post.update(post_params)
+      @old_relations=PostTag.where(post_id: @post.id)
+        @old_relations.each do |relation|
+          relation.delete
+        end
+        @post.save_tag(tag_list)
+        redirect_to post_path(@post.id), notice: '更新完了しました'
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -51,7 +71,6 @@ class User::PostsController < ApplicationController
   def sort
     selection = params[:keyword]
     @posts = Post.sort(selection)
-
   end
 
 

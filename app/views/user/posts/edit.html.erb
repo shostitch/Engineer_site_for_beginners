@@ -8,10 +8,15 @@
 
   <div>
     <%= f.label :content, '内容' %>
-    <%= f.text_field :content %>
+    <%= f.text_area :content %>
   </div>
 
-  <%= f.select :status, Post.statuses.keys.map { |k| [t("enums.post.status.#{k}"),k]}, {}, {class: "custom-select w-25"} %>
-
+  <div>
+    <%= f.label :name, "タグ (,で区切ると複数タグ登録できます)" %>
+    <%= f.text_field :name,value: @tag_list,class:"form-control"%>
+  </div>
+  <% if @post_status %>
+    <%= f.select :status, Post.statuses.keys.map { |k| [t("enums.post.status.#{k}"),k]}, {}, {class: "custom-select w-25"} %>
+  <% end %>
   <%= f.submit '更新する', class: 'btn btn-success' %>
 <% end %>

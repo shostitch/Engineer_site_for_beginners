@@ -7,7 +7,7 @@
                             ['いいねが少ない順', 'dislikes'],
                           ]
   %>
-  <%= f.submit 'タグ検索' %>
+  <%= f.submit '並び替え' %>
 <% end %>
 
 <table class='table'>
@@ -30,14 +30,11 @@
 
         <td>
           <% if post.liked_by?(current_member) &&  member_signed_in? %>
-            <%= link_to "いいね: #{post.likes.count}", post_likes_path(post.id), method: :delete %>
+            <%= link_to "いいね: ", post_likes_path(post.id), method: :delete %>
           <% else %>
-            <%= link_to "いいね: #{post.likes.count}", post_likes_path(post.id), method: :post %>
+            <%= link_to "いいね: ", post_likes_path(post.id), method: :post %>
           <% end %>
-
-          <% if current_member.guest_member %>
-            <%= post.likes.count %>
-          <% end %>
+          <%= post.likes.count %>
         </td>
       </tr>
     <% end %>

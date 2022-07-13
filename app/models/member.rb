@@ -52,11 +52,12 @@ class Member < ApplicationRecord
   end
 
   def self.guest
-    find_or_create_by!(last_name: 'guest',first_name: 'member' ,email: 'guest@example.com',nickname: 'ゲスト') do |member|
+    find_or_create_by!(email: 'guest@example.com') do |member|
       member.password = SecureRandom.urlsafe_base64
       member.last_name = 'guest'
       member.first_name = 'member'
       member.nickname = 'ゲスト'
+      member.start_date = '2022-02-22'
     end
   end
 
@@ -67,5 +68,5 @@ class Member < ApplicationRecord
       Member.where('nickname LIKE ?', '%' + content + '%')
     end
   end
-
 end
+

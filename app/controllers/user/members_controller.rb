@@ -44,7 +44,7 @@ before_action :find_member,only: [:show,:edit,:update,:likes]
   private
 
   def member_params
-    params.require(:member).permit(:last_name, :first_name, :nickname, :introduction)
+    params.require(:member).permit(:last_name, :first_name, :nickname, :introduction, :start_date)
   end
 
   def find_member

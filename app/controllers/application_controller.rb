@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   private
 
     def sign_up_parameters
-      devise_parameter_sanitizer.permit(:sign_up,keys:[:first_name,:last_name,:nickname,:introduction])
+      devise_parameter_sanitizer.permit(:sign_up,keys:[:first_name,:last_name,:nickname,:introduction,:start_date])
     end
 
 end

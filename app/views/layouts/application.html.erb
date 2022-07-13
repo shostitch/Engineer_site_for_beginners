@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>EngineerSiteForBeginners</title>
+    <title>初心者のためのエンジニアサイト</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -15,8 +15,10 @@
     <% if flash[:notice] %>
       <%= flash[:notice] %>
     <% end %>
-    <%= render '/user/searches/form' %>
-    <%= yield %>
+    <main class="mb-auto">
+      <%= render '/user/searches/form' %>
+      <%= yield %>
+    </main>
     <%= render '/layouts/footer' %>
   </body>
 </html>

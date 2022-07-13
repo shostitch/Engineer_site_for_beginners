@@ -1,63 +1,75 @@
-<header>
-    <%= link_to 'ホーム画面', root_path, class: 'header-item header-icon' %>
-  <ul>
-    <% if member_signed_in? %>
+<header class="shadow-sm d-flex flex-column">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <%= link_to 'ホーム画面', root_path, class: 'navbar-brand p-3' %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+          <% if member_signed_in? %>
 
-      <li>
-        <%= link_to 'About', about_path, class: 'header-item' %>
-      </li>
+            <li class='nav-item mx-2'>
+              <%= link_to 'About', about_path, class: 'nav-link active' %>
+            </li>
 
-      <li>
-        <%= link_to 'マイページ', member_path(current_member.id), class: 'header-item' %>
-      </li>
+            <li class='nav-item mx-2'>
+              <%= link_to 'マイページ', member_path(current_member.id), class: 'nav-link active' %>
+            </li>
 
-      <li>
-        <%= link_to '投稿一覧', posts_path, class: 'header-item' %>
-      </li>
+            <li class='nav-item mx-2'>
+              <%= link_to '投稿一覧', posts_path, class: 'nav-link active' %>
+            </li>
 
-      <li>
-        <%= link_to "下書き一覧", confirm_posts_path, class: "header-item" %>
-      </li>
+            <li class='nav-item mx-2'>
+              <%= link_to "下書き一覧", confirm_posts_path, class: 'nav-link active' %>
+            </li>
 
-      <li>
-        <%= link_to 'ログアウト', destroy_member_session_path, method: :delete, class: 'header-item' %>
-      </li>
+            <li class='nav-item mx-2'>
+              <%= link_to 'ログアウト', destroy_member_session_path, method: :delete, class: 'nav-link active' %>
+            </li>
 
-    <% elsif admin_signed_in? %>
-      <li>
-        <%= link_to '会員一覧', admin_members_path, class: 'header-item' %>
-      </li>
+          <% elsif admin_signed_in? %>
 
-      <li>
-        <%= link_to '投稿一覧', admin_posts_path, class: 'header-item' %>
-      </li>
+            <li class='nav-item mx-2'>
+              <%= link_to '会員一覧', admin_members_path, class: 'nav-link active' %>
+            </li>
 
-      <li>
-        <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'header-item' %>
-      </li>
+            <li class='nav-item mx-2'>
+              <%= link_to '投稿一覧', admin_posts_path, class: 'nav-link active' %>
+            </li>
 
-    <% else %>
+            <li class='nav-item mx-2'>
+              <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'nav-link active' %>
+            </li>
 
-      <li>
-        <%= link_to 'ゲストログイン', guest_sign_in_path, method: :post, class: 'header-item' %>
-      </li>
+          <% else %>
 
-      <li>
-        <%= link_to 'About', about_path, class: 'header-item' %>
-      </li>
+            <li class='nav-item mx-2'>
+              <%= link_to 'ゲストログイン', guest_sign_in_path, method: :post, class: 'nav-link active' %>
+            </li>
 
-      <li>
-        <%= link_to '投稿一覧', posts_path, class: 'header-item' %>
-      </li>
+            <li class='nav-item mx-2'>
+              <%= link_to 'About', about_path, class: 'nav-link active' %>
+            </li>
 
-      <li>
-        <%= link_to '新規登録', new_member_registration_path, class: 'header-item' %>
-      </li>
+            <li class='nav-item mx-2'>
+              <%= link_to '投稿一覧', posts_path, class: 'nav-link active' %>
+            </li>
 
-      <li>
-        <%= link_to 'ログイン', new_member_session_path, class: 'header-item' %>
-      </li>
+            <li class='nav-item mx-2'>
+              <%= link_to '新規登録', new_member_registration_path, class: 'nav-link active' %>
+            </li>
 
-    <% end %>
-  </ul>
+            <li class='nav-item mx-2'>
+              <%= link_to 'ログイン', new_member_session_path, class: 'nav-link active' %>
+            </li>
+
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
 </header>
+

@@ -17,6 +17,17 @@
       <th>自己紹介</th>
       <td><%= @member.introduction %></td>
     </tr>
+    <tr>
+      <th>勉強を始めた日</th>
+      <td><%= @member.start_date.strftime('%Y年 %m月 %d日') %></td>
+    </tr>
+    <tr>
+      <th>学日初めて何ヶ月？</th>
+      <td>
+        <%= (Date.today - @member.start_date).to_i / 365 %>年
+        <%= (Date.today - @member.start_date).to_i % 365 / 30 %>ヶ月
+      </td>
+    </tr>
   </tbody>
 </table>
 

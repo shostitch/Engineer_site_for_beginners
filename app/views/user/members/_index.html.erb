@@ -1,6 +1,8 @@
 <% members.each do |member| %>
   <tr>
-    <td><%= link_to member.nickname,member_path(member.id) %></td>
-    <td><%= member.full_name %></td>
+    <% if member.guest? %>
+      <td><%= link_to member.nickname,member_path(member.id) %></td>
+      <td><%= member.full_name %></td>
+    <% end %>
   </tr>
 <% end %>

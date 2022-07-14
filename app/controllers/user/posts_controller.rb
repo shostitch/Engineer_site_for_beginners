@@ -32,7 +32,7 @@ class User::PostsController < ApplicationController
 
   def search_tag
     @tag_list=Tag.all
-    @tag=Tag.find(params[:id])
+    @tag=Tag.find(params[:tag_id])
     @posts=@tag.posts
   end
 
@@ -45,7 +45,7 @@ class User::PostsController < ApplicationController
     if current_member.id != @post.member_id
       redirect_to posts_path
     end
-    @tag_list=@post.tags.pluck(:name).join(',')
+    @tag_list = @post.tags.pluck(:name).join(',')
     @post_status = @post.status == 'draft'
   end
 

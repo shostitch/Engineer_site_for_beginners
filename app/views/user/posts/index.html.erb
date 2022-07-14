@@ -1,4 +1,6 @@
-<table>
+<%= render 'user/posts/post_search' %>
+
+<table class='table'>
   <thead>
     <tr>
       <th>投稿者</th>
@@ -11,28 +13,13 @@
   </tbody>
 </table>
 
-<%= form_with url: sort_path, method: :get, local: true do |f| %>
-  <%= f.select :keyword, [  ['投稿が新しい順', 'new'],
-                            ['投稿が古い順', 'old'],
-                            ['いいねが多い順', 'likes'],
-                            ['いいねが少ない順', 'dislikes']
-                          ] %>
-  <%= f.submit '並び替え' %>
-<% end %>
-
-<table>
+<table class='table'>
+  <thead>
+    <tr>
+      <th>タグ一覧</th>
+    </tr>
+  </thead>
   <tbody>
-    <% @tag_lists.each do |list| %>
-      <% if list.posts.published.count != 0 %>
-        <tr>
-          <td><%=link_to list.name, tag_posts_path(tag_id: list.id) %></td>
-          <td><%= "(#{list.posts.published.count})" %></td>
-        </tr>
-      <% end %>
-    <% end %>
+    <%= render 'user/posts/tag_lists', tag_lists: @tag_lists %>
   </tbody>
 </table>
-
-<% @posts.each do |post| %>
-  <%= post.tags.map(&:name).join(',') %>
-<% end %>

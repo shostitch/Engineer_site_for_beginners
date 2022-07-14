@@ -1,23 +1,27 @@
 <div><%= render 'layouts/errors', obj: @member %></div>
 
-<%= form_with model: @member,url: member_path(@member.id) do |f| %>
+<table class='table'>
+  <%= form_with model: @member,url: member_path(@member.id) do |f| %>
+    <tbody>
+      <tr>
+        <th><%= f.label '名前' %>&emsp;<span class="badge badge-danger">必須</span></th>
+        <td>
+          <%= f.text_field :last_name, autofocus: true %>
+          <%= f.text_field :first_name %>
+        </td>
+      </tr>
 
-    <div>
-      <%= f.label '名前' %><span>必須</span>
-      <%= f.text_field :last_name, autofocus: true %>
-      <%= f.text_field :first_name %>
-    </div>
+      <tr>
+        <th><%= f.label :nickname, 'ニックネーム' %>&emsp;<span class="badge badge-danger">必須</span></th>
+        <td><%= f.text_field :nickname %></td>
+      </tr>
 
-    <div>
-      <%= f.label :nickname, 'ニックネーム' %><span>必須</span>
-      <%= f.text_field :nickname %>
-    </div>
+      <tr>
+        <th><%= f.label :introduction, '自己紹介' %></th>
+        <td><%= f.text_area :introduction, placeholder: 'こんにちわ！よろしくね',rows: '5' %></td>
+      </tr>
 
-    <div>
-      <%= f.label :introduction, '自己紹介' %>
-      <%= f.text_field :introduction %>
-    </div>
-
-    <%= f.submit '更新する', class: 'btn btn-success' %>
-
-<% end %>
+      <td><%= f.submit '更新する', class: 'btn btn-success' %></td>
+    </tbody>
+  <% end %>
+</div>

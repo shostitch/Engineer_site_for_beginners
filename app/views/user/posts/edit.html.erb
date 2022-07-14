@@ -1,22 +1,30 @@
 <h2>投稿編集ページ</h2>
+<table class='table'>
+  <tbody>
+    <%= form_with model: @post, url: post_path(@post.id) do |f| %>
+      <tr>
+        <th><%= f.label :title, 'タイトル' %></th>
+        <td><%= f.text_field :title %></td>
+      </tr>
 
-<%= form_with model: @post, url: post_path(@post.id) do |f| %>
-  <div>
-    <%= f.label :title, 'タイトル' %>
-    <%= f.text_field :title %>
-  </div>
+      <tr>
+        <th><%= f.label :content, '内容' %></th>
+        <td><%= f.text_area :content %></td>
+      </tr>
 
-  <div>
-    <%= f.label :content, '内容' %>
-    <%= f.text_area :content %>
-  </div>
+      <tr>
+        <th><%= f.label :name, "タグ (,で区切ると複数タグ登録できます)" %></th>
+        <td><%= f.text_field :name,value: @tag_list,class:"form-control"%></td>
+      </tr>
 
-  <div>
-    <%= f.label :name, "タグ (,で区切ると複数タグ登録できます)" %>
-    <%= f.text_field :name,value: @tag_list,class:"form-control"%>
-  </div>
-  <% if @post_status %>
-    <%= f.select :status, Post.statuses.keys.map { |k| [t("enums.post.status.#{k}"),k]}, {}, {class: "custom-select w-25"} %>
-  <% end %>
-  <%= f.submit '更新する', class: 'btn btn-success' %>
-<% end %>
+      <td>
+        <% if @post_status %>
+          <%= f.select :status, Post.statuses.keys.map { |k| [t("enums.post.status.#{k}"),k]}, {}, {class: "custom-select"} %>
+        <% end %>
+      </td>
+
+      <td><%= f.submit '更新する', class: 'btn btn-success' %></td>
+
+    <% end %>
+  </tbody>
+</table>

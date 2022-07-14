@@ -1,14 +1,6 @@
 <h1>検索結果</h1>
 
-<%= form_with url: sort_path, method: :get, local: true do |f| %>
-  <%= f.select :keyword, [ ['投稿が新しい順', 'new'],
-                            ['投稿が古い順', 'old'],
-                            ['いいねが多い順', 'likes'],
-                            ['いいねが少ない順', 'dislikes'],
-                          ]
-  %>
-  <%= f.submit '並び替え' %>
-<% end %>
+<%= render 'user/posts/post_search' %>
 
 <table class='table'>
   <thead>
@@ -16,7 +8,8 @@
       <th>投稿者</th>
       <th>タイトル</th>
       <th>投稿日</th>
-      <th>いいね</th>
+      <th>タグ</th>
+      <th>いいね数</th>
     </tr>
   </thead>
   <tbody>
@@ -28,13 +21,20 @@
 
         <td><%= l post.created_at %></td>
 
+        <td><%= post.tags.pluck(:name).join(',') %></td>
+
         <td>
-          <% if post.liked_by?(current_member) &&  member_signed_in? %>
-            <%= link_to "いいね: ", post_likes_path(post.id), method: :delete %>
+          <% if post.member.id != current_member.id %>
+          
+            <% if post.liked_by?(current_member) &&  member_signed_in? %>
+              <%= link_to "いいねをする: #{post.likes.count}件", post_likes_path(post.id), method: :delete %>
+            <% else %>
+              <%= link_to "いいねを外す: #{post.likes.count}件", post_likes_path(post.id), method: :post %>
+            <% end %>
+            
           <% else %>
-            <%= link_to "いいね: ", post_likes_path(post.id), method: :post %>
+            <%= "#{post.likes.count}件" %>
           <% end %>
-          <%= post.likes.count %>
         </td>
       </tr>
     <% end %>

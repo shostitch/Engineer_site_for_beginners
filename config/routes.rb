@@ -26,7 +26,9 @@ Rails.application.routes.draw do
         get 'confirm'
       end
     end
-    get 'tags/:id/posts'  => 'posts#search_tag', as: 'tag_posts'
+    resources :tags, only:[:posts] do
+      get 'posts'  => 'posts#search_tag'
+    end
     get 'members/check' =>  'members#check', as: 'check'
     patch 'members/withdrawal' => 'members#withdrawal', as: 'withdrawal'
     get 'members/:id/likes' => 'members#likes',as: 'likes_member'

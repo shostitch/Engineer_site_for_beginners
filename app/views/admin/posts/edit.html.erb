@@ -1,2 +1,28 @@
-<h1>Admin::Posts#edit</h1>
-<p>Find me in app/views/admin/posts/edit.html.erb</p>
+<%= form_with model: @post,url: admin_post_path(@post.id) do |f| %>
+  <table class='table'>
+    <tbody>
+      <tr>
+        <th><%= f.label :title, 'タイトル' %></th>
+        <td><%= f.text_field :title %></td>
+      </tr>
+
+      <tr>
+        <th><%= f.label :content, '内容' %></th>
+        <td><%= f.text_area :content %></td>
+      </tr>
+
+      <tr>
+        <th><%= f.label :name, "タグ (,で区切ると複数タグ登録できます)" %></th>
+        <td><%= f.text_field :name,value: @tag_list,class:"form-control"%></td>
+      </tr>
+
+       <td>
+        <% if @post_status %>
+          <%= f.select :status, Post.statuses.keys.map { |k| [t("enums.post.status.#{k}"),k]}, {}, {class: "custom-select"} %>
+        <% end %>
+      </td>
+
+      <td><%= f.submit '編集を終える' %></td>
+    </tbody>
+  </table>
+<% end %>

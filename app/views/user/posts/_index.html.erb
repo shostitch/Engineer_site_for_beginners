@@ -3,5 +3,24 @@
     <td><%= link_to post.member.nickname, member_path(post.member_id) %></td>
     <td><%= link_to post.title, post_path(post.id) %></td>
     <td><%= post.content.truncate(30) %></td>
+    <% if current_member.id == post.member_id %>
+      <td><%= link_to '編集する', edit_post_path(post.id),class: 'btn btn-success' %></td>
+      <td><%= link_to '削除する', post_path(post.id),method: :delete,class: 'btn btn-danger' %></td>
+    <% end %>
+    <% if current_member.id != post.member_id && current_member.guest? %>
+      <% if post.liked_by?(current_member) %>
+        <td>
+          <%= link_to post_likes_path(post.id), method: :delete do %>
+            ♥<%= post.likes.count %> いいね
+          <% end %>
+        </td>
+      <% else %>
+        <td>
+          <%= link_to post_likes_path(post.id), method: :post do %>
+            ♡<%= post.likes.count %> いいね
+          <% end %>
+        </td>
+      <% end %>
+    <% end %>
   </tr>
 <% end %>

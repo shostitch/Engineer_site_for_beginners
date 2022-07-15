@@ -27,9 +27,7 @@ class User::SessionsController < Devise::SessionsController
   protected
     def member_states
       @member = Member.find_by(email: params[:member][:email])
-
       return if !@member
-
       if @member.valid_password?(params[:member][:password]) && (@member.is_active == false)
         flash[:notice] = "このアカウントは退会済みです"
         redirect_to new_member_registration_path

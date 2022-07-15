@@ -27,6 +27,16 @@ class Member < ApplicationRecord
   validates :first_name,    presence: true
   validates :nickname,      presence: true
 
+  has_one_attached :profile_image
+
+  def get_profile_image(width, height)
+    unless profile_image.attached?
+      file_path = Rails.root.join('app/assets/images/sample-author1.jpg')
+      profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+    end
+    profile_image.variant(resize_to_limit: [width, height]).processed
+  end
+
   def full_name
     last_name + " "  + first_name
   end
@@ -52,7 +62,10 @@ class Member < ApplicationRecord
   end
 
   def self.guest
-    find_or_create_by!(email: 'guest@example.com') do |member|
+    randam_num = rand(100)
+    email = "guest#{randam_num}@example.com"
+
+    find_or_create_by!(email: email) do |member|
       member.password = SecureRandom.urlsafe_base64
       member.last_name = 'guest'
       member.first_name = 'member'

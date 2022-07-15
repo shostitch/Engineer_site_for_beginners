@@ -1,5 +1,5 @@
 class User::PostsController < ApplicationController
-  before_action :authenticate_member!,except:[:index]
+  before_action :authenticate_member!
   before_action :find_post,only: [:show,:edit,:update,:destroy]
 
   def new
@@ -11,7 +11,7 @@ class User::PostsController < ApplicationController
 
   def create
     @post = current_member.posts.new(post_params)
-    tag_list = params[:post][:name].split(/[,、 　]/)#全角半角スペース込み
+    tag_list = params[:post][:name].split(/[,、 　]/)#全角半角スペース込みもしものため
     if @post.save
       @post.save_tag(tag_list)
       redirect_to  posts_path

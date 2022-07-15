@@ -1,28 +1,28 @@
 <h2><%= @member.full_name %>さんの情報編集</h2>
 
 <%= form_with model: @member, url: admin_member_path(@member.id) do |f| %>
-  <div>
+  <div class='field'>
     <%= f.label :full_name, 'お名前' %>
     <%= f.text_field :last_name ,autofocus: true %>
     <%= f.text_field :last_name %>
   </div>
 
-  <div>
+  <div class='field'>
     <%= f.label :nickname, 'ニックネーム' %>
     <%= f.text_field :nickname %>
   </div>
 
-  <div>
+  <div class='field'>
     <%= f.label :introduction, '自己紹介' %>
     <%= f.text_field :introduction %>
   </div>
 
-  <div>
+  <div class='field'>
     <%= f.label :email, 'メールアドレス' %>
     <%= f.text_field :email %>
   </div>
 
-  <div>
+  <div class='field'>
     <%= f.label :is_active, "会員ステータス" %>
     <%= f.radio_button :is_active,true, value: true %>
     <%= f.label :is_active_true,"有効" %>

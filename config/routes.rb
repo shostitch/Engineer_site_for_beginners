@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   devise_for :members,skip: [:passwords], controllers: {
     registrations: 'user/registrations',
     sessions: 'user/sessions'
@@ -42,7 +41,10 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :members, only:[:index,:show,:edit,:update]
-    resources :posts, only:[:index,:show,:edit,:update,:destroy]
+    resources :posts, only:[:index,:show,:edit,:update,:destroy] do
+      resources :post_comments, only:[:destroy]
+    end
+    resources :tags, only:[:index,:destroy]
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

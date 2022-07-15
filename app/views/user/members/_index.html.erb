@@ -3,6 +3,9 @@
     <% if member.guest? %>
       <td><%= link_to member.nickname,member_path(member.id) %></td>
       <td><%= member.full_name %></td>
+      <td><%= member.likes.count %></td>
+      <td><%= member.followings.count %></td>
+      <td><%= member.followers.count %></td>
     <% end %>
   </tr>
 <% end %>

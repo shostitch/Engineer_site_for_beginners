@@ -8,6 +8,10 @@
           <h2><%= @member.nickname %>さんのページ</h2>
         <% end %>
         <tr>
+          <th>プロフィール画像</th>
+          <td>投稿ユーザー画像：<%= image_tag @member.get_profile_image(100,100) %></td>
+        </tr>
+        <tr>
           <th>名前</th>
           <td><%= @member.full_name %></td>
         </tr>

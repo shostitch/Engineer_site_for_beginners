@@ -1,10 +1,11 @@
 <%= render 'layouts/errors', obj: @post %>
 <div class='container main-top'>
   <div class='row'>
-    <table class='table text-center'>
+
+        <%= form_with model: @post,url: posts_path do |f| %>
+        <table class='table text-center'>
       <h2>新規投稿</h2>
       <tbody>
-        <%= form_with model: @post,url: posts_path do |f| %>
           <tr>
             <th><%= f.label :title, 'タイトル' %></th>
             <td><%= f.text_field :title %></td>
@@ -23,8 +24,9 @@
           <td>
             <%= f.submit '投稿',class: 'btn btn-success' %>
           </td>
-        <% end %>
-      </tbody>
+          </tbody>
     </table>
+        <% end %>
+
 </div>
 </div>

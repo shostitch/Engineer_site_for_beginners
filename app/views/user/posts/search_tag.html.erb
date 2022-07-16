@@ -2,7 +2,7 @@
   <table class='table'>
       <h2>タグ検索投稿一覧</h2>
       <h2>#タグ</h2>
-      <% @tag_list.each do |list| %>
+      <% @tag_lists.each do |list| %>
         <%= link_to list.name, tag_posts_path(tag_id: list.id) %>
         <%= "(#{list.posts.count})" %>
       <% end %>

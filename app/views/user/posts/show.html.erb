@@ -14,19 +14,9 @@
             <%= f.submit 'コメントを投稿する' %>
           <% end %>
 
-          <% if @post.liked_by?(current_member) %>
-            <p>
-              <%= link_to post_likes_path(@post.id), method: :delete do %>
-                ♥<%= @post.likes.count %> いいね
-              <% end %>
-            </p>
-          <% else %>
-            <p>
-              <%= link_to post_likes_path(@post.id), method: :post do %>
-                ♡<%= @post.likes.count %> いいね
-              <% end %>
-            </p>
-          <% end %>
+          <div id="like_buttons_<%= @post.id %>">
+            <%= render "user/likes/like", post: @post %>
+          </div>
         <% end %>
       <% end %>
 

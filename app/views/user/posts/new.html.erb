@@ -1,32 +1,30 @@
 <%= render 'layouts/errors', obj: @post %>
 <div class='container main-top'>
   <div class='row'>
-
-        <%= form_with model: @post,url: posts_path do |f| %>
-        <table class='table text-center'>
-      <h2>新規投稿</h2>
-      <tbody>
+    <%= form_with model: @post,url: posts_path do |f| %>
+      <table class='table text-center'>
+        <h2>新規投稿</h2>
+        <tbody>
           <tr>
             <th><%= f.label :title, 'タイトル' %></th>
-            <td><%= f.text_field :title %></td>
+            <td><%= f.text_field :title, placeholder: 'タイトルはここに' %></td>
           </tr>
           <tr>
             <th><%= f.label :content, '内容' %></th>
-            <td><%= f.text_area :content %></td>
+            <td><%= f.text_area :content, placeholder: '投稿をしてみよう！' %></td>
           </tr>
           <tr>
             <th><%= f.label :name, 'タグ' %></th>
             <td><%= f.text_field :name %></td>
           </tr>
 
-          <td> <%= f.select :status, Post.statuses.keys.map{ |k| [t("enums.post.status.#{k}"),k]},{},{class: "custom-select"} %> </td>
+          <td><%= f.select :status, Post.statuses.keys.map{ |k| [t("enums.post.status.#{k}"),k]},{},{class: "custom-select"} %></td>
 
           <td>
             <%= f.submit '投稿',class: 'btn btn-success' %>
           </td>
-          </tbody>
-    </table>
-        <% end %>
-
-</div>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
 </div>

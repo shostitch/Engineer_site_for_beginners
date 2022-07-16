@@ -31,7 +31,7 @@ class User::PostsController < ApplicationController
   end
 
   def search_tag
-    @tag_list=Tag.all
+    @tag_lists=Tag.all
     @tag=Tag.find(params[:tag_id])
     @posts=@tag.posts
   end

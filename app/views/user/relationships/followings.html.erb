@@ -1,0 +1,22 @@
+<% if @members.exists? %>
+  <table class='table'>
+    <thead>
+      <tr>
+        <th>名前</th>
+        <th>フォローしている人</th>
+        <th>フォローしてくれている人</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @members.each do |member| %>
+        <tr>
+          <td><%= member.full_name %></td>
+          <td>フォロー数: <%= member.followings.count %></td>
+          <td>フォロワー数: <%= member.followers.count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>ユーザーはいません</p>
+<% end %>

@@ -1,0 +1,32 @@
+<div><%= render 'layouts/errors', obj: @member %></div>
+
+
+<%= form_with model: @member,url: member_path(@member.id) do |f| %>
+  <table class='table'>
+    <tbody>
+      <tr>
+        <th><%= f.label :profile_image, 'プロフィール画像' %></th>
+        <td><%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %></td>
+      </tr>
+      <tr>
+        <th><%= f.label '名前' %>&emsp;<span class="badge badge-danger">必須</span></th>
+        <td>
+          <%= f.text_field :last_name, autofocus: true %>
+          <%= f.text_field :first_name %>
+        </td>
+      </tr>
+
+      <tr>
+        <th><%= f.label :nickname, 'ニックネーム' %>&emsp;<span class="badge badge-danger">必須</span></th>
+        <td><%= f.text_field :nickname %></td>
+      </tr>
+
+      <tr>
+        <th><%= f.label :introduction, '自己紹介' %></th>
+        <td><%= f.text_area :introduction, placeholder: 'こんにちわ！よろしくね',rows: '5' %></td>
+      </tr>
+
+      <td><%= f.submit '更新する', class: 'btn btn-success' %></td>
+    </tbody>
+  </div>
+<% end %>

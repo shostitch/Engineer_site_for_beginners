@@ -1,0 +1,16 @@
+<h2>参加者の一覧</h2>
+<table class='table'>
+  <thead>
+    <tr>
+      <th>ニックネーム</th>
+      <th>フルネーム</th>
+      <th>いいね総数</th>
+      <th>フォロー</th>
+      <th>フォロワー</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render 'user/members/index', members: @members %>
+  </tbody>
+</table>
+

@@ -1,0 +1,29 @@
+<h2>投稿編集ページ</h2>
+<%= form_with model: @post, url: post_path(@post.id) do |f| %>
+　<table class='table'>
+  　<tbody>
+      <tr>
+        <th><%= f.label :title, 'タイトル' %></th>
+        <td><%= f.text_field :title %></td>
+      </tr>
+
+      <tr>
+        <th><%= f.label :content, '内容' %></th>
+        <td><%= f.text_area :content %></td>
+      </tr>
+
+      <tr>
+        <th><%= f.label :name, "タグ (,で区切ると複数タグ登録できます)" %></th>
+        <td><%= f.text_field :name,value: @tag_list,class:"form-control"%></td>
+      </tr>
+
+      <tr>
+        <% if @post_status %>
+          <td><%= f.select :status, Post.statuses.keys.map { |k| [t("enums.post.status.#{k}"),k]}, {}, {class: "custom-select"} %></td>
+        <% end %>
+      </tr>
+
+      <td><%= f.submit '更新する', class: 'btn btn-success' %></td>
+    </tbody>
+  </table>
+<% end %>

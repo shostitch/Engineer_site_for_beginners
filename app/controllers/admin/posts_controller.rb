@@ -12,6 +12,7 @@ class Admin::PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    @member = @post.member
     @tag_list = @post.tags.pluck(:name).join(',')
     @post_status = @post.status == 'draft'
   end

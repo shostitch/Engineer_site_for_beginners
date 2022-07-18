@@ -15,10 +15,18 @@
     <% if flash[:notice] %>
       <%= flash[:notice] %>
     <% end %>
-    <main class="mb-auto">
-      <%= render '/user/searches/form' %>
-      <%= yield %>
-    </main>
+    <div class="row">
+        <div class="col-2">
+          <% unless %w[root about admin_session member_session new_member_registration].any? { |name| current_page?(send("#{name}_path")) } %>
+            <%= render'layouts/sidebar', tag_lists: Tag.all %>
+          <% end %>
+        </div>
+
+      <main class="col-10">
+        <%= render '/user/searches/form' %>
+        <%= yield %>
+      </main>
+    </div>
     <%= render '/layouts/footer' %>
   </body>
 </html>

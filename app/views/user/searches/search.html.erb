@@ -1,7 +1,18 @@
-<% if @model == 'member' %>
-	<h3>Members search for "<%= @content %>"</h3>
-  <%= render 'user/members/index', members: @records %>
-<% elsif @model == 'post' %>
-	<h3>Posts search for "<%= @content %>"</h3>
-  <%= render 'user/posts/index', posts: @records %>
-<% end %>
+<table class='table main-top'>
+  <thead>
+    <tr>
+      <th>ニックネーム</th>
+      <th>タイトル</th>
+      <th>投稿内容</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @model == 'member' %>
+    	<h2>メンバー検索結果 ( <%= @content %> )</h2>
+      <%= render 'user/members/index', members: @records %>
+    <% elsif @model == 'post' %>
+    	<h2>投稿検索結果 ( <%= @content %> )</h2>
+      <%= render 'user/posts/index', posts: @records %>
+    <% end %>
+  </tbody>
+</table>

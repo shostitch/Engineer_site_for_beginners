@@ -33,7 +33,7 @@ class User::PostsController < ApplicationController
   def search_tag
     @tag_lists=Tag.all
     @tag=Tag.find(params[:tag_id])
-    @posts=@tag.posts
+    @posts=@tag.posts.published
   end
 
   def show

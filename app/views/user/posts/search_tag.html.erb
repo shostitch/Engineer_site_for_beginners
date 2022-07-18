@@ -1,22 +1,27 @@
-<div class= 'main-top'>
-  <table class='table'>
-      <h2>タグ検索投稿一覧</h2>
-      <h2>#タグ</h2>
-      <% @tag_lists.each do |list| %>
-        <%= link_to list.name, tag_posts_path(tag_id: list.id) %>
-        <%= "(#{list.posts.count})" %>
-      <% end %>
+<div class= 'container main-top'>
+  <div class='row'>
+    <div class='col-10'>
+      <h2>タグ検索投稿一覧 <%= "─ #{@tag.name} ─ " %></h2>
+      <table class='table'>
+        <thead>
+          <tr>
+            <th>内容</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @posts.each do |post| %>
+          <tr>
+            <td><%= link_to post.content, post %></td>
+          </tr>
+          <% end %>
+        </tbody>
 
 
-    <div>
-      #タグによって絞り込んだ投稿一覧
-      <%= "タグが ─ #{@tag.name} ─ の投稿一覧" %>
-      <% @posts.each do |post| %>
-        <%= link_to post.content, post %>
-      <% end %>
-      <div>
-        <%= link_to 'ホーム', root_path %>
-      </div>
+        <div>
+          <%= link_to 'ホーム', root_path %>
+        </div>
+      </table>
+
     </div>
-  </table>
+  </div>
 </div>

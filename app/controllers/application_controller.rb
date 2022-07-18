@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
+
   private
 
     def sign_up_parameters

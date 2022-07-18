@@ -1,42 +1,24 @@
-<h1>検索結果</h1>
-
-<%= render 'user/posts/post_search' %>
-
-<table class='table'>
-  <thead>
-    <tr>
-      <th>投稿者</th>
-      <th>タイトル</th>
-      <th>投稿日</th>
-      <th>タグ</th>
-      <th>いいね数</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= link_to post.member.email, member_path(post.member.id) %></td>
-
-        <td><%= link_to post.title, post_path(post.id) %></td>
-
-        <td><%= l post.created_at %></td>
-
-        <td><%= post.tags.pluck(:name).join(',') %></td>
-
-        <td>
-          <% if post.member.id != current_member.id %>
-          
-            <% if post.liked_by?(current_member) &&  member_signed_in? %>
-              <%= link_to "いいねをする: #{post.likes.count}件", post_likes_path(post.id), method: :delete %>
-            <% else %>
-              <%= link_to "いいねを外す: #{post.likes.count}件", post_likes_path(post.id), method: :post %>
-            <% end %>
-            
-          <% else %>
-            <%= "#{post.likes.count}件" %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class='container main-top'>
+  <div class='row'>
+    <div class='col-11'>
+      <h2>並び替え結果</h2>
+      <%= render 'user/posts/post_search' %>
+      <table class='table'>
+        <thead>
+          <tr>
+            <th>投稿者</th>
+            <th>タイトル</th>
+            <th>投稿日</th>
+            <th>タグ</th>
+            <th>いいね数</th>
+          </tr>
+        </thead>
+        <tbody>
+          <div class='sort'>
+            <%= render 'user/posts/sort', posts: @posts %>
+          </div>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

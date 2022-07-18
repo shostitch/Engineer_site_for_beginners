@@ -27,8 +27,8 @@ class Member < ApplicationRecord
   validates :first_name,    presence: true
   validates :nickname,      presence: true
   validates :is_active,     inclusion: [true, false]
-  
-  
+
+
   has_one_attached :profile_image
 
   def get_profile_image(width, height)

@@ -1,61 +1,87 @@
 <div class='container main-top'>
   <div class='row'>
-    <table class='table'>
-      <tbody>
-        <% if current_member.id == @member.id %>
-          <h2>マイページ</h2>
-        <% else %>
-          <h2><%= @member.nickname %>さんのページ</h2>
-        <% end %>
-        <tr>
-          <th>プロフィール画像</th>
-          <td>投稿ユーザー画像：<%= image_tag @member.get_profile_image(100,100) %></td>
-        </tr>
-        <tr>
-          <th>名前</th>
-          <td><%= @member.full_name %></td>
-        </tr>
-        <tr>
-          <th>ニックネーム</th>
-          <td><%= @member.nickname %></td>
-        </tr>
-        <tr>
-          <th>自己紹介</th>
-          <td><%= @member.introduction %></td>
-        </tr>
-        <tr>
-          <th>勉強を始めた日</th>
-          <td><%= @member.start_date.strftime('%Y年 %m月 %d日') %></td>
-        </tr>
-        <tr>
-          <th>学日初めて何ヶ月？</th>
-          <td>
-            <% if (Date.today - @member.start_date).to_i / 365 != 0 %>
-              <%= (Date.today - @member.start_date).to_i / 365 %>年
+    <div class='col-10'>
+      <table class='table '>
+        <tbody>
+          <% if current_member.id == @member.id %>
+            <h2>マイページ</h2>
+          <% else %>
+            <h2><%= @member.nickname %>さんのページ</h2>
+          <% end %>
+          <tr>
+            <th>プロフィール画像</th>
+            <td>投稿ユーザー画像：<%= image_tag @member.get_profile_image(100,100) %></td>
+          </tr>
+          <tr>
+            <th>名前</th>
+            <td><%= @member.full_name %></td>
+          </tr>
+          <tr>
+            <th>ニックネーム</th>
+            <td><%= @member.nickname %></td>
+          </tr>
+          <tr>
+            <th>自己紹介</th>
+            <td><%= @member.introduction %></td>
+          </tr>
+          <tr>
+            <th>勉強を始めた日</th>
+            <td><%= @member.start_date.strftime('%Y年 %m月 %d日') %></td>
+          </tr>
+          <tr>
+            <th>学日初めて何ヶ月？</th>
+            <td>
+              <% if (Date.today - @member.start_date).to_i / 365 != 0 %>
+                <%= (Date.today - @member.start_date).to_i / 365 %>年
+              <% end %>
+              <%= (Date.today - @member.start_date).to_i % 365 / 30 %>ヶ月
+            </td>
+          </tr>
+            <% if current_member.guest? %>
+              <tr>
+                <th>フォロー</th>
+                <td>
+                  <%= link_to "#{@member.followings.count}人", member_followings_path(@member.id) %>
+                </td>
+              </tr>
+              <tr>
+                <th>フォロワー</th>
+                <td>
+                  <%= link_to "#{@member.followers.count}人", member_followers_path(@member.id) %>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <%= render 'user/relationships/follow_btn', member: @member %>
+                </td>
+              </tr>
             <% end %>
-            <%= (Date.today - @member.start_date).to_i % 365 / 30 %>ヶ月
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <%= link_to "投稿者一覧へ",members_path,class: 'btn btn-primary mr-4' %>
-    <% if current_member.guest? && current_member.id == @member.id %>
-        <%= link_to '新規投稿する', new_post_path, class: 'btn btn-success mr-4' %>
-        <%= link_to '編集する', edit_member_path(@member.id), class: 'btn btn-success mr-4' %>
-        <%= link_to '退会する',check_path,class: 'btn btn-danger mr-4' %>
-        <%= link_to "いいねした投稿", likes_member_path(@member),class: 'btn btn-primary' %>
-    <% end %>
-
-    <% if current_member.guest? %>
-      <div>
-        <%= link_to "フォロー #{@member.followings.count}人", member_followings_path(@member.id) %>
-      </div>
-      <div>
-        <%= link_to "フォロワー#{@member.followers.count}人", member_followers_path(@member.id) %>
+        </tbody>
+      </table>
+      <div class='mb-5'>
+        <% if current_member.guest? && current_member.id == @member.id %>
+          <%= link_to '新規投稿する', new_post_path, class: 'btn btn-success mr-4' %>
+          <%= link_to '編集する', edit_member_path(@member.id), class: 'btn btn-success mr-4' %>
+          <%= link_to '退会する',check_path,class: 'btn btn-danger mr-4' %>
+          <%= link_to "いいねした投稿", likes_member_path(@member),class: 'btn btn-primary' %>
+        <% end %>
       </div>
 
-      <%= render 'user/relationships/follow_btn', member: @member %>
-    <% end %>
+      <% if current_member.guest? %>
+      <table class='table'>
+        <h2><%= "#{current_member.full_name}さんの投稿一覧" %></h2>
+        <thead>
+          <tr>
+            <th class='col-2'>ニックネーム</th>
+            <th class='col-2'>タイトル</th>
+            <th class='col-7'>内容</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render 'user/posts/index', posts: @posts %>
+        </tbody>
+      </table>
+      <% end %>
+    </div>
   </div>
 </div>

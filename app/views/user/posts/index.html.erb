@@ -1,18 +1,26 @@
-<%= render 'user/posts/post_search' %>
+<div class='container main-top'>
+  <div class='row'>
+    <div class='col-11'>
+      <h2>投稿一覧</h2>
+      <%= render 'user/posts/post_search' %>
+      <table class='table'>
+        <thead>
+          <tr>
+            <th class='col-2'>投稿者</th>
+            <th class='col-2'>タイトル</th>
+            <th calss='col-5'>内容</th>
+            <th class='col-1'>いいね総数</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render 'user/posts/index', posts: @posts %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
-<table class='table'>
-  <thead>
-    <tr>
-      <th>投稿者</th>
-      <th>タイトル</th>
-      <th>内容</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= render 'user/posts/index', posts: @posts %>
-  </tbody>
-</table>
-
+<div class='container'>
 <table class='table'>
   <thead>
     <tr>
@@ -23,3 +31,4 @@
     <%= render 'user/posts/tag_lists', tag_lists: @tag_lists %>
   </tbody>
 </table>
+</div>

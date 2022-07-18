@@ -7,6 +7,7 @@ before_action :find_member,only: [:show,:edit,:update,:likes]
   end
 
   def show
+    @posts = @member.posts
   end
 
   def edit

@@ -4,6 +4,7 @@
       <h2><%= @member.full_name %>さんの情報編集</h2>
 
       <%= form_with model: @member, url: admin_member_path(@member.id) do |f| %>
+
         <table class='table'>
           <tbody>
             <tr class='form-group'>
@@ -36,10 +37,10 @@
                 <%= f.label :is_active_false,"退会" %>
               </td>
             </tr>
-              <td>
-                <%= f.submit '編集する' %>
-              </td>
-
+            <tr>
+              <th></th>
+              <td class='text-right'><%= f.submit '編集する', class: 'btn btn-success' %></td>
+            </tr>
           </tbody>
         </table>
       <% end %>

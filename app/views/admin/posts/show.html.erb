@@ -24,17 +24,9 @@
           </tr>
         </tbody>
       </table>
-
-      <table class='table'>
-        <tbody>
-          <% @post.post_comments.each do |post_comment| %>
-              <tr>
-                <th><%= post_comment.comment %></th>
-                <td><%= link_to '削除する', post_post_comment_path(post_comment.post.id, post_comment.id), method: :delete %></td>
-              </tr>
-            <% end %>
-        </tbody>
-      </table>
+      <div id='comments_area'>
+        <%= render 'user/post_comments/comments',post: @post %>
+      </div>
     </div>
   </div>
 </div>

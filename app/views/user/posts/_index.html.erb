@@ -3,11 +3,8 @@
     <td><%= link_to post.member.nickname, member_path(post.member_id) %></td>
     <td><%= link_to post.title, post_path(post.id) %></td>
     <td><%= post.content.truncate(30) %></td>
-    <% if current_member.id == post.member_id || current_member.guest_member %>
-      <td><%= "♥#{post.likes.count}" %></td>
-    <% end %>
-      <td id="like_buttons_<%= post.id %>">
-        <%= render "user/likes/like", post: post %>
-      </td>
+    <td id="like_buttons_<%= post.id %>">
+      <%= render "user/likes/like", post: post %>
+    </td>
   </tr>
 <% end %>

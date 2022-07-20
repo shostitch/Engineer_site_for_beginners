@@ -6,8 +6,7 @@ class User::SessionsController < Devise::SessionsController
   def guest_sign_in
     member = Member.guest
     sign_in member
-    redirect_to member_path(member)
-    flash[:notice] = 'ゲストログインしました。'
+    redirect_to member_path(member), notice: 'ゲストログインしました。'
   end
   # GET /resource/sign_in
   # def new
@@ -29,8 +28,7 @@ class User::SessionsController < Devise::SessionsController
       @member = Member.find_by(email: params[:member][:email])
       return if !@member
       if @member.valid_password?(params[:member][:password]) && (@member.is_active == false)
-        flash[:notice] = "このアカウントは退会済みです"
-        redirect_to new_member_registration_path
+        redirect_to new_member_registration_path, notice: "このアカウントは退会済みです"
       end
     end
 

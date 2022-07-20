@@ -1,4 +1,4 @@
-<div class="container main-top">
+<div class="container main">
   <div class="row">
     <div class="col-9 offset-2">
       <div class="col-8">
@@ -6,7 +6,6 @@
           <h2><strong>管理者</strong>ログイン</h2>
         </div>
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-
           <div class="my-3">
             <%= f.label :email,'メールアドレス' %><br />
             <%= f.email_field :email, autofocus: true, autocomplete: "email" %>

@@ -1,35 +1,33 @@
 <div class='container main-top'>
   <div class='row'>
     <div class='col-10'>
-      <h2><%= @member.full_name %>さん編集情報</h2>
-      <%= form_with model: @post,url: admin_post_path(@post.id) do |f| %>
+    <h2><%= @member.full_name %>さんの投稿編集</h2>
+    <%= form_with model: @post,url: admin_post_path(@post.id) do |f| %>
 
-        <div class='form-group'>
-          <%= f.label :title, 'タイトル' %>&emsp;<span class="badge badge-danger">必須</span><br />
-          <%= f.text_field :title,class: 'form-control' %>
-        </div>
+      <div class='form-group'>
+        <%= f.label :title, 'タイトル' %>&emsp;<span class="badge badge-danger">必須</span><br />
+        <%= f.text_field :title,class: 'form-control' %>
+      </div>
 
-        <div class='form-group'>
-          <%= f.label :content, '内容' %>&emsp;<span class="badge badge-danger">必須</span><br />
-          <%= f.text_area :content,class: 'form-control',rows: "10" %>
-        </div>
+      <div class='form-group'>
+        <%= f.label :content, '内容' %>&emsp;<span class="badge badge-danger">必須</span><br />
+        <%= f.text_area :content,class: 'form-control',rows: "10" %>
+      </div>
 
-        <div class='form-group'>
-          <%= f.label :name, "タグ (,で区切ると複数タグ登録できます)" %><br />
-          <%= f.text_field :name,value: @tag_list,class:"form-control"%>
-        </div>
+      <div class='form-group'>
+        <%= f.label :name, "タグ (,で区切ると複数タグ登録できます)" %><br />
+        <%= f.text_field :name,value: @tag_list,class:"form-control"%>
+      </div>
 
-        <div class='form-group'>
-          <% if @post_status %>
-            <%= f.select :status, Post.statuses.keys.map { |k| [t("enums.post.status.#{k}"),k]}, {}, {class: "custom-select"} %>
-          <% end %>
-        </div>
+      <div class='form-group'>
+        <%= f.select :status, Post.statuses.keys.map { |k| [t("enums.post.status.#{k}"),k]}, {}, {class: "custom-select"} %>
+      </div>
 
-        <div class='form-group'>
-          <%= f.submit '編集を終える' %>
-        </div>
+      <div class='form-group text-right'>
+        <%= f.submit '編集を終える',class: 'btn btn-success' %>
+      </div>
 
-      <% end %>
+    <% end %>
     </div>
   </div>
 </div>

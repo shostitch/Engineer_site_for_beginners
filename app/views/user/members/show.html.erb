@@ -1,7 +1,10 @@
 <div class='container main-top'>
   <div class='row'>
+    <div class='col-2'>
+      <%= render 'user/posts/tag_lists', tag_lists: Tag.all %>
+    </div>
     <div class='col-10'>
-      <table class='table '>
+      <table class='table'>
         <tbody>
           <% if current_member.id == @member.id %>
             <h2>マイページ</h2>
@@ -51,6 +54,7 @@
                 </td>
               </tr>
               <tr>
+                <th></th>
                 <td>
                   <%= render 'user/relationships/follow_btn', member: @member %>
                 </td>
@@ -67,20 +71,20 @@
         <% end %>
       </div>
 
-      <% if current_member.guest? %>
-      <table class='table'>
-        <h2><%= "#{current_member.full_name}さんの投稿一覧" %></h2>
-        <thead>
-          <tr>
-            <th class='col-2'>ニックネーム</th>
-            <th class='col-2'>タイトル</th>
-            <th class='col-7'>内容</th>
-          </tr>
-        </thead>
-        <tbody>
-          <%= render 'user/posts/index', posts: @posts %>
-        </tbody>
-      </table>
+      <% if @member.guest? %>
+        <table class='table'>
+          <h2><%= "#{@member.full_name}さんの投稿一覧" %></h2>
+          <thead>
+            <tr>
+              <th class='col-2'>ニックネーム</th>
+              <th class='col-6'>タイトル</th>
+              <th class='col-4'>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render 'user/posts/index', posts: @posts %>
+          </tbody>
+        </table>
       <% end %>
     </div>
   </div>

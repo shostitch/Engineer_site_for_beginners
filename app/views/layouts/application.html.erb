@@ -11,22 +11,18 @@
   </head>
 
   <body>
-    <%= render '/layouts/header' %>
-    <% if flash[:notice] %>
-      <%= flash[:notice] %>
-    <% end %>
-    <div class="row">
-        <div class="col-2">
-          <% unless %w[root about admin_session member_session new_member_registration].any? { |name| current_page?(send("#{name}_path")) } %>
-            <%= render'layouts/sidebar', tag_lists: Tag.all %>
-          <% end %>
-        </div>
+    <header>
+      <%= render '/layouts/header' %>
+    </header>
 
-      <main class="col-10">
-        <%= render '/user/searches/form' %>
-        <%= yield %>
-      </main>
-    </div>
-    <%= render '/layouts/footer' %>
+    <main class='main'>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= render '/user/searches/form' %>
+      <%= yield %>
+    </main>
+    <footer class="footer">
+      <%= render '/layouts/footer' %>
+    </footer>
   </body>
 </html>

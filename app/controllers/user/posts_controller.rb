@@ -4,8 +4,8 @@ class User::PostsController < ApplicationController
 
   def new
     @post = Post.new
-    if current_member.full_name == 'guest member'
-      redirect_to posts_path
+    if current_member.guest_member
+      redirect_to posts_path, notice: 'ゲストメンバーは投稿ができません'
     end
   end
 
@@ -14,7 +14,7 @@ class User::PostsController < ApplicationController
     tag_list = params[:post][:name].split(/[,、 　]/)#全角半角スペース込みもしものため
     if @post.save
       @post.save_tag(tag_list)
-      redirect_to  posts_path
+      redirect_to  posts_path, notice: '投稿しました。'
     else
       render :new
     end
@@ -27,7 +27,6 @@ class User::PostsController < ApplicationController
   def index
     @posts = Post.published.reverse_order
     @posts = @posts.where('title LIKE ?', "%#{params[:search]}%") if params[:search].present?
-    @tag_lists = Tag.all
   end
 
   def search_tag
@@ -43,7 +42,7 @@ class User::PostsController < ApplicationController
 
   def edit
     if current_member.id != @post.member_id
-      redirect_to posts_path
+      redirect_to posts_path, notice: '投稿したメンバーでないと編集はできません'
     end
     @tag_list = @post.tags.pluck(:name).join(',')
     @post_status = @post.status == 'draft'
@@ -64,8 +63,9 @@ class User::PostsController < ApplicationController
   end
 
   def destroy
-    @post.destroy
-    redirect_to posts_path
+    if @post.destroy
+      redirect_to posts_path, notice: '削除完了しました'
+    end
   end
 
   def sort

@@ -1,8 +1,8 @@
 <div class='container main-top'>
   <div class='row'>
-    <div class='col-10'>
+    <div class='col-10 offset-1'>
       <%= form_with model: @member, url: member_path(@member.id) do |f| %>
-        <%= render 'layouts/errors', obj: @member %>
+        <div class='my-3'><%= render 'shared/errors', obj: @member %></div>
         <table class='table'>
           <tbody>
             <h2>登録者編集</h2>
@@ -28,7 +28,11 @@
               <td><%= f.text_area :introduction, placeholder: 'こんにちわ！よろしくね',rows: '5' %></td>
             </tr>
 
-            <td><%= f.submit '更新する', class: 'btn btn-success' %></td>
+            <tr>
+              <th></th>
+              <td><%= f.submit '更新する', class: 'btn btn-success text-right' %></td>
+            </tr>
+
           </tbody>
         </table>
       <% end %>

@@ -1,4 +1,4 @@
-<div class='text-right mt-3 mr-3'>
+<div class='text-right mr-3 py-5'>
   <% if member_signed_in? %>
     <%= form_with url: search_path, method: :get, local: true do |f| %>
       <%= f.text_field :content,placeholder: '検索したい内容' %>

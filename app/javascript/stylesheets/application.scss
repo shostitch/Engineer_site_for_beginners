@@ -1,14 +1,27 @@
 @import '~bootstrap/scss/bootstrap';
 
+header {
+  background-color: #d4d4d4;
+}
+
+.main {
+  padding: 50px 0;
+  background-color: #14ffff;
+}
+
+.nav-link:hover {
+  background-color: gold;
+}
+
 li {
   list-style: none;
 }
 
-.main-top {
-  margin-top: 100px;
+footer {
+  height: 70px;
+  background-color: #d4d4d4;
 }
 
-footer {
-  height: 50px;
-  margin: 100px;
+.footer-p {
+  line-height: 70px;
 }

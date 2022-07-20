@@ -1,8 +1,10 @@
-<div class="container main-top">
+<div class="container">
   <div class="row">
     <div class="col-9 offset-2">
       <h2>ログイン</h2>
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <%= render "user/shared/error_messages", resource: resource %>
+
           <div class="mb-3">
             <%= f.label :email,'メールアドレス' %>&emsp;<span class="badge badge-danger">必須</span>
             <%= f.email_field :email, autofocus: true, autocomplete: "email" %>

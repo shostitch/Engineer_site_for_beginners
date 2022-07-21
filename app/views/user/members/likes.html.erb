@@ -1,12 +1,29 @@
-<div class='main-top'>
-  <% if @likes.count != 0 %>
-    <% @likes.each do |like|%>
-      <% post = Post.find_by(id: like.post_id) %>
-      <%= link_to post.member.last_name, member_path(post.member_id) %>
-      <%= link_to post.content, post_path(post.id) %>
-    <% end %>
-  <% else %>
-    <h2 class='text-center mt-5'>まだいいねした投稿がありません</h2>
-    <h3 class='text-center mt-5'>参考になった投稿などをどんどんいいねして自分の力に変えましょう</h3>
-  <% end %>
+<div class='container  main-top'>
+  <div class='row'>
+    <div class='col-10'>
+      <h2>いいねした投稿</h2>
+      <table class='table'>
+        <thead>
+          <tr>
+            <th class='col-3'>ニックネーム</th>
+            <th class='col-9'>いいねした内容</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @likes.count != 0 %>
+            <% @likes.each do |like|%>
+              <% post = Post.find_by(id: like.post_id) %>
+              <tr>
+                <td><%= link_to post.member.nickname, member_path(post.member_id) %></td>
+                <td><%= link_to post.content, post_path(post.id) %></td>
+              </tr>
+            <% end %>
+          <% else %>
+            <h2 class='text-center mt-5'>まだいいねした投稿がありません</h2>
+            <h3 class='text-center mt-5'>参考になった投稿などをどんどんいいねして自分の力に変えましょう</h3>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

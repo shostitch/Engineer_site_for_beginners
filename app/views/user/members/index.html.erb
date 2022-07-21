@@ -1,16 +1,25 @@
-<h2>参加者の一覧</h2>
-<table class='table'>
-  <thead>
-    <tr>
-      <th>ニックネーム</th>
-      <th>フルネーム</th>
-      <th>いいね総数</th>
-      <th>フォロー</th>
-      <th>フォロワー</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= render 'user/members/index', members: @members %>
-  </tbody>
-</table>
+<div class='main-top'>
+  <div class='row'>
+    <div class='col-2'>
+      <%= render 'user/posts/tag_lists', tag_lists: Tag.all %>
+    </div>
+    <div class='col-10'>
+      <table class='table'>
+        <thead>
+          <h2>参加者の一覧</h2>
+          <tr>
+            <th class='col-4'>ニックネーム</th>
+            <th class='col-4'>フルネーム</th>
+            <th class='col-2'>いいね総数</th>
+            <th class='col-1'>フォロー</th>
+            <th class='col-1'>フォロワー</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render 'user/members/index', members: @members %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 

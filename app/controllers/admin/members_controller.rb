@@ -14,8 +14,11 @@ class Admin::MembersController < ApplicationController
   end
 
   def update
-    @member.update(member_params)
-    redirect_to admin_member_path(@member.id)
+    if @member.update(member_params)
+      redirect_to admin_member_path(@member.id), notice: '編集完了しました'
+    else
+      render :edit
+    end
   end
 
   private

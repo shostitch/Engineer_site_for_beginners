@@ -7,12 +7,12 @@ before_action :find_member,only: [:show,:edit,:update,:likes]
   end
 
   def show
+    @posts = @member.posts
   end
 
   def edit
-    if @member.full_name == "guest member"
-      flash[:notice] = 'ゲストユーザーはプロフィール編集画面へ遷移できません。'
-      redirect_to member_path(current_member)
+    if @member.guest_member
+      redirect_to member_path(current_member), notice: 'ゲストメンバーはプロフィール編集画面へ遷移できません。'
     elsif current_member.id != @member.id
       redirect_to members_path
     end
@@ -20,8 +20,7 @@ before_action :find_member,only: [:show,:edit,:update,:likes]
 
   def update
     if @member.update(member_params)
-      flash[:notice] = '変更完了'
-      redirect_to member_path(@member.id)
+      redirect_to member_path(@member.id), notice: '変更完了しました'
     else
       render :edit
     end
@@ -33,7 +32,7 @@ before_action :find_member,only: [:show,:edit,:update,:likes]
   def withdrawal
     current_member.update(is_active: false)
     reset_session
-    redirect_to root_path
+    redirect_to root_path, notice: '退会しました'
   end
 
   def likes

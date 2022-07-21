@@ -1,29 +1,35 @@
-<h2>登録者一覧</h2>
-<table class='table'>
-  <thead>
-    <tr>
-      <th>お名前</th>
-      <th>メールアドレス</th>
-      <th>登録日</th>
-      <th>ステータス</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @members.each do |member| %>
-      <% if member.guest? %>
-        <tr>
-          <td><%= link_to member.full_name, admin_member_path(member.id) %></td>
-          <td><%= member.email %></td>
-          <td><%= l member.created_at, format: :short %></td>
-          <td>
-            <% if member.is_active  %>
-              <div>有効</div>
-            <% else %>
-              <div>退会</div>
+<div class="container main-top">
+  <div class="row">
+    <div class='col-12'>
+      <h2>登録者一覧</h2>
+      <table class='table table-striped'>
+        <thead class='thead-dark'>
+          <tr>
+            <th class='col-2'>お名前</th>
+            <th class='col-4'>メールアドレス</th>
+            <th class='col-2'>登録日</th>
+            <th class='col-2'>ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @members.each do |member| %>
+            <% if member.guest? %>
+              <tr>
+                <td><%= link_to member.full_name, admin_member_path(member.id) %></td>
+                <td><%= member.email %></td>
+                <td><%= l member.created_at, format: :short %></td>
+                <td>
+                  <% if member.is_active  %>
+                    <div>有効</div>
+                  <% else %>
+                    <div>退会</div>
+                  <% end %>
+                </td>
+              </tr>
             <% end %>
-          </td>
-        </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

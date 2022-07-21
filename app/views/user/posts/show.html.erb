@@ -1,36 +1,44 @@
-<div class="container">
+<div class="container main-top">
   <div class="row">
-    <div class="col-9 offset-2">
-      <h2>タイトル: <%= @post.title %></h2>
-
-      <h4>投稿内容: <%= @post.content %></h4>
-      <% if current_member.guest? %>
-        <% if current_member.id == @post.member_id %>
-          <%= link_to '編集する', edit_post_path(@post.id),class: 'btn btn-success' %>
-          <%= link_to '削除する', post_path(@post.id),method: :delete,class: 'btn btn-danger' %>
-        <% else %>
-          <%= form_with model: [@post,@post_comment] do |f| %>
-            <%= f.text_area :comment, rows: '5', placeholder: 'コメントしてみよう！' %>
-            <%= f.submit 'コメントを投稿する' %>
-          <% end %>
-
-          <div id="like_buttons_<%= @post.id %>">
-            <%= render "user/likes/like", post: @post %>
-          </div>
-        <% end %>
-      <% end %>
-
-      <div>コメント<%= @post.post_comments.count %>件</div>
-
-      <% @post.post_comments.each do |post_comment| %>
-        <%= post_comment.comment %>
-        <% if post_comment.member_id == current_member.id %>
-          <%= link_to '削除する', post_post_comment_path(post_comment.post.id, post_comment.id), method: :delete %>
-        <% end %>
-      <% end %>
-
-    </div>
+    <table class='table'>
+      <tbody>
+        <h2>投稿詳細</h2>
+        <tr>
+          <th class='col-2'>投稿者: </th>
+          <td><%= @post.member.nickname %>さん</td>
+        </tr>
+        <tr>
+          <th>タイトル: </th>
+          <td><%= @post.title %></td>
+        </tr>
+        <tr>
+          <th>投稿内容:</th>
+          <td><%= @post.content %></td>
+        </tr>
+        <tr>
+          <th>タグ:</th>
+          <td><%= @post.tags.pluck(:name).join(',') %></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+
+    <% if current_member.guest? %>
+      <% if current_member.id == @post.member_id %>
+        <%= link_to '編集する', edit_post_path(@post.id),class: 'btn btn-success' %>
+        <%= link_to '削除する', post_path(@post.id),method: :delete, data: {confirm: "削除しますか？"} ,class: 'btn btn-danger' %>
+      <% else %>
+        <div class='new_comments'>
+          <%= render 'user/post_comments/form', post: @post, post_comment: @post_comment %>
+        </div>
+        <div id="like_buttons_<%= @post.id %>" class='text-right'>
+          <%= render "user/likes/like", post: @post %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <div id='comments_area'>
+      <%= render 'user/post_comments/comments',post: @post %>
+    </div>
+
 </div>
-
-

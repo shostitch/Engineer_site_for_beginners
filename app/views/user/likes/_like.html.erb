@@ -1,11 +1,13 @@
 <% if current_member.id != post.member_id && current_member.guest? %>
   <% if post.liked_by?(current_member) %>
-      <%= link_to post_likes_path(post.id), method: :delete, remote: true do %>
-        ♥<%= post.likes.count %> いいね
+      <%= link_to post_likes_path(post.id), method: :delete,remote: true do %>
+        ♥<%= post.likes.count %>
       <% end %>
   <% else %>
       <%= link_to post_likes_path(post.id), method: :post, remote: true do %>
-        ♡<%= post.likes.count %> いいね
+        ♡<%= post.likes.count %>
       <% end %>
   <% end %>
+<% else %>
+  ♥<%= post.likes.count %>
 <% end %>

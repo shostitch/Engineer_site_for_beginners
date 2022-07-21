@@ -1,35 +1,49 @@
-<h2><%= @member.full_name %>さんの情報編集</h2>
+<div class="container main-top">
+  <div class="row">
+    <div class='col-10'>
+      <h2><%= @member.full_name %>さんの情報編集</h2>
 
-<%= form_with model: @member, url: admin_member_path(@member.id) do |f| %>
-  <div class='field'>
-    <%= f.label :full_name, 'お名前' %>
-    <%= f.text_field :last_name ,autofocus: true %>
-    <%= f.text_field :last_name %>
+      <%= form_with model: @member, url: admin_member_path(@member.id) do |f| %>
+
+        <table class='table'>
+          <tbody>
+            <tr class='form-group'>
+              <th><%= f.label :full_name, 'お名前' %>&emsp;<span class="badge badge-danger">必須</span></th>
+              <td><%= f.text_field :last_name ,autofocus: true,class: 'form-control' %>
+              <%= f.text_field :first_name,class: 'form-control mt-4' %></td>
+            </tr>
+
+            <tr class='form-group'>
+              <th><%= f.label :nickname, 'ニックネーム' %>&emsp;<span class="badge badge-danger">必須</span></th>
+              <td><%= f.text_field :nickname,class: 'form-control' %></td>
+            </tr>
+
+            <tr class='form-group'>
+              <th><%= f.label :introduction, '自己紹介' %>&emsp;<span class="badge badge-danger">必須</span></th>
+              <td><%= f.text_area :introduction,rows: '3',class: 'form-control' %></td>
+            </tr>
+
+            <tr class='form-group'>
+              <th><%= f.label :email, 'メールアドレス' %>&emsp;<span class="badge badge-danger">必須</span></th>
+              <td><%= f.text_field :email,class: 'form-control' %></td>
+            </tr>
+
+            <tr class='form-group'>
+              <th><%= f.label :is_active, "会員ステータス" %></th>
+              <td>
+                <%= f.radio_button :is_active,true, value: true %>
+                <%= f.label :is_active_true,"有効" %>
+                <%= f.radio_button :is_active,false,value: false %>
+                <%= f.label :is_active_false,"退会" %>
+              </td>
+            </tr>
+            <tr>
+              <th></th>
+              <td class='text-right'><%= f.submit '編集する', class: 'btn btn-success' %></td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
   </div>
-
-  <div class='field'>
-    <%= f.label :nickname, 'ニックネーム' %>
-    <%= f.text_field :nickname %>
-  </div>
-
-  <div class='field'>
-    <%= f.label :introduction, '自己紹介' %>
-    <%= f.text_field :introduction %>
-  </div>
-
-  <div class='field'>
-    <%= f.label :email, 'メールアドレス' %>
-    <%= f.text_field :email %>
-  </div>
-
-  <div class='field'>
-    <%= f.label :is_active, "会員ステータス" %>
-    <%= f.radio_button :is_active,true, value: true %>
-    <%= f.label :is_active_true,"有効" %>
-    <%= f.radio_button :is_active,false,value: false %>
-    <%= f.label :is_active_false,"退会" %>
-  </div>
-
-  <%= f.submit '編集する' %>
-
-<% end %>
+</div>

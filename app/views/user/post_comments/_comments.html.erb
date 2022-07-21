@@ -1,0 +1,13 @@
+<table class='table'>
+  <h5>コメント一覧(<%= @post.post_comments.count %>件)</h5>
+  <tbody>
+    <% post.post_comments.each do |post_comment| %>
+    <tr>
+      <td><%= post_comment.comment %></td>
+      <% if admin_signed_in? || post_comment.member_id == current_member.id %>
+        <td><%= link_to '削除する', post_post_comment_path(post_comment.post.id, post_comment.id), method: :delete,remote: true, data: {confirm: "削除しますか？"},class: 'btn btn-danger' %></td>
+      <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

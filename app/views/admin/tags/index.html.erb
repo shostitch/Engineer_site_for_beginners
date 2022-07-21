@@ -1,17 +1,23 @@
-<h2>タグ一覧</h2>
-<table class='table'>
-  <thead>
-    <tr>
-      <th>タグ</th>
-      <th>削除</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @tags.each do |tag| %>
-      <tr>
-        <td><%= tag.name %></td>
-        <td><%= link_to '削除する', admin_tag_path(tag.id), method: :delete,"data-confirm" => "本当に消しますか?" %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class='container main-top'>
+  <div class='row'>
+    <div class='col-10'>
+      <h2>タグ一覧</h2>
+      <table class='table table-striped'>
+        <thead class='thead-dark'>
+          <tr>
+            <th>タグ</th>
+            <th>削除</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @tags.each do |tag| %>
+            <tr>
+              <td><%= tag.name %></td>
+              <td><%= link_to '削除する', admin_tag_path(tag.id), method: :delete,"data-confirm" => "本当に消しますか?", class: 'btn btn-danger' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

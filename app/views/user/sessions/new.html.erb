@@ -1,15 +1,17 @@
-<div class="container main-top">
+<div class="container">
   <div class="row">
     <div class="col-9 offset-2">
       <h2>ログイン</h2>
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-          <div class="field">
-            <%= f.label :email,'メールアドレス' %><span class="badge badge-light ml-2">必須</span>
+          <%= render "user/shared/error_messages", resource: resource %>
+
+          <div class="mb-3">
+            <%= f.label :email,'メールアドレス' %>&emsp;<span class="badge badge-danger">必須</span>
             <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
           </div>
 
-          <div class="field">
-            <%= f.label :password,'パスワード' %><span class="badge badge-light ml-2">必須</span>
+          <div class="mb-3">
+            <%= f.label :password,'パスワード' %>&emsp;<span class="badge badge-danger">必須</span>
             <%= f.password_field :password, autocomplete: "current-password" %>
           </div>
 

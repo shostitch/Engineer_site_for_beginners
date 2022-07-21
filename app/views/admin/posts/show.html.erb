@@ -1,31 +1,32 @@
-<h2><%= @member.full_name %>さんの投稿</h2>
+<div class='container'>
+  <div class='row'>
+    <div class='col-10'>
+      <h2><%= @member.full_name %>さんの投稿</h2>
+      <table class='table'>
+        <tbody>
+          <tr>
+            <th>タイトル</th>
+            <td><%= @post.title %></td>
+          </tr>
 
-<table class='table'>
-  <tbody>
-    <tr>
-      <th>タイトル</th>
-      <td><%= @post.title %></td>
-    </tr>
-
-    <tr>
-      <th>投稿内容</th>
-      <td><%= @post.content %></td>
-    </tr>
-
-    <td><%= link_to '編集する', edit_admin_post_path(@post.id) %></td>
-    <td><%= link_to '削除する', admin_post_path(@post.id),method: :delete %></td>
-
-    <div>コメント<%= @post.post_comments.count %>件</div>
-  </tbody>
-</table>
-
-<table class='table'>
-  <tbody>
-    <% @post.post_comments.each do |post_comment| %>
-        <tr>
-          <th><%= post_comment.comment %></th>
-          <td><%= link_to '削除する', post_post_comment_path(post_comment.post.id, post_comment.id), method: :delete %></td>
-        </tr>
-      <% end %>
-  </tbody>
-</table>
+          <tr>
+            <th>投稿内容</th>
+            <td><%= @post.content %></td>
+          </tr>
+          <tr>
+            <th>変更</th>
+            <td><%= link_to '編集する', edit_admin_post_path(@post.id),class: 'btn btn-success' %>
+            <%= link_to '削除する', admin_post_path(@post.id),method: :delete, data: {confirm: "削除しますか？"}, class: 'btn btn-danger' %></td>
+          </tr>
+          <tr>
+            <th>コメント</th>
+            <td><%= @post.post_comments.count %>件</td>
+          </tr>
+        </tbody>
+      </table>
+      <div id='comments_area'>
+        <%= render 'user/post_comments/comments',post: @post %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,55 +1,61 @@
-<%= link_to '会員一覧へ', admin_members_path %>
-<table class='table'>
-  <tbody>
-    <tr>
-      <th>会員名</th>
-      <td><%= @member.full_name %></td>
-    </tr>
+<div class='container main-top'>
+  <div class='row'>
+    <div class='col-10'>
+      <h2><%= @member.full_name %>さんの詳細</h2>
+      <table class='table table-striped'>
+        <tbody>
+          <tr>
+            <th>会員名</th>
+            <td><%= @member.full_name %></td>
+          </tr>
 
-    <tr>
-      <th>ニックネーム</th>
-      <td><%= @member.nickname %></td>
-    </tr>
+          <tr>
+            <th>ニックネーム</th>
+            <td><%= @member.nickname %></td>
+          </tr>
 
-    <tr>
-      <th>自己紹介文</th>
-      <td><%= @member.introduction %></td>
-    </tr>
+          <tr>
+            <th>自己紹介文</th>
+            <td><%= @member.introduction %></td>
+          </tr>
 
-    <tr>
-      <th>メールアドレス</th>
-      <td><%= @member.email %></td>
-    </tr>
+          <tr>
+            <th>メールアドレス</th>
+            <td><%= @member.email %></td>
+          </tr>
 
-    <tr>
-      <th>ステータス</th>
-      <td>
-        <% if @member.is_active  %>
-          <div>有効</div>
-        <% else %>
-          <div>退会</div>
-        <% end %>
-      </td>
-    </tr>
+          <tr>
+            <th>ステータス</th>
+            <td>
+              <% if @member.is_active  %>
+                <div>有効</div>
+              <% else %>
+                <div>退会</div>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-  </tbody>
-</table>
-
-<table class='table'>
-  <thead>
-    <tr>
-      <th>タイトル</th>
-      <th>内容</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= link_to post.title, admin_post_path(post.id) %></td>
-        <td><%= post.content.truncate(30) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<%= link_to "#{@member.full_name}さんの編集ページへ", edit_admin_member_path(@member.id) %>
+      <table class='table mt-5'>
+        <thead class='thead-dark'>
+          <tr>
+            <th>タイトル</th>
+            <th>内容</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @posts.each do |post| %>
+            <tr>
+              <td><%= link_to post.title, admin_post_path(post.id) %></td>
+              <td><%= post.content.truncate(30) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class='text-right'>
+        <%= link_to "#{@member.full_name}さんの編集ページへ", edit_admin_member_path(@member.id), class: 'btn btn-success' %>
+      </div>
+    </div>
+  </div>
+</div>

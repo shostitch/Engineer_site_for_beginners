@@ -1,22 +1,29 @@
-<% if @members.exists? %>
-  <table class='table'>
-    <thead>
-      <tr>
-        <th>名前</th>
-        <th>フォローしている人</th>
-        <th>フォローしてくれている人</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @members.each do |member| %>
-        <tr>
-          <td><%= member.full_name %></td>
-          <td>フォロー数: <%= member.followings.count %></td>
-          <td>フォロワー数: <%= member.followers.count %></td>
-        </tr>
+<div class='container main-top'>
+  <div class='row'>
+    <div class='col-10'>
+      <% if @members.exists? %>
+        <table class='table'>
+          <h2>フォローしている人一覧</h2>
+          <thead>
+            <tr>
+              <th>名前</th>
+              <th>フォローしている人</th>
+              <th>フォローしてくれている人</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @members.each do |member| %>
+              <tr>
+                <td><%= link_to member.full_name, member_path(member.id) %></td>
+                <td>フォロー数: <%= member.followings.count %></td>
+                <td>フォロワー数: <%= member.followers.count %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p>ユーザーはいません</p>
       <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p>ユーザーはいません</p>
-<% end %>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,5 @@
-<div class='text-right mr-3 py-5'>
-  <% if member_signed_in? %>
+<div class='text-right'>
+  <% if member_signed_in? || admin_signed_in? %>
     <%= form_with url: search_path, method: :get, local: true do |f| %>
       <%= f.text_field :content,placeholder: '検索したい内容' %>
       <%= f.select :model, options_for_select({ "投稿を探す" => "post", "ニックネームで探す" => "member" }) %>

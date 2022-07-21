@@ -16,7 +16,7 @@ class User::PostsController < ApplicationController
       @post.save_tag(tag_list)
       redirect_to  posts_path, notice: '投稿しました。'
     else
-      render :new
+      render :error_messages
     end
   end
 
@@ -52,13 +52,13 @@ class User::PostsController < ApplicationController
     tag_list=params[:post][:name].split(/[,、 　]/)
     if @post.update(post_params)
       @old_relations=PostTag.where(post_id: @post.id)
-        @old_relations.each do |relation|
-          relation.delete
-        end
-        @post.save_tag(tag_list)
-        redirect_to post_path(@post.id), notice: '更新完了しました'
+      @old_relations.each do |relation|
+        relation.delete
+      end
+      @post.save_tag(tag_list)
+      redirect_to post_path(@post.id), notice: '更新完了しました'
     else
-      render :edit
+      render :error_messages
     end
   end
 

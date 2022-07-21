@@ -2,7 +2,7 @@
   <tr>
     <td><%= link_to post.member.nickname, member_path(post.member_id) %></td>
     <td><%= link_to post.title, post_path(post.id) %></td>
-    <td><%= post.content.truncate(30) %></td>
+    <td><%= post.content.truncate(15) %></td>
     <td id="like_buttons_<%= post.id %>">
       <%= render "user/likes/like", post: post %>
     </td>

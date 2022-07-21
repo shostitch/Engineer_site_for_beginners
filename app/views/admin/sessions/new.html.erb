@@ -1,27 +1,25 @@
-<div class="container main">
-  <div class="row">
-    <div class="col-9 offset-2">
-      <div class="col-8">
-        <div class="my-2">
-          <h2><strong>管理者</strong>ログイン</h2>
+<div class="container margin">
+  <div class="row circle">
+    <div class="col">
+      <h2><strong>管理者</strong>ログイン</h2>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <p class="alert text-right text-danger"><%= alert %></p>
+        <div class="form-group">
+          <%= f.label :email,'メールアドレス' %>&emsp;<span class="badge badge-danger">必須</span><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email",class: 'form-control' %>
         </div>
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-          <div class="my-3">
-            <%= f.label :email,'メールアドレス' %><br />
-            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-          </div>
 
-          <div class="mb-4">
-            <%= f.label :password,'パスワード（6文字以上）' %><br />
-            <%= f.password_field :password, autocomplete: "current-password" %>
-          </div>
+        <div class="form-group">
+          <%= f.label :password,'パスワード（6文字以上）' %>&emsp;<span class="badge badge-danger">必須</span><br />
+          <%= f.password_field :password, autocomplete: "current-password",class: 'form-control' %>
+        </div>
 
-          <div class="actions">
-            <%= f.submit "ログイン",class: "btn btn-success" %>
-          </div>
-        <% end %>
-      </div>
-        <%= render "admin/shared/links" %>
+        <div class="actions text-right">
+          <%= f.submit "ログイン",class: "btn btn-success" %>
+        </div>
+      <% end %>
+
+      <%= render "admin/shared/links" %>
     </div>
   </div>
 </div>

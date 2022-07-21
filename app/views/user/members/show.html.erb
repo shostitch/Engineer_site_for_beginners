@@ -1,20 +1,17 @@
-<div class='container main-top'>
-  <div class='row'>
-    <div class='col-2'>
+<div class='container margin'>
+  <div class='row circle'>
+    <div class='col-2 mt-5'>
       <%= render 'user/posts/tag_lists', tag_lists: Tag.all %>
     </div>
-    <div class='col-10'>
-      <table class='table'>
+    <div class='col-9 offset-1'>
+      <table class='table table-striped'>
         <tbody>
+
           <% if current_member.id == @member.id %>
-            <h2>マイページ</h2>
+            <h2><%= image_tag current_member.get_profile_image(100,100),class: 'image mr-5' %>マイページ</h2>
           <% else %>
-            <h2><%= @member.nickname %>さんのページ</h2>
+            <h2><%= image_tag @member.get_profile_image(100,100),class: 'image mr-5 ' %><%= @member.nickname %>さんのページ</h2>
           <% end %>
-          <tr>
-            <th>プロフィール画像</th>
-            <td>投稿ユーザー画像：<%= image_tag @member.get_profile_image(100,100) %></td>
-          </tr>
           <tr>
             <th>名前</th>
             <td><%= @member.full_name %></td>
@@ -43,42 +40,46 @@
             <% if current_member.guest? %>
               <tr>
                 <th>フォロー</th>
-                <td>
+                <td id='follow_count_<%= @member.id %>'>
                   <%= link_to "#{@member.followings.count}人", member_followings_path(@member.id) %>
                 </td>
               </tr>
               <tr>
                 <th>フォロワー</th>
-                <td>
+                <td id='follower_count_<%= @member.id %>'>
                   <%= link_to "#{@member.followers.count}人", member_followers_path(@member.id) %>
                 </td>
               </tr>
               <tr>
                 <th></th>
-                <td>
+                <td id="follow_button_<%= @member.id %>">
                   <%= render 'user/relationships/follow_btn', member: @member %>
                 </td>
               </tr>
             <% end %>
         </tbody>
       </table>
-      <div class='mb-5'>
+      <div class='mb-5 text-right'>
         <% if current_member.guest? && current_member.id == @member.id %>
-          <%= link_to '新規投稿する', new_post_path, class: 'btn btn-success mr-4' %>
+          <%= link_to "いいねした投稿", likes_member_path(@member),class: 'btn btn-primary mr-4' %>
           <%= link_to '編集する', edit_member_path(@member.id), class: 'btn btn-success mr-4' %>
           <%= link_to '退会する',check_path,class: 'btn btn-danger mr-4' %>
-          <%= link_to "いいねした投稿", likes_member_path(@member),class: 'btn btn-primary' %>
         <% end %>
       </div>
 
       <% if @member.guest? %>
         <table class='table'>
-          <h2><%= "#{@member.full_name}さんの投稿一覧" %></h2>
+          <% if current_member.id == @member.id %>
+            <h2>自分の投稿一覧</h2>
+          <% else %>
+            <h2><%= "#{@member.full_name}さんの投稿一覧" %></h2>
+          <% end %>
           <thead>
             <tr>
               <th class='col-2'>ニックネーム</th>
               <th class='col-6'>タイトル</th>
               <th class='col-4'>内容</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>

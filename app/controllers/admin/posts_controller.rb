@@ -26,9 +26,9 @@ class Admin::PostsController < ApplicationController
           relation.delete
         end
       @post.save_tag(tag_list)
-      redirect_to admin_posts_path, notice: '更新完了しました'
+      redirect_to admin_post_path(@post.id), notice: '更新完了しました'
     else
-      render :edit
+      render :error_messages
     end
   end
 

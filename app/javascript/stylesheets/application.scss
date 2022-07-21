@@ -1,12 +1,38 @@
 @import '~bootstrap/scss/bootstrap';
 
+.error_messages {
+  color: red;
+}
+
 header {
   background-color: #d4d4d4;
 }
 
+.margin-root {
+  padding: 100px;
+}
+
+.image {
+	width: 100px;
+	height: 100px;
+	object-fit: cover;
+	border-radius: 50%;
+	border: 2px solid #00e2ff;
+}
+
+.circle {
+  border-radius: 30px;
+  background-color: #bcffff;
+  padding: 30px;
+}
+
+h2{
+  padding: 30px;
+}
+
 .main {
   padding: 50px 0;
-  background-color: #14ffff;
+
 }
 
 .nav-link:hover {
@@ -15,6 +41,11 @@ header {
 
 li {
   list-style: none;
+}
+
+.margin {
+  margin-top: 100px;
+  margin-bottom: 100px;
 }
 
 footer {

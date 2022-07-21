@@ -1,18 +1,25 @@
-<table class='table main-top'>
-  <thead>
-    <tr>
-      <th>ニックネーム</th>
-      <th>タイトル</th>
-      <th>投稿内容</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% if @model == 'member' %>
-    	<h2>メンバー検索結果 ( <%= @content %> )</h2>
-      <%= render 'user/members/index', members: @records %>
-    <% elsif @model == 'post' %>
-    	<h2>投稿検索結果 ( <%= @content %> )</h2>
-      <%= render 'user/posts/index', posts: @records %>
-    <% end %>
-  </tbody>
-</table>
+<div class='container margin'>
+  <div class='row circle'>
+    <div class='col'>
+      <table class='table main-top'>
+        <thead>
+          <tr>
+            <th class='col-3'>ニックネーム</th>
+            <th class='col-4'>タイトル</th>
+            <th class='col-3'>投稿内容</th>
+            <th class='col-2'>いいね数</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @model == 'member' %>
+          	<h2>メンバー検索結果 ( <%= @content %> )</h2>
+            <%= render 'user/members/index', members: @records %>
+          <% elsif @model == 'post' %>
+          	<h2>投稿検索結果 ( <%= @content %> )</h2>
+            <%= render 'user/posts/index', posts: @records %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

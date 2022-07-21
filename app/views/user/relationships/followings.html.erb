@@ -1,28 +1,27 @@
-<div class='container main-top'>
-  <div class='row'>
-    <div class='col-10'>
+<div class='container margin'>
+  <div class='row circle'>
+    <div class='col'>
+      <h2>フォローしている人一覧</h2>
       <% if @members.exists? %>
         <table class='table'>
-          <h2>フォローしている人一覧</h2>
           <thead>
             <tr>
               <th>名前</th>
-              <th>フォローしている人</th>
-              <th>フォローしてくれている人</th>
+              <th>投稿数</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             <% @members.each do |member| %>
               <tr>
                 <td><%= link_to member.full_name, member_path(member.id) %></td>
-                <td>フォロー数: <%= member.followings.count %></td>
-                <td>フォロワー数: <%= member.followers.count %></td>
+                <td><%= member.posts.published.count %>件</td＞
               </tr>
             <% end %>
           </tbody>
         </table>
       <% else %>
-        <p>ユーザーはいません</p>
+        <h2>フォローしている人はいません</h2>
       <% end %>
     </div>
   </div>

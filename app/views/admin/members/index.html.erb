@@ -1,12 +1,12 @@
-<div class="container main-top">
-  <div class="row">
-    <div class='col-12'>
+<div class="container margin">
+  <div class="row circle">
+    <div class='col'>
       <h2>登録者一覧</h2>
       <table class='table table-striped'>
         <thead class='thead-dark'>
           <tr>
-            <th class='col-2'>お名前</th>
-            <th class='col-4'>メールアドレス</th>
+            <th class='col-3'>お名前</th>
+            <th class='col-5'>メールアドレス</th>
             <th class='col-2'>登録日</th>
             <th class='col-2'>ステータス</th>
           </tr>
@@ -20,9 +20,9 @@
                 <td><%= l member.created_at, format: :short %></td>
                 <td>
                   <% if member.is_active  %>
-                    <div>有効</div>
+                    <div class='text-success'>有効</div>
                   <% else %>
-                    <div>退会</div>
+                    <div class='text-danger'>退会済み</div>
                   <% end %>
                 </td>
               </tr>

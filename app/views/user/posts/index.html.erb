@@ -1,18 +1,22 @@
-<div class='container main-top'>
-  <div class='row'>
-    <div class='col-2'>
+<div class='container margin'>
+  <div class='row circle'>
+    <div class='col-2 pt-5'>
       <%= render 'user/posts/tag_lists', tag_lists: Tag.all %>
     </div>
-    <div class='col-10'>
-      <h2>投稿一覧</h2>
-      <%= render 'user/posts/post_search' %>
+    <div class='col-9 offset-1'>
+      <div class='row'>
+        <h2 class='col-5'>投稿一覧</h2>
+        <div class='text-right col-7'>
+          <%= render 'user/posts/post_search' %>
+        </div>
+      </div>
       <table class='table'>
         <thead>
           <tr>
-            <th>投稿者</th>
-            <th>タイトル</th>
-            <th>内容</th>
-            <th>いいね数</th>
+            <th class='col-2'>投稿者</th>
+            <th class='col-3'>タイトル</th>
+            <th class='col-2'>内容</th>
+            <th class='col-2'>いいね数</th>
           </tr>
         </thead>
         <tbody>

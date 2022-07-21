@@ -22,7 +22,7 @@ before_action :find_member,only: [:show,:edit,:update,:likes]
     if @member.update(member_params)
       redirect_to member_path(@member.id), notice: '変更完了しました'
     else
-      render :edit
+      render :error_messages
     end
   end
 

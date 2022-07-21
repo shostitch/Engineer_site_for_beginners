@@ -17,7 +17,7 @@ class Admin::MembersController < ApplicationController
     if @member.update(member_params)
       redirect_to admin_member_path(@member.id), notice: '編集完了しました'
     else
-      render :edit
+      render :error_messages
     end
   end
 

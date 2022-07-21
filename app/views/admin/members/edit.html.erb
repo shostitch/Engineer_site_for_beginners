@@ -1,26 +1,36 @@
-<div class="container main-top">
-  <div class="row">
-    <div class='col-10'>
+<div class="container margin">
+  <div class="row circle">
+    <div class='col'>
       <h2><%= @member.full_name %>さんの情報編集</h2>
-
-      <%= form_with model: @member, url: admin_member_path(@member.id) do |f| %>
-
+      <%= form_with model: @member, url: admin_member_path(@member.id),local: false do |f| %>
+        <div id='errors' class='my-3 text-right'>
+          <%= render 'shared/errors', obj: f.object %>
+        </div>
         <table class='table'>
+
           <tbody>
             <tr class='form-group'>
               <th><%= f.label :full_name, 'お名前' %>&emsp;<span class="badge badge-danger">必須</span></th>
-              <td><%= f.text_field :last_name ,autofocus: true,class: 'form-control' %>
-              <%= f.text_field :first_name,class: 'form-control mt-4' %></td>
+              <td>
+                <div class='row'>
+                  <div class='col'>
+                    <%= f.text_field :last_name , placeholder: '性',autofocus: true,class: 'form-control' %>
+                  </div>
+                  <div class='col'>
+                    <%= f.text_field :first_name, placeholder: '名',class: 'form-control' %>
+                  </div>
+                </div>
+              </td>
             </tr>
 
             <tr class='form-group'>
               <th><%= f.label :nickname, 'ニックネーム' %>&emsp;<span class="badge badge-danger">必須</span></th>
-              <td><%= f.text_field :nickname,class: 'form-control' %></td>
+              <td><%= f.text_field :nickname, placeholder: 'ぴょん太',class: 'form-control' %></td>
             </tr>
 
             <tr class='form-group'>
-              <th><%= f.label :introduction, '自己紹介' %>&emsp;<span class="badge badge-danger">必須</span></th>
-              <td><%= f.text_area :introduction,rows: '3',class: 'form-control' %></td>
+              <th><%= f.label :introduction, '自己紹介' %></th>
+              <td><%= f.text_area :introduction, placeholder: 'よろしくお願いします！',rows: '3',class: 'form-control' %></td>
             </tr>
 
             <tr class='form-group'>
@@ -32,7 +42,7 @@
               <th><%= f.label :is_active, "会員ステータス" %></th>
               <td>
                 <%= f.radio_button :is_active,true, value: true %>
-                <%= f.label :is_active_true,"有効" %>
+                <%= f.label :is_active_true,"有効",class: 'mr-5' %>
                 <%= f.radio_button :is_active,false,value: false %>
                 <%= f.label :is_active_false,"退会" %>
               </td>

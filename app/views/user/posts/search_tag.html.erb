@@ -1,10 +1,10 @@
-<div class= 'container main-top'>
-  <div class='row'>
+<div class= 'container margin'>
+  <div class='row circle'>
     <div class='col-2'>
       <%= render 'user/posts/tag_lists', tag_lists: Tag.all %>
     </div>
-    <div class='col-10'>
-      <h2>タグ検索投稿一覧 <%= "─ #{@tag.name} ─ " %></h2>
+    <div class='col-9 offset-1'>
+      <h2>タグ検索投稿一覧 <%= "( #{@tag.name} ) " %></h2>
       <table class='table'>
         <thead>
           <tr>
@@ -14,17 +14,11 @@
         <tbody>
           <% @posts.each do |post| %>
           <tr>
-            <td><%= link_to post.content, post %></td>
+            <td><%= link_to post.content, post_path(post.id) %></td>
           </tr>
           <% end %>
         </tbody>
-
-
-        <div>
-          <%= link_to 'ホーム', root_path %>
-        </div>
       </table>
-
     </div>
   </div>
 </div>

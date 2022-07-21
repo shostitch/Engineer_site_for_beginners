@@ -1,17 +1,20 @@
-<div class='main-top'>
+<div class=' container margin'>
+  <div class='row circle'>
+    <div class='col'>
+      <h2 class='text-center'>本当に退会しますか？</h2>
+      <p class='text-center mt-5'>退会すると主に以下の項目が使えなくなります</p>
+      <ul class='text-center mt-5'>
+        <li>投稿すること</li>
+        <li>いいねすること</li>
+        <li>コメントすること</li>
+        <li>自分の今までの投稿を見ること</li>
+      </ul>
 
-  <h1 class='text-center'>本当に退会しますか？</h1>
-  <p class='text-center mt-5'>退会すると主に以下の項目が使えなくなります</p>
-  <ul class='text-center mt-5'>
-    <li>投稿すること</li>
-    <li>いいねすること</li>
-    <li>コメントすること</li>
-    <li>自分の今までの投稿を見ること</li>
-  </ul>
+      <h3 class='text-center mt-5'>上記を確認の上、実行してください</h3>
 
-  <h2 class='text-center mt-5'>上記を確認の上、実行してください</h2>
-
-  <div class='text-center mt-5'>
-    <%= link_to '退会します', withdrawal_path,method: :patch, class: 'btn btn-danger'%>
+      <div class='text-center mt-5'>
+        <%= link_to '退会します', withdrawal_path,method: :patch, class: 'btn btn-danger'%>
+      </div>
+    </div>
   </div>
 </div>

@@ -1,11 +1,13 @@
-<div class='container main-top'>
-  <div class='row'>
-    <div class='col-10 offset-1'>
-      <%= form_with model: @member, url: member_path(@member.id) do |f| %>
-        <div class='my-3'><%= render 'shared/errors', obj: @member %></div>
+<div class='container margin'>
+  <div class='row circle'>
+    <div class='col'>
+      <%= form_with model: @member, url: member_path(@member.id),local: false do |f| %>
+        <div id='errors' class='my-3 text-right'>
+          <%= render 'shared/errors', obj: f.object %>
+        </div>
+        <h2>登録者編集</h2>
         <table class='table'>
           <tbody>
-            <h2>登録者編集</h2>
             <tr>
               <th><%= f.label :profile_image, 'プロフィール画像' %></th>
               <td><%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %></td>
@@ -13,24 +15,30 @@
             <tr>
               <th><%= f.label '名前' %>&emsp;<span class="badge badge-danger">必須</span></th>
               <td>
-                <%= f.text_field :last_name, autofocus: true %>
-                <%= f.text_field :first_name %>
+                <div class='row'>
+                  <div class='col'>
+                    <%= f.text_field :last_name, autofocus: true,placeholder: '性',class: 'form-control' %>
+                  </div>
+                  <div class='col'>
+                    <%= f.text_field :first_name, placeholder: '名',class: 'form-control' %>
+                  </div>
+                </div>
               </td>
             </tr>
 
             <tr>
               <th><%= f.label :nickname, 'ニックネーム' %>&emsp;<span class="badge badge-danger">必須</span></th>
-              <td><%= f.text_field :nickname %></td>
+              <td><%= f.text_field :nickname, placeholder: 'ぴょん太',class: 'form-control' %></td>
             </tr>
 
             <tr>
               <th><%= f.label :introduction, '自己紹介' %></th>
-              <td><%= f.text_area :introduction, placeholder: 'こんにちわ！よろしくね',rows: '5' %></td>
+              <td><%= f.text_area :introduction, placeholder: 'こんにちわ！よろしくね',rows: '5',class: 'form-control' %></td>
             </tr>
 
             <tr>
               <th></th>
-              <td><%= f.submit '更新する', class: 'btn btn-success text-right' %></td>
+              <td class='text-right pt-5'><%= f.submit '更新する', class: 'btn btn-success' %></td>
             </tr>
 
           </tbody>

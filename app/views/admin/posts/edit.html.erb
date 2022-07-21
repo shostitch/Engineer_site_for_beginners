@@ -1,9 +1,11 @@
-<div class='container'>
-  <div class='row'>
-    <div class='col-10'>
+<div class='container margin'>
+  <div class='row circle'>
+    <div class='col'>
     <h2><%= @member.full_name %>さんの投稿編集</h2>
-    <%= form_with model: @post,url: admin_post_path(@post.id) do |f| %>
-
+    <%= form_with model: @post,url: admin_post_path(@post.id),local: false do |f| %>
+      <div id='errors' class='my-3 text-right'>
+        <%= render 'shared/errors', obj: f.object %>
+      </div>
       <div class='form-group'>
         <%= f.label :title, 'タイトル' %>&emsp;<span class="badge badge-danger">必須</span><br />
         <%= f.text_field :title,class: 'form-control' %>

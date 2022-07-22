@@ -36,6 +36,9 @@ class User::PostsController < ApplicationController
   end
 
   def show
+    if @post.status == 'draft'
+      redirect_to posts_path, notice: '投稿が見つかりません'
+    end
     @post_comment = PostComment.new
     @post_tags = @post.tags
   end

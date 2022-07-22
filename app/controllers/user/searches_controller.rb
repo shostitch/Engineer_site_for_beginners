@@ -1,5 +1,4 @@
 class User::SearchesController < ApplicationController
-  before_action :authenticate_member!
 
   def search
 	@model = params[:model]
@@ -8,7 +7,7 @@ class User::SearchesController < ApplicationController
 	if @model == 'member'
 	  @records = Member.search_for(@content, @method)
 	else
-	  @records = Post.search_for(@content, @method)
+	  @records = Post.published.search_for(@content, @method)
 	end
   end
 

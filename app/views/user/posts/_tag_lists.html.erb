@@ -5,8 +5,9 @@
       <% if list.posts.published.count != 0 %>
         <tr>
           <td>
-            <%=link_to list.name, tag_posts_path(tag_id: list.id) %>
-            <%= "(#{list.posts.published.count})" %>
+            <%= link_to  tag_posts_path(tag_id: list.id) do %>
+            <%= "#{list.name}(#{list.posts.published.count})" %>
+            <% end %>
           </td>
         </tr>
       <% end %>

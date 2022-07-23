@@ -5,8 +5,10 @@
       <table class='table table-striped'>
         <thead>
           <tr>
-            <th class='col-3'>ニックネーム</th>
-            <th class='col-9'>いいねした内容</th>
+            <% if @likes.count != 0 %>
+              <th class='col-3'>ニックネーム</th>
+              <th class='col-9'>いいねした内容</th>
+            <% end %>
           </tr>
         </thead>
         <tbody>

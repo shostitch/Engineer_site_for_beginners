@@ -1,4 +1,4 @@
-<% if admin_signed_in? || current_member.guest_member %>
+<% if admin_signed_in? || current_member.guest_member || current_member.id == post.member.id %>
  <i class="fa-solid fa-thumbs-up"></i>&nbsp;<%= post.likes.count %>
 <% else %>
   <% if post.liked_by?(current_member) %>
@@ -7,7 +7,7 @@
       <% end %>
   <% else %>
       <%= link_to post_likes_path(post.id), method: :post, remote: true do %>
-        <i class="fa-solid fa-thumbs-up"></i>&nbsp;<%= post.likes.count %>
+        <i class="fa-regular fa-thumbs-up"></i>&nbsp;<%= post.likes.count %>
       <% end %>
   <% end %>
 <% end %>

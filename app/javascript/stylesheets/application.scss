@@ -1,29 +1,50 @@
 @import '~bootstrap/scss/bootstrap';
 
+header {
+  background-color: #d4d4d4;
+}
+
+.nav-link:hover {
+  background-color: #a9a9a9;
+  transform: scale(1.3, 1.3);
+  border-radius: 20px;
+}
+
 .error_messages {
   color: red;
 }
 
-a {
-  color: #000;
+.notice {
+  background-color: #4db56a;
+  color: #fff;
+  font-size: 30px;
+}
 
+.home {
+  color: #fff;
+}
+
+.background {
+  background-image: url('../images/computer-g317870da3_1920.png');
+  height: 700px;
+  width: auto;
+  background-size: cover;
 }
 
 .fa-thumbs-up {
   color: pink;
 }
 
-header {
-  background-color: #d4d4d4;
-}
 
 i {
   color: #fff;
 }
 
-.margin-root {
-  padding: 100px;
+.padding {
+  padding: 150px;
 }
+
+
 
 .image {
 	width: 100px;
@@ -43,13 +64,8 @@ h2{
   padding: 30px;
 }
 
-.main {
-  padding: 50px 0;
-
-}
-
-.nav-link:hover {
-  background-color: gold;
+.form-margin {
+  margin-top: 50px;
 }
 
 li {

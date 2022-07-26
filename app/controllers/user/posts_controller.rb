@@ -11,7 +11,16 @@ class User::PostsController < ApplicationController
 
   def create
     @post = current_member.posts.new(post_params)
+    if @post.status == "published"
+      @post.exp = 50
+    else
+      @post.exp = 0
+    end
     tag_list = params[:post][:name].split(/[,、 　]/)#全角半角スペース込みもしものため
+    @member = Member.find(current_member.id)
+    @member.exp_sum +=  @post.exp.to_i
+    @member.level = @member.exp_sum.to_i / 50
+    current_member.update(exp_sum: @member.exp_sum, level: @member.level)
     if @post.save
       @post.save_tag(tag_list)
       redirect_to  posts_path, notice: '投稿しました。'

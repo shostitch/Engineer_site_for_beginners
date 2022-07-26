@@ -12,6 +12,12 @@
           <% else %>
             <h2><%= image_tag @member.get_profile_image(100,100),class: 'image mr-5 ' %><%= @member.nickname %>さんのページ</h2>
           <% end %>
+
+          <tr>
+            <th>レベル</th>
+            <td><%= @member.level %></td>
+          </tr>
+
           <tr>
             <th>名前</th>
             <td><%= @member.full_name %></td>

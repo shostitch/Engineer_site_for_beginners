@@ -35,12 +35,12 @@
             <td><%= @member.start_date.strftime('%Y年 %m月 %d日') %></td>
           </tr>
           <tr>
-            <th>学日初めて何ヶ月？</th>
+            <th>学び初めて何ヶ月になりますか？？</th>
             <td>
               <% if (Date.today - @member.start_date).to_i / 365 != 0 %>
                 <%= (Date.today - @member.start_date).to_i / 365 %>年
               <% end %>
-              <%= (Date.today - @member.start_date).to_i % 365 / 30 %>ヶ月
+              <%= (Date.today - @member.start_date).to_i % 365 / 30 %>ヶ月です
             </td>
           </tr>
             <% if current_member.guest? %>

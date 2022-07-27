@@ -18,9 +18,18 @@ class User::PostsController < ApplicationController
     end
     tag_list = params[:post][:name].split(/[,、 　]/)#全角半角スペース込みもしものため
     @member = Member.find(current_member.id)
-    @member.exp_sum +=  @post.exp.to_i
-    @member.level = @member.exp_sum.to_i / 50
-    current_member.update(exp_sum: @member.exp_sum, level: @member.level)
+    @member.exp_sum +=  @post.exp
+    if @member.level == 1
+      @member.level = @member.exp_sum / 50 + 1
+    else
+      # level 2以降 ↓↓
+      exp_range = (@member.level**2)/2*50
+      if exp_range <= @member.exp_sum
+        @member.level += 1
+      end
+    # ↑↑
+    end
+    @member.update(exp_sum: @member.exp_sum, level: @member.level)
     if @post.save
       @post.save_tag(tag_list)
       redirect_to  posts_path, notice: '投稿しました。'

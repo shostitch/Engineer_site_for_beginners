@@ -38,7 +38,7 @@
 
             <tr>
               <th><%= f.label :email, 'メールアドレス' %>&emsp;<span class="badge badge-danger">必須</span></th>
-              <td><%= f.email_field :email, autofocus: true,placeholder: "12345678", autocomplete: "email",class: 'form-control'  %></td>
+              <td><%= f.email_field :email, autofocus: true, autocomplete: "email",class: 'form-control'  %></td>
             </tr>
 
             <tr>
@@ -48,12 +48,12 @@
 
             <tr>
               <th><%= f.label :password_confirmation, 'パスワード再確認（6文字以上）' %>&emsp;<span class="badge badge-danger">必須</span></th>
-              <td><%= f.password_field :password_confirmation, autocomplete: "new-password",class: 'form-control'  %></td>
+              <td><%= f.password_field :password_confirmation,placeholder: "12345678", autocomplete: "new-password",class: 'form-control'  %></td>
             </tr>
 
             <tr>
               <th><%= f.label :start_date, '勉強を始めた日' %>&emsp;<span class="badge badge-danger">必須</span></th>
-              <td><%= f.date_field :start_date,class: 'form-control' %></td>
+              <td><%= f.date_field :start_date, value: Time.now.strftime("%Y-%m-%d"),class: 'form-control' %></td>
             </tr>
 
             <tr>

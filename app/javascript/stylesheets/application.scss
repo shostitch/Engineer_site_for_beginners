@@ -44,14 +44,32 @@ i {
   padding: 150px;
 }
 
-
-
 .image {
 	width: 100px;
 	height: 100px;
 	object-fit: cover;
 	border-radius: 50%;
 	border: 2px solid #00e2ff;
+}
+
+.profile {
+  position: relative;
+}
+
+.level {
+  width: 40px;
+	height: 40px;
+  background-color: #fff;
+  position: absolute;
+  border-radius: 50%;
+  top: 100px;
+  left: 10px;
+  text-align: center;
+  line-height: 40px;
+}
+
+.preogress {
+  width: 80%;
 }
 
 .circle {

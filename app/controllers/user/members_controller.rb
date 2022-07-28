@@ -8,6 +8,7 @@ before_action :find_member,only: [:show,:edit,:update,:likes]
 
   def show
     @posts = @member.posts.published
+    @exp_sum_percent = sprintf("%.2f",(@member.exp_sum / (@member.level*50.to_f)*100))
   end
 
   def edit

@@ -3,11 +3,12 @@ before_action :authenticate_member!
 before_action :find_member,only: [:show,:edit,:update,:likes]
 
   def index
-    @members = Member.all
+    @members = Member.page(params[:page])
   end
 
   def show
-    @posts = @member.posts.published
+    @posts = @member.posts.published.page(params[:page])
+    @exp_sum_percent = sprintf("%.2f",(@member.exp_sum / (@member.level*50.to_f)*100))
   end
 
   def edit
@@ -37,7 +38,7 @@ before_action :find_member,only: [:show,:edit,:update,:likes]
 
   def likes
     @member = Member.find(params[:id])
-    @likes = Like.where(member_id: @member.id)
+    @likes = Like.where(member_id: @member.id).page(params[:page])
   end
 
   private

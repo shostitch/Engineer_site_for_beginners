@@ -10,7 +10,7 @@
           <tbody>
             <tr>
               <th><%= f.label :profile_image, 'プロフィール画像' %></th>
-              <td><%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %></td>
+              <td><%= f.file_field :profile_image, accept: "image/*" %></td>
             </tr>
             <tr>
               <th class='col-4'><%= f.label '名前' %>&emsp;<span class="badge badge-danger">必須</span></th>
@@ -38,7 +38,7 @@
 
             <tr>
               <th><%= f.label :email, 'メールアドレス' %>&emsp;<span class="badge badge-danger">必須</span></th>
-              <td><%= f.email_field :email, autofocus: true, autocomplete: "email",class: 'form-control'  %></td>
+              <td><%= f.email_field :email, autofocus: true, autocomplete: "email",class: 'form-control', placeholder: 'hello@example.com' %></td>
             </tr>
 
             <tr>

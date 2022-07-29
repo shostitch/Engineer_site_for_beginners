@@ -36,7 +36,7 @@ class User::PostsController < ApplicationController
   end
 
   def confirm
-    @posts = current_member.posts.draft.reverse_order
+    @posts = current_member.posts.draft.reverse_order.page(params[:page])
   end
 
   def index
@@ -55,6 +55,7 @@ class User::PostsController < ApplicationController
       redirect_to posts_path, notice: '投稿が見つかりません'
     end
     @post_comment = PostComment.new
+    @post_comments = @post.post_comments.page(params[:page])
     @post_tags = @post.tags
   end
 
@@ -74,13 +75,11 @@ class User::PostsController < ApplicationController
         @post.exp = 50
         @member = Member.find(current_member.id)
         @member.exp_sum +=  @post.exp
-          # level 2以降 ↓↓
         exp_range = @member.level * 50
         if exp_range <= @member.exp_sum
           @member.level += 1
           @member.exp_sum = 0
         end
-        # ↑↑
         @member.update(exp_sum: @member.exp_sum, level: @member.level)
       end
       @old_relations=PostTag.where(post_id: @post.id)

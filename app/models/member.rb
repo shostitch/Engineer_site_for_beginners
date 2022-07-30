@@ -74,6 +74,7 @@ class Member < ApplicationRecord
       member.first_name = 'member'
       member.nickname = 'ゲスト'
       member.start_date = '2022-02-22'
+      member.guest = true
     end
   end
 

@@ -36,7 +36,7 @@ class User::PostsController < ApplicationController
   end
 
   def confirm
-    @posts = current_member.posts.draft.reverse_order.page(params[:page])
+    @posts = current_member.posts.draft.page(params[:page]).reverse_order
   end
 
   def index

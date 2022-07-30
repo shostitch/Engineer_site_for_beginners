@@ -3,7 +3,7 @@ before_action :authenticate_member!
 before_action :find_member,only: [:show,:edit,:update,:likes]
 
   def index
-    @members = Member.page(params[:page])
+    @members = Member.where(guest: false).page(params[:page])
   end
 
   def show

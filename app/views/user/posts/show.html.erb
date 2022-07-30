@@ -46,9 +46,9 @@
       </table>
 
       <div id='comments_area'>
-        <%= render 'user/post_comments/comments',post: @post %>
+        <%= render 'user/post_comments/comments',post: @post%>
       </div>
-
+      <div><%= paginate @post_comments %></div>
     </div>
   </div>
 </div>

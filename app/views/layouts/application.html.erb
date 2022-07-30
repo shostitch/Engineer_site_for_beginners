@@ -8,13 +8,16 @@
     <script src="https://kit.fontawesome.com/0e753d0079.js" crossorigin="anonymous"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
   </head>
 
   <body>
     <header>
       <%= render '/layouts/header' %>
     </header>
-
     <main>
       <div class="notice pl-5 "><%= notice %></div>
       <% unless %w[root about].any? { |name| current_page?(send("#{name}_path")) } %>

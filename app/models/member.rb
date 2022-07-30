@@ -27,6 +27,7 @@ class Member < ApplicationRecord
   validates :first_name,    presence: true
   validates :nickname,      presence: true
   validates :is_active,     inclusion: [true, false]
+  validates :start_date,    presence: true
 
 
   has_one_attached :profile_image

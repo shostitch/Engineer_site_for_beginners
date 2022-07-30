@@ -11,7 +11,22 @@ class User::PostsController < ApplicationController
 
   def create
     @post = current_member.posts.new(post_params)
+    if @post.status == "published"
+      @post.exp = 50
+    else
+      @post.exp = 0
+    end
     tag_list = params[:post][:name].split(/[,、 　]/)#全角半角スペース込みもしものため
+    @member = Member.find(current_member.id)
+    @member.exp_sum +=  @post.exp
+      # level 2以降 ↓↓
+    exp_range = @member.level * 50
+    if exp_range <= @member.exp_sum
+      @member.level += 1
+      @member.exp_sum = 0
+    end
+    # ↑↑
+    @member.update(exp_sum: @member.exp_sum, level: @member.level)
     if @post.save
       @post.save_tag(tag_list)
       redirect_to  posts_path, notice: '投稿しました。'
@@ -21,7 +36,7 @@ class User::PostsController < ApplicationController
   end
 
   def confirm
-    @posts = current_member.posts.draft.reverse_order
+    @posts = current_member.posts.draft.reverse_order.page(params[:page])
   end
 
   def index
@@ -40,6 +55,7 @@ class User::PostsController < ApplicationController
       redirect_to posts_path, notice: '投稿が見つかりません'
     end
     @post_comment = PostComment.new
+    @post_comments = @post.post_comments.page(params[:page])
     @post_tags = @post.tags
   end
 
@@ -54,6 +70,18 @@ class User::PostsController < ApplicationController
   def update
     tag_list=params[:post][:name].split(/[,、 　]/)
     if @post.update(post_params)
+
+      if @post.saved_change_to_attribute?("status") == true
+        @post.exp = 50
+        @member = Member.find(current_member.id)
+        @member.exp_sum +=  @post.exp
+        exp_range = @member.level * 50
+        if exp_range <= @member.exp_sum
+          @member.level += 1
+          @member.exp_sum = 0
+        end
+        @member.update(exp_sum: @member.exp_sum, level: @member.level)
+      end
       @old_relations=PostTag.where(post_id: @post.id)
       @old_relations.each do |relation|
         relation.delete

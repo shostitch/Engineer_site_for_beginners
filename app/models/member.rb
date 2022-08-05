@@ -57,11 +57,11 @@ class Member < ApplicationRecord
   end
 
   def guest?
-    full_name != "guest member"
+    guest == false
   end
 
   def guest_member
-    full_name == "guest member"
+    guest == true
   end
 
   def self.guest

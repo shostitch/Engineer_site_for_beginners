@@ -64,7 +64,7 @@ class Member < ApplicationRecord
     guest == true
   end
 
-  def self.guest
+  def self.guest_log_in
     randam_num = rand(100)
     email = "guest#{randam_num}@example.com"
 

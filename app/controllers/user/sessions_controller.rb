@@ -4,7 +4,7 @@ class User::SessionsController < Devise::SessionsController
   before_action :member_states, only: [:create]
   # before_action :configure_sign_in_params, only: [:create]
   def guest_sign_in
-    member = Member.guest
+    member = Member.guest_log_in
     sign_in member
     redirect_to member_path(member), notice: 'ゲストログインしました。'
   end

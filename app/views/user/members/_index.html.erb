@@ -1,10 +1,15 @@
 <% members.each do |member| %>
   <tr>
-    <% if member.guest? %>
+    <% if member_signed_in? %>
       <td><%= link_to "#{member.nickname}(#{member.full_name}さん)",member_path(member.id) %></td>
       <td><%= "#{member.posts.published.count}件" %></td>
-      <td><%= "#{member.followings.count}人" %></td>
-      <td><%= "#{member.followers.count}人" %></td>
+      <td><%= link_to "#{member.followings.count}人",member_followings_path(member_id: member.id) %></td>
+      <td><%= link_to "#{member.followers.count}人",member_followers_path(member_id: member.id) %></td>
+    <% elsif admin_signed_in? %>
+      <td><%= link_to "#{member.nickname}(#{member.full_name}さん)",admin_member_path(member.id) %></td>
+      <td><%= "#{member.posts.published.count}件" %></td>
+      <td><%="#{member.followings.count}人" %></td>
+      <td><%="#{member.followers.count}人" %></td>
     <% end %>
   </tr>
 <% end %>

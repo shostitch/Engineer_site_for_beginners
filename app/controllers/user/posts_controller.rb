@@ -16,16 +16,14 @@ class User::PostsController < ApplicationController
     else
       @post.exp = 0
     end
-    tag_list = params[:post][:name].split(/[,、 　]/)#全角半角スペース込みもしものため
+    tag_list = params[:post][:tag_name].split(/[,]/)#半角スペースで区切る
     @member = Member.find(current_member.id)
     @member.exp_sum +=  @post.exp
-      # level 2以降 ↓↓
     exp_range = @member.level * 50
     if exp_range <= @member.exp_sum
       @member.level += 1
       @member.exp_sum = 0
     end
-    # ↑↑
     @member.update(exp_sum: @member.exp_sum, level: @member.level)
     if @post.save
       @post.save_tag(tag_list)
@@ -36,7 +34,7 @@ class User::PostsController < ApplicationController
   end
 
   def confirm
-    @posts = current_member.posts.draft.reverse_order.page(params[:page])
+    @posts = current_member.posts.draft.page(params[:page]).reverse_order
   end
 
   def index
@@ -63,12 +61,12 @@ class User::PostsController < ApplicationController
     if current_member.id != @post.member_id
       redirect_to posts_path, notice: '投稿したメンバーでないと編集はできません'
     end
-    @tag_list = @post.tags.pluck(:name).join(',')
+    @tag_list = @post.tags.pluck(:tag_name).join(',')
     @post_status = @post.status == 'draft'
   end
 
   def update
-    tag_list=params[:post][:name].split(/[,、 　]/)
+    tag_list=params[:post][:tag_name].split(/[,]/)
     if @post.update(post_params)
 
       if @post.saved_change_to_attribute?("status") == true

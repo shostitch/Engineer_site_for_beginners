@@ -4,7 +4,7 @@
       <%= render 'user/posts/tag_lists', tag_lists: Tag.all %>
     </div>
     <div class='col-9 offset-1'>
-      <h2>タグ検索投稿一覧 <%= "( #{@tag.name} ) " %></h2>
+      <h2>タグ検索投稿一覧 <%= "( #{@tag.tag_name} ) " %></h2>
       <table class='table'>
         <thead>
           <tr>

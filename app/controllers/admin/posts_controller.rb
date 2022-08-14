@@ -1,24 +1,22 @@
 class Admin::PostsController < ApplicationController
   before_action :authenticate_admin!
+  before_action :find_post,only: [:show,:edit,:update,:destroy]
 
   def index
     @posts = Post.all
   end
 
   def show
-    @post = Post.find(params[:id])
     @member = @post.member
   end
 
   def edit
-    @post = Post.find(params[:id])
     @member = @post.member
     @tag_list = @post.tags.pluck(:name).join(',')
     @post_status = @post.status == 'draft'
   end
 
   def update
-    @post = Post.find(params[:id])
     tag_list = params[:post][:name].split(/[,、 　]/)
     if @post.update(post_params)
       @old_relations = PostTag.where(post_id: @post.id)
@@ -33,7 +31,6 @@ class Admin::PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
     @post.destroy
     redirect_to admin_member_path(@post.member_id), notice: '削除しました'
   end
@@ -43,4 +40,9 @@ class Admin::PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:title,:content,:status)
   end
+
+  def find_post
+    @post = Post.find(params[:id])
+  end
+
 end

@@ -8,20 +8,21 @@
       </div>
       <div class='form-group'>
         <%= f.label :title, 'タイトル' %>&emsp;<span class="badge badge-danger">必須</span><br />
-        <%= f.text_field :title,class: 'form-control' %>
+        <%= f.text_field :title,placeholder: 'タイトルをここに',class: 'form-control' %>
       </div>
 
       <div class='form-group'>
         <%= f.label :content, '内容' %>&emsp;<span class="badge badge-danger">必須</span><br />
-        <%= f.text_area :content,class: 'form-control',rows: "10" %>
+        <%= f.text_area :content,placeholder: '内容をここに',class: 'form-control',rows: "10" %>
       </div>
 
       <div class='form-group'>
         <%= f.label :name, "タグ (,で区切ると複数タグ登録できます)" %><br />
-        <%= f.text_field :name,value: @tag_list,class:"form-control"%>
+        <%= f.text_field :name,placeholder: '例）rails,HTML',value: @tag_list,class:"form-control"%>
       </div>
 
       <div class='form-group'>
+        <%= f.label :status, "投稿するか下書き保存するか選択してください" %><br />
         <%= f.select :status, Post.statuses.keys.map { |k| [t("enums.post.status.#{k}"),k]}, {}, {class: "custom-select"} %>
       </div>
 

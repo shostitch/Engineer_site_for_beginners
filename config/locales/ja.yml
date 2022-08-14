@@ -362,6 +362,8 @@ ja:
       post:
         title: "タイトル"
         content: "内容"
+      tag:
+        tag_name: "タグ"
   views:
     pagination:
       first: "&laquo; 最初"

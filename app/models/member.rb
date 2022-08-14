@@ -57,14 +57,14 @@ class Member < ApplicationRecord
   end
 
   def guest?
-    full_name != "guest member"
+    guest == false
   end
 
   def guest_member
-    full_name == "guest member"
+    guest == true
   end
 
-  def self.guest
+  def self.guest_log_in
     randam_num = rand(100)
     email = "guest#{randam_num}@example.com"
 
@@ -74,6 +74,7 @@ class Member < ApplicationRecord
       member.first_name = 'member'
       member.nickname = 'ゲスト'
       member.start_date = '2022-02-22'
+      member.guest = true
     end
   end
 

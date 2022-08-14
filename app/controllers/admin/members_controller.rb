@@ -3,11 +3,11 @@ class Admin::MembersController < ApplicationController
   before_action :find_member,only: [:show,:edit,:update]
 
   def index
-    @members = Member.all
+    @members = Member.where(guest: false).page(params[:page])
   end
 
   def show
-    @posts = @member.posts
+    @posts = @member.posts.page(params[:page])
   end
 
   def edit

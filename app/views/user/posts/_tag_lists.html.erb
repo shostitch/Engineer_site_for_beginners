@@ -5,7 +5,7 @@
       <% if list.posts.published.count != 0 %>
           <div>
             <%= link_to  tag_posts_path(tag_id: list.id) do %>
-              <i class="fa-solid fa-tag"></i>&nbsp;<%= "#{list.name}(#{list.posts.published.count})" %>
+              <i class="fa-solid fa-tag"></i>&nbsp;<%= "#{list.tag_name}(#{list.posts.published.count})" %>
             <% end %>
           </div>
       <% end %>

@@ -21,7 +21,7 @@
           </tr>
           <tr>
             <th>タグ:</th>
-            <td><%= @post.tags.pluck(:name).join(',') %></td>
+            <td><%= @post.tags.pluck(:tag_name).join(',') %></td>
           </tr>
         </tbody>
       </table>

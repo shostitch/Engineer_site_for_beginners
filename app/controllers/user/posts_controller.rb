@@ -40,6 +40,7 @@ class User::PostsController < ApplicationController
   def index
     @posts = Post.published.reverse_order
     @posts = @posts.where('title LIKE ?', "%#{params[:search]}%") if params[:search].present?
+    @posts = @posts.page(params[:page])
   end
 
   def search_tag

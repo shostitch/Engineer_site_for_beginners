@@ -1,32 +1,37 @@
-<div class='container margin'>
-  <div class='row circle'>
-    <div class='col'>
-      <table class='table main-top'>
-        <thead>
-          <tr>
+<div class='flex'>
+  <div class='sidebar'>
+    <%= render 'user/posts/tag_lists', tag_lists: Tag.all %>
+  </div>
+  <div class='container margin'>
+    <div class='row circle'>
+      <div class='col'>
+        <table class='table main-top'>
+          <thead>
+            <tr>
+              <% if @model == 'member' %>
+                <th class='col-3'>ニックネーム(フルネーム)</th>
+                <th class='col-4'>投稿数</th>
+                <th class='col-3'>フォロー数</th>
+                <th class='col-2'>フォロワー数</th>
+              <% elsif @model == 'post' %>
+                <th class='col-3'>ニックネーム(フルネーム)</th>
+                <th class='col-4'>タイトル</th>
+                <th class='col-3'>投稿内容</th>
+                <th class='col-2'>いいね数</th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
             <% if @model == 'member' %>
-              <th class='col-3'>ニックネーム(フルネーム)</th>
-              <th class='col-4'>投稿数</th>
-              <th class='col-3'>フォロー数</th>
-              <th class='col-2'>フォロワー数</th>
+            	<h2>メンバー検索結果 ( <%= @content %> )</h2>
+              <%= render 'user/members/index', members: @records %>
             <% elsif @model == 'post' %>
-              <th class='col-3'>ニックネーム(フルネーム)</th>
-              <th class='col-4'>タイトル</th>
-              <th class='col-3'>投稿内容</th>
-              <th class='col-2'>いいね数</th>
+            	<h2>投稿検索結果 ( <%= @content %> )</h2>
+              <%= render 'user/posts/index', posts: @records %>
             <% end %>
-          </tr>
-        </thead>
-        <tbody>
-          <% if @model == 'member' %>
-          	<h2>メンバー検索結果 ( <%= @content %> )</h2>
-            <%= render 'user/members/index', members: @records %>
-          <% elsif @model == 'post' %>
-          	<h2>投稿検索結果 ( <%= @content %> )</h2>
-            <%= render 'user/posts/index', posts: @records %>
-          <% end %>
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

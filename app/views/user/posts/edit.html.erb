@@ -1,32 +1,37 @@
-<div class='container margin'>
-  <div class='row circle'>
-    <div class='col'>
-      <h2>投稿編集ページ</h2>
-      <%= form_with model: @post, url: post_path(@post.id),local: false do |f| %>
-        <div id='errors' class='my-3 text-right'>
-          <%= render 'shared/errors', obj: f.object %>
-        </div>
-        <div class='form-group'>
-          <%= f.label :title, 'タイトル' %>&emsp;<span class="badge badge-danger">必須</span><br />
-          <%= f.text_field :title,class: 'form-control' %>
-        </div>
-        <div class='form-group'>
-          <%= f.label :content, '内容' %>&emsp;<span class="badge badge-danger">必須</span><br />
-          <%= f.text_area :content,class: 'form-control',rows: "20" %>
-        </div>
-        <div class='form-group'>
-          <%= f.label :tag_name, "タグ (,で区切ると複数タグ登録できます)" %>
-          <%= f.text_field :tag_name,value: @tag_list,class:"form-control"%>
-        </div>
-        <div class='form-group'>
-          <% if @post_status %>
-            <%= f.select :status, Post.statuses.keys.map { |k| [t("enums.post.status.#{k}"),k]}, {}, {class: "custom-select"} %>
-          <% end %>
-        </div>
-        <div class='text-right pt-3'>
-          <%= f.submit '更新する', class: 'btn btn-success' %>
-        </div>
-      <% end %>
+<div class='flex'>
+  <div class='sidebar'>
+    <%= render 'user/posts/tag_lists', tag_lists: Tag.all %>
+  </div>
+  <div class='container margin'>
+    <div class='row circle'>
+      <div class='col'>
+        <h2>投稿編集ページ</h2>
+        <%= form_with model: @post, url: post_path(@post.id),local: false do |f| %>
+          <div id='errors' class='my-3 text-right'>
+            <%= render 'shared/errors', obj: f.object %>
+          </div>
+          <div class='form-group'>
+            <%= f.label :title, 'タイトル' %>&emsp;<span class="badge badge-danger">必須</span><br />
+            <%= f.text_field :title,placeholder: 'タイトルはここに',class: 'form-control' %>
+          </div>
+          <div class='form-group'>
+            <%= f.label :content, '内容' %>&emsp;<span class="badge badge-danger">必須</span><br />
+            <%= f.text_area :content,placeholder: '内容をここに',class: 'form-control',rows: "20" %>
+          </div>
+          <div class='form-group'>
+            <%= f.label :tag_name, "タグ (,で区切ると複数タグ登録できます)" %>
+            <%= f.text_field :tag_name,value: @tag_list,class:"form-control"%>
+          </div>
+          <div class='form-group'>
+            <% if @post_status %>
+              <%= f.select :status, Post.statuses.keys.map { |k| [t("enums.post.status.#{k}"),k]}, {}, {class: "custom-select"} %>
+            <% end %>
+          </div>
+          <div class='text-right pt-3'>
+            <%= f.submit '更新する', class: 'btn btn-success' %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

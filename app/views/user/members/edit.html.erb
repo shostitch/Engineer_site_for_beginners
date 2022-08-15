@@ -32,6 +32,11 @@
             </tr>
 
             <tr>
+              <th><%= f.label :start_date, '勉強を始めた日' %></th>
+              <td><%= f.date_field :start_date, value: Time.now.strftime("%Y-%m-%d"),class: 'form-control' %></td>
+            </tr>
+
+            <tr>
               <th><%= f.label :introduction, '自己紹介' %></th>
               <td><%= f.text_area :introduction, placeholder: 'こんにちわ！よろしくね',rows: '5',class: 'form-control' %></td>
             </tr>

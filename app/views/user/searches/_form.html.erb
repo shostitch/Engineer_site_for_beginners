@@ -1,10 +1,8 @@
 <div class='text-right mr-5 form-margin'>
-  <% if (admin_signed_in? || member_signed_in?) %>
-    <%= form_with url: search_path, method: :get do |f| %>
-      <%= f.text_field :content,placeholder: '検索したい内容' %>
-      <%= f.select :model, options_for_select({ "投稿を探す" => "post", "ニックネームで探す" => "member" }) %>
-      <%= f.select :method, options_for_select({ "部分一致" => "partial", "完全一致" => "perfect" }) %>
-      <%= f.submit '検索' %>
-    <% end %>
+  <%= form_with url: search_path, method: :get do |f| %>
+    <%= f.text_field :content,placeholder: '検索したい内容' %>
+    <%= f.select :model, options_for_select({ "投稿を探す" => "post", "ニックネームで探す" => "member" }) %>
+    <%= f.select :method, options_for_select({ "部分一致" => "partial", "完全一致" => "perfect" }) %>
+    <%= f.submit '検索' %>
   <% end %>
 </div>

@@ -1,25 +1,26 @@
-<div class='container margin'>
-  <div class='row circle'>
-    <div class='col-2 pt-5'>
-      <%= render 'user/posts/tag_lists', tag_lists: Tag.all %>
-    </div>
-    <div class='col-9 offset-1'>
-      <h2>参加者の一覧</h2>
-      <table class='table table-striped'>
-        <thead>
-          <tr>
-            <th class='col-6'>ニックネーム(フルネーム)</th>
-            <th class='col-2'>投稿した件数</th>
-            <th class='col-2'>フォロー</th>
-            <th class='col-2'>フォロワー</th>
-          </tr>
-        </thead>
-        <tbody>
-          <%= render 'user/members/index', members: @members %>
-        </tbody>
-      </table>
-      <div><%= paginate @members %></div>
+<div class='flex'>
+  <div class='sidebar'>
+    <%= render 'user/posts/tag_lists', tag_lists: Tag.all %>
+  </div>
+  <div class='container margin'>
+    <div class='row circle'>
+      <div class='col'>
+        <h2>メンバー一覧</h2>
+        <table class='table table-striped'>
+          <thead>
+            <tr>
+              <th class='col-5'>ニックネーム(フルネーム)</th>
+              <th class='col-2'>投稿した件数</th>
+              <th class='col-2'>フォロー</th>
+              <th class='col-2'>フォロワー</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render 'user/members/index', members: @members %>
+          </tbody>
+        </table>
+        <div><%= paginate @members %></div>
+      </div>
     </div>
   </div>
 </div>
-

@@ -4,7 +4,7 @@ class User::PostsController < ApplicationController
 
   def new
     @post = Post.new
-    if current_member.guest_member
+    if current_member.guest
       redirect_to posts_path, notice: 'ゲストメンバーは投稿ができません'
     end
   end
@@ -45,16 +45,16 @@ class User::PostsController < ApplicationController
 
   def search_tag
     @tag_lists=Tag.all
-    @tag=Tag.find(params[:tag_id])
-    @posts=@tag.posts.published
+    @tag = Tag.find(params[:tag_id])
+    @posts = @tag.posts.published
   end
 
   def show
     if @post.status == 'draft'
-      redirect_to posts_path, notice: '投稿が見つかりません'
+      redirect_to posts_path, notice: '投稿を下書きとして保存しました。'
     end
     @post_comment = PostComment.new
-    @post_comments = @post.post_comments.page(params[:page])
+    @post_comments = @post.post_comments.page(params[:page]).reverse_order
     @post_tags = @post.tags
   end
 

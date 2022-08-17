@@ -44,8 +44,11 @@
               <% end %>
             <% end %>
 
+        <div>
+          <h5>コメント一覧( <span id="comment_count"><%= @post.post_comments.count %></span> 件)</h5>
+        </div>
         <div id='comments_area'>
-          <%= render 'user/post_comments/comments',post: @post%>
+          <%= render 'user/post_comments/comments', post_comments: @post_comments %>
         </div>
         <div><%= paginate @post_comments %></div>
       </div>

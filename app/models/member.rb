@@ -42,6 +42,7 @@ class Member < ApplicationRecord
 
   def full_name
     last_name + " "  + first_name
+    # "#{last_name} #{first_name}"
   end
 
   def follow(member_id)
@@ -84,6 +85,17 @@ class Member < ApplicationRecord
     else
       Member.where('nickname LIKE ?', '%' + content + '%')
     end
+  end
+
+  def self.exp_update(current_member, post)
+    @member = Member.find(current_member.id)
+    @member.exp_sum +=  post.status == "published" ? 50 : 0
+    exp_range = @member.level * 50
+    if exp_range <= @member.exp_sum
+      @member.level += 1
+      @member.exp_sum = 0
+    end
+    @member.update(exp_sum: @member.exp_sum, level: @member.level)
   end
 end
 

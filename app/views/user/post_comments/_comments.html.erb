@@ -1,13 +1,13 @@
-<h5>コメント一覧(<%= post.post_comments.count %>件)</h5>
-<table class='table'>
-  <tbody>
-    <% post.post_comments.each do |post_comment| %>
-      <tr>
-        <td class='col-9'><%= post_comment.comment %></td>
-        <% if admin_signed_in? || post_comment.member_id == current_member.id %>
-          <td class='col-3'><%= link_to '削除する', post_post_comment_path(post_comment.post.id, post_comment.id), method: :delete,remote: true, data: {confirm: "削除しますか？"},class: 'btn btn-danger' %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+
+<% post_comments.each do |post_comment| %>
+<div>
+  <p>投稿者</p>
+  <div class='comment-name'><%= post_comment.member.nickname %>さん</div>
+</div>
+<div>
+  <div class='comment-name'><%= post_comment.comment %></div>
+  <% if admin_signed_in? || post_comment.member_id == current_member.id %>
+    <%= link_to '削除する', post_post_comment_path(post_comment.post.id, post_comment.id), method: :delete,remote: true, data: {confirm: "削除しますか？"},class: 'btn btn-danger' %>
+  <% end %>
+</div>
+<% end %>

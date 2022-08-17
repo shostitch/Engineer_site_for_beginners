@@ -18,12 +18,13 @@
               <td><%= link_to post.member.full_name, admin_member_path(post.member_id) %></td>
               <td><%= link_to post.title, admin_post_path(post.id) %></td>
               <td><%= post.content.truncate(30) %></td>
-              <td><%= post.tags.pluck(:name).join(',') %></td>
+              <td><%= post.tags.pluck(:tag_name).join(',') %></td>
               <td><%= post.status_i18n %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
+      <%= paginate @posts %>
     </div>
   </div>
 </div>

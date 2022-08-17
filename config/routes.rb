@@ -38,7 +38,7 @@ Rails.application.routes.draw do
     end
   end
 
-
+  get 'admin/search' => 'user/searches#search', as: 'admin_search'
   namespace :admin do
     resources :members, only:[:index,:show,:edit,:update]
     resources :posts, only:[:index,:show,:edit,:update,:destroy] do

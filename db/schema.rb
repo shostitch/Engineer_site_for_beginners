@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(version: 2022_07_30_062141) do
     t.integer "post_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id", "tag_id"], name: "index_post_tags_on_post_id_and_tag_id", unique: true
   end
 
   create_table "posts", force: :cascade do |t|
@@ -116,7 +117,7 @@ ActiveRecord::Schema.define(version: 2022_07_30_062141) do
   end
 
   create_table "tags", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "tag_name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

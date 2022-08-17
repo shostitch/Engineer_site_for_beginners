@@ -14,24 +14,23 @@
         </thead>
         <tbody>
           <% @members.each do |member| %>
-            <% if member.guest? %>
-              <tr>
-                <td><%= link_to member.full_name, admin_member_path(member.id) %></td>
-                <td>レベル<%= member.level %></td>
-                <td><%= member.email %></td>
-                <td><%= l member.created_at, format: :short %></td>
-                <td>
-                  <% if member.is_active  %>
-                    <div class='text-success'>有効</div>
-                  <% else %>
-                    <div class='text-danger'>退会済み</div>
-                  <% end %>
-                </td>
-              </tr>
-            <% end %>
+            <tr>
+              <td><%= link_to member.full_name, admin_member_path(member.id) %></td>
+              <td>Lv.<%= member.level %></td>
+              <td><%= member.email %></td>
+              <td><%= l member.created_at, format: :short %></td>
+              <td>
+                <% if member.is_active  %>
+                  <div class='text-success'>有効</div>
+                <% else %>
+                  <div class='text-danger'>退会済み</div>
+                <% end %>
+              </td>
+            </tr>
           <% end %>
         </tbody>
       </table>
+      <%= paginate @members %>
     </div>
   </div>
 </div>

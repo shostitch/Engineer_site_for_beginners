@@ -6,7 +6,7 @@
 
     <td><%= l post.created_at %></td>
 
-    <td><%= post.tags.pluck(:name).join(',')%></td>
+    <td><%= post.tags.pluck(:tag_name).join(',')%></td>
 
     <td id="like_buttons_<%= post.id %>">
       <%= render "user/likes/like", post: post %>

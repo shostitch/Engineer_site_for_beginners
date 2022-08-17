@@ -52,6 +52,8 @@ header {
   height: 700px;
   width: auto;
   background-size: cover;
+  background-color: rgba(0,0,0,0.5);
+  background-blend-mode: darken;
 }
 
 .fa-thumbs-up {
@@ -119,6 +121,18 @@ li {
 .margin {
   margin-top: 100px;
   margin-bottom: 100px;
+}
+
+.flex {
+  display: flex;
+}
+
+.sidebar {
+  padding: 30px;
+}
+
+.comment-name {
+  font-size: 30px;
 }
 
 .pagination {

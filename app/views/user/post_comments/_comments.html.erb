@@ -1,8 +1,8 @@
-<h5>コメント一覧(<%= post.post_comments.count %>件)</h5>
-<% post.post_comments.each do |post_comment| %>
+
+<% post_comments.each do |post_comment| %>
 <div>
   <p>投稿者</p>
-  <div class='comment-name'><%= post_comment.member.nickname %></div>
+  <div class='comment-name'><%= post_comment.member.nickname %>さん</div>
 </div>
 <div>
   <div class='comment-name'><%= post_comment.comment %></div>
@@ -10,5 +10,4 @@
     <%= link_to '削除する', post_post_comment_path(post_comment.post.id, post_comment.id), method: :delete,remote: true, data: {confirm: "削除しますか？"},class: 'btn btn-danger' %>
   <% end %>
 </div>
-
-    <% end %>
+<% end %>

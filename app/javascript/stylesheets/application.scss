@@ -1,5 +1,18 @@
 @import '~bootstrap/scss/bootstrap';
 
+main {
+  font-family: 'Courgette', cursive;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+
+a {
+  color: #000;
+}
+
+a:hover {
+  color: #000;
+}
+
 .logo {
   font-size: 30px;
 }
@@ -56,6 +69,36 @@ header {
   background-blend-mode: darken;
 }
 
+
+.tags {
+  width: 150px;
+	font-size: 14px;
+}
+
+.tag{
+  padding-left: 3px;
+  margin-top: 3px;
+  border: 1px solid;
+}
+
+.tag a {
+  display: block;
+}
+
+.tag:hover {
+  background-color :#d3d3d3;
+}
+
+.follow {
+  margin-left: auto;
+  
+}
+
+.follow_btn {
+  font-size: 25px;
+}
+
+
 .fa-thumbs-up {
   color: pink;
 }
@@ -65,7 +108,7 @@ i {
 }
 
 .fa-tag {
-  color: #000;
+  color: #696969;
 }
 
 .padding {

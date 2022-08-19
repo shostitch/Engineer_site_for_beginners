@@ -1,26 +1,32 @@
-<div class='container margin'>
-  <div class='row circle'>
-    <div class='col'>
-      <div class='row'>
-        <h2 class='col-5'>並び替え結果</h2>
-        <div class='text-right col-7'>
-          <%= render 'user/posts/post_search' %>
+<div class='flex'>
+  <div class='sidebar'>
+    <%= render 'user/posts/tag_lists', tag_lists: Tag.tag_order('desc') %>
+  </div>
+  <div class='container margin'>
+    <div class='row circle'>
+      <div class='col'>
+        <div class='row'>
+          <h2 class='col-5'>並び替え結果</h2>
+          <div class='text-right col-7'>
+            <%= render 'user/posts/post_search' %>
+          </div>
         </div>
+        <table class='table'>
+          <thead>
+            <tr>
+              <th class='col-3'>投稿者</th>
+              <th class='col-3'>タイトル</th>
+              <th class='col-2'>投稿日</th>
+              <th class='col-2'>タグ</th>
+              <th class='col-2'>いいね数</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render 'user/posts/sort', posts: @posts %>
+          </tbody>
+        </table>
+        <%= paginate @posts %>
       </div>
-      <table class='table'>
-        <thead>
-          <tr>
-            <th class='col-3'>投稿者</th>
-            <th class='col-3'>タイトル</th>
-            <th class='col-2'>投稿日</th>
-            <th class='col-2'>タグ</th>
-            <th class='col-2'>いいね数</th>
-          </tr>
-        </thead>
-        <tbody>
-          <%= render 'user/posts/sort', posts: @posts %>
-        </tbody>
-      </table>
     </div>
   </div>
 </div>

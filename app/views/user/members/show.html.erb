@@ -1,6 +1,6 @@
 <div class='flex'>
   <div class='sidebar'>
-    <%= render 'user/posts/tag_lists', tag_lists: Tag.all %>
+    <%= render 'user/posts/tag_lists', tag_lists: Tag.tag_order('desc') %>
   </div>
   <div class='container margin'>
     <div class='row circle'>
@@ -11,7 +11,12 @@
               <% if current_member.id == @member.id %>
                 <h2><%= image_tag current_member.get_profile_image(100,100),class: 'image mr-5' %>マイページ</h2>
               <% else %>
-                <h2><%= image_tag @member.get_profile_image(100,100),class: 'image mr-5 ' %><%= @member.nickname %>さんのページ</h2>
+                <div class="flex">
+                  <h2><%= image_tag @member.get_profile_image(100,100),class: 'image mr-5 ' %><%= @member.nickname %>さんのページ</h2>
+                  <div id="follow_button_<%= @member.id %>" class="follow">
+                      <%= render 'user/relationships/follow_btn', member: @member %>
+                  </div>
+                </div>
               <% end %>
               <% if current_member.guest? %>
                 <div class='level'>Lv.<%= @member.level %></div>
@@ -21,7 +26,7 @@
                 </div>
               <% end %>
             </div>
-  
+
             <tr>
               <th>名前</th>
               <td><%= @member.full_name %></td>
@@ -64,12 +69,6 @@
                     <%= link_to "#{@member.followers.count}人", member_followers_path(@member.id) %>
                   </td>
                 </tr>
-                <tr>
-                  <th></th>
-                  <td id="follow_button_<%= @member.id %>">
-                    <%= render 'user/relationships/follow_btn', member: @member %>
-                  </td>
-                </tr>
               <% end %>
           </tbody>
         </table>
@@ -80,7 +79,7 @@
             <%= link_to '退会する',check_path,class: 'btn btn-danger mr-4' %>
           <% end %>
         </div>
-  
+
         <% if @member.guest? %>
           <table class='table'>
             <% if current_member.id == @member.id %>

@@ -1,6 +1,6 @@
 <div class='flex'>
   <div class='sidebar'>
-    <%= render 'user/posts/tag_lists', tag_lists: Tag.all %>
+    <%= render 'user/posts/tag_lists', tag_lists: Tag.tag_order('desc') %>
   </div>
   <div class="container margin">
     <div class="row circle">

@@ -17,16 +17,6 @@ class User::PostsController < ApplicationController
     #   @post.exp = 0
     # end
     @post.exp = @post.status == "published" ? 50 : 0
-
-    # tag_list = params[:post][:tag_name].split(/[,]/)#半角スペースで区切る
-    # @member = Member.find(current_member.id)
-    # @member.exp_sum +=  @post.exp
-    # exp_range = @member.level * 50
-    # if exp_range <= @member.exp_sum
-    #   @member.level += 1
-    #   @member.exp_sum = 0
-    # end
-    # @member.update(exp_sum: @member.exp_sum, level: @member.level)
     Member.exp_update(current_member, @post)
     if @post.save
       tag_list = params[:post][:tag_name].split(/[,]/)#半角スペースで区切る
@@ -76,14 +66,6 @@ class User::PostsController < ApplicationController
 
       if @post.saved_change_to_attribute?("status") == true
         @post.exp = 50
-        # @member = Member.find(current_member.id)
-        # @member.exp_sum +=  @post.exp
-        # exp_range = @member.level * 50
-        # if exp_range <= @member.exp_sum
-        #   @member.level += 1
-        #   @member.exp_sum = 0
-        # end
-        # @member.update(exp_sum: @member.exp_sum, level: @member.level)
         Member.exp_update(current_member, @post)
       end
       @old_relations=PostTag.where(post_id: @post.id)
@@ -106,6 +88,7 @@ class User::PostsController < ApplicationController
   def sort
     selection = params[:keyword]
     @posts = Post.sort(selection)
+    @posts = @posts.page(params[:page]).reverse_order
   end
 
 

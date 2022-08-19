@@ -1,5 +1,18 @@
 @import '~bootstrap/scss/bootstrap';
 
+main {
+  font-family: 'Courgette', cursive;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+
+a {
+  color: #000;
+}
+
+a:hover {
+  color: #000;
+}
+
 .logo {
   font-size: 30px;
 }
@@ -56,15 +69,6 @@ header {
   background-blend-mode: darken;
 }
 
-h2 {
-  font-family: 'Courgette', cursive;
-  font-family: 'M PLUS Rounded 1c', sans-serif;
-}
-
-.th {
-  font-family: 'Courgette', cursive;
-  font-family: 'M PLUS Rounded 1c', sans-serif;
-}
 
 .tags {
   width: 150px;
@@ -77,8 +81,21 @@ h2 {
   border: 1px solid;
 }
 
-.tag a{
+.tag a {
   display: block;
+}
+
+.tag:hover {
+  background-color :#d3d3d3;
+}
+
+.follow {
+  margin-left: auto;
+  
+}
+
+.follow_btn {
+  font-size: 25px;
 }
 
 
@@ -91,7 +108,7 @@ i {
 }
 
 .fa-tag {
-  color: #000;
+  color: #696969;
 }
 
 .padding {

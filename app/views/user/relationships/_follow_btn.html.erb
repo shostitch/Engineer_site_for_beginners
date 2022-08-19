@@ -1,7 +1,7 @@
 <% if current_member != member %>
   <% if current_member.following?(member) %>
-    <%= link_to "フォロー外す", member_relationships_path(member.id), method: :delete, remote: true %>
+    <%= link_to "フォロー外す", member_relationships_path(member.id), method: :delete, remote: true, class: "follow_btn" %>
   <% else %>
-    <%= link_to "フォローする", member_relationships_path(member.id), method: :post, remote: true %>
+    <%= link_to "フォローする", member_relationships_path(member.id), method: :post, remote: true, class: "follow_btn" %>
   <% end %>
 <% end %>

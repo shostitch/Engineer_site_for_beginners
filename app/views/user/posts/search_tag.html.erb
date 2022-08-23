@@ -1,24 +1,30 @@
-<div class= 'container margin'>
-  <div class='row circle'>
-    <div class='col-2'>
-      <%= render 'user/posts/tag_lists', tag_lists: Tag.tag_order('desc') %>
-    </div>
-    <div class='col-9 offset-1'>
-      <h2>タグ検索投稿一覧 <%= "( #{@tag.tag_name} ) " %></h2>
-      <table class='table'>
-        <thead>
-          <tr>
-            <th>内容</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @posts.each do |post| %>
-          <tr>
-            <td><%= link_to post.content, post_path(post.id) %></td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
+<div class='flex'>
+  <div class='sidebar'>
+    <%= render 'user/posts/tag_lists', tag_lists: Tag.tag_order('desc') %>
+  </div>
+  <div class= 'container margin'>
+    <div class='row circle'>
+      <div class='col'>
+        <h2>タグ検索投稿一覧 <%= "( #{@tag.tag_name} ) " %></h2>
+        <table class='table'>
+          <thead>
+            <tr>
+              <th>タイトル</th>
+              <th>内容</th>
+              <th>投稿日(最終更新日)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @posts.each do |post| %>
+            <tr>
+              <td><%= link_to post.title, post_path(post.id) %></td>
+              <td><%= link_to post.content, post_path(post.id) %></td>
+              <td><%= l post.updated_at,format: :long %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

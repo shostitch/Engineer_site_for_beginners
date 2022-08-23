@@ -13,9 +13,11 @@
               <% else %>
                 <div class="flex">
                   <h2><%= image_tag @member.get_profile_image(100,100),class: 'image mr-5 ' %><%= @member.nickname %>さんのページ</h2>
-                  <div id="follow_button_<%= @member.id %>" class="follow">
+                  <% if current_member.guest? %>
+                    <div id="follow_button_<%= @member.id %>" class="follow">
                       <%= render 'user/relationships/follow_btn', member: @member %>
-                  </div>
+                    </div>
+                  <% end %>
                 </div>
               <% end %>
               <% if current_member.guest? %>
@@ -56,20 +58,20 @@
                 <%= (Date.today - @member.start_date).to_i % 365 / 30 %>ヶ月
               </td>
             </tr>
-              <% if current_member.guest? %>
-                <tr>
-                  <th>フォロー</th>
-                  <td id='follow_count_<%= @member.id %>'>
-                    <%= link_to "#{@member.followings.count}人", member_followings_path(@member.id) %>
-                  </td>
-                </tr>
-                <tr>
-                  <th>フォロワー</th>
-                  <td id='follower_count_<%= @member.id %>'>
-                    <%= link_to "#{@member.followers.count}人", member_followers_path(@member.id) %>
-                  </td>
-                </tr>
-              <% end %>
+            <% if current_member.guest? %>
+              <tr>
+                <th>フォロー</th>
+                <td id='follow_count_<%= @member.id %>'>
+                  <%= link_to "#{@member.followings.count}人", member_followings_path(@member.id) %>
+                </td>
+              </tr>
+              <tr>
+                <th>フォロワー</th>
+                <td id='follower_count_<%= @member.id %>'>
+                  <%= link_to "#{@member.followers.count}人", member_followers_path(@member.id) %>
+                </td>
+              </tr>
+            <% end %>
           </tbody>
         </table>
         <div class='mb-5 text-right'>

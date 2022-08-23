@@ -31,8 +31,8 @@ class Post < ApplicationRecord
       all.published.order(created_at: :ASC)
     elsif selection == 'likes'
       find(Like.group(:post_id).order(Arel.sql('count(post_id) desc')).pluck(:post_id))
-    elsif selection == 'dislikes'
-      find(Like.group(:post_id).order(Arel.sql('count(post_id) asc')).pluck(:post_id))
+    # elsif selection == 'dislikes'
+    #   find(Like.group(:post_id).order(Arel.sql('count(post_id) asc')).pluck(:post_id))
     end
   end
 

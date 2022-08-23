@@ -1,7 +1,7 @@
 <div class='container margin'>
   <div class='row circle'>
     <div class='col'>
-      <h2>フォローしている人一覧</h2>
+      <h2><%= @member.nickname %>さんがフォローしている人一覧</h2>
       <% if @members.exists? %>
         <table class='table'>
           <thead>

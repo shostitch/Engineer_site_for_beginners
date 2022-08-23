@@ -1,12 +1,12 @@
 <% post_comments.each do |post_comment| %>
-<div>
-  <p>投稿者</p>
-  <div class='comment-name'><%= post_comment.member.nickname %>さん</div>
-</div>
-<div>
-  <div class='comment-name'><%= post_comment.comment %></div>
-  <% if admin_signed_in? || post_comment.member_id == current_member.id %>
-    <%= link_to '削除する', post_post_comment_path(post_comment.post.id, post_comment.id), method: :delete,remote: true, data: {confirm: "削除しますか？"},class: 'btn btn-danger' %>
-  <% end %>
+<div class='comment-space'>
+  <div>コメント者 <%= post_comment.member.nickname %>さん</div>
+  <div>コメント</div>
+  <div><%= post_comment.comment %></div>
+  <div class="text-right">
+    <% if admin_signed_in? || post_comment.member_id == current_member.id %>
+      <%= link_to '削除する', post_post_comment_path(post_comment.post.id, post_comment.id), method: :delete,remote: true, data: {confirm: "削除しますか？"},class: 'btn btn-danger' %>
+    <% end %>
+  </div>
 </div>
 <% end %>

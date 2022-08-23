@@ -8,6 +8,7 @@ class Admin::PostsController < ApplicationController
 
   def show
     @member = @post.member
+    @post_comments = @post.post_comments.page(params[:page]).reverse_order
   end
 
   def edit

@@ -88,7 +88,7 @@ class User::PostsController < ApplicationController
   def sort
     selection = params[:keyword]
     @posts = Post.sort(selection)
-    @posts = @posts.page(params[:page]).reverse_order
+    # @posts = @posts.page(params[:page]).reverse_order
   end
 
 

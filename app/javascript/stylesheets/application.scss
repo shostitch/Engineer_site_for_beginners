@@ -60,6 +60,14 @@ header {
   color: #fff;
 }
 
+.about-link {
+  color: #0000ee;
+}
+
+.about-link:hover {
+  color: #fff;
+}
+
 .background {
   background-image: url('../images/computer-g317870da3_1920.png');
   height: 700px;
@@ -91,13 +99,16 @@ header {
 
 .follow {
   margin-left: auto;
-  
+
 }
 
 .follow_btn {
   font-size: 25px;
 }
 
+.like {
+  font-size: 20px;
+}
 
 .fa-thumbs-up {
   color: pink;
@@ -174,8 +185,9 @@ li {
   padding: 30px;
 }
 
-.comment-name {
-  font-size: 30px;
+.comment-space {
+  border: solid;
+  margin-bottom: 3px;
 }
 
 .pagination {

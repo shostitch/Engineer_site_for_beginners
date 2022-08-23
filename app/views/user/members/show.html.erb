@@ -53,7 +53,7 @@
                 <% if (Date.today - @member.start_date).to_i / 365 != 0 %>
                   <%= (Date.today - @member.start_date).to_i / 365 %>年
                 <% end %>
-                <%= (Date.today - @member.start_date).to_i % 365 / 30 %>ヶ月です
+                <%= (Date.today - @member.start_date).to_i % 365 / 30 %>ヶ月
               </td>
             </tr>
               <% if current_member.guest? %>
@@ -90,9 +90,10 @@
             <thead>
               <tr>
                 <th class='col-2'>ニックネーム</th>
-                <th class='col-6'>タイトル</th>
+                <th class='col-4'>タイトル</th>
                 <th class='col-3'>内容</th>
-                <th class='col-1'></th>
+                <th class='col-2'>投稿日(最終更新日)</th>
+                <th class='col-1'>いいね</th>
               </tr>
             </thead>
             <tbody>

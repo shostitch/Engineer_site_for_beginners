@@ -20,11 +20,11 @@
     </header>
     <main>
       <div class='notice pl-5'><%= notice %></div>
-      <% if (admin_signed_in? || member_signed_in?) %>
-        <% unless %w[root about].any? { |name| current_page?(send("#{name}_path")) } %>
-          <%= render '/user/searches/form' %>
+        <% if (admin_signed_in? || member_signed_in?) %>
+          <% unless %w[root about].any? { |name| current_page?(send("#{name}_path")) } %>
+            <%= render '/user/searches/form' %>
+          <% end %>
         <% end %>
-      <% end %>
       <%= yield %>
     </main>
     <footer class='footer'>

@@ -9,14 +9,15 @@
           <thead>
             <tr>
               <% if @model == 'member' %>
-                <th class='col-3'>ニックネーム(フルネーム)</th>
+                <th class='col-3'>ニックネーム<br />(フルネーム)</th>
                 <th class='col-4'>投稿数</th>
                 <th class='col-3'>フォロー数</th>
                 <th class='col-2'>フォロワー数</th>
               <% elsif @model == 'post' %>
-                <th class='col-3'>ニックネーム(フルネーム)</th>
-                <th class='col-4'>タイトル</th>
+                <th class='col-2'>ニックネーム<br />(フルネーム)</th>
+                <th class='col-3'>タイトル</th>
                 <th class='col-3'>投稿内容</th>
+                <th class="col-2">投稿日(最終更新日)</th>
                 <th class='col-2'>いいね数</th>
               <% end %>
             </tr>
@@ -31,7 +32,7 @@
             <% end %>
           </tbody>
         </table>
-        <%= paginate @records %>
+        <div><%= paginate @records %></div>
       </div>
     </div>
   </div>

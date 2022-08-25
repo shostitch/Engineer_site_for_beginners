@@ -1,14 +1,12 @@
-<div class="sidebar">
-  <h6>タグ一覧</h6>
-  <div class="tags">
-    <% tag_lists.each do |list| %>
-      <% if list.posts.published.count != 0 %>
-          <div class="tag">
-            <%= link_to  tag_posts_path(tag_id: list.id) do %>
-              <i class="fa-solid fa-tag"></i>&nbsp;<%= "#{list.tag_name}(#{list.posts.published.count})" %>
-            <% end %>
-          </div>
-      <% end %>
+<h6>タグ一覧</h6>
+<div class="tags">
+  <% tag_lists.each do |list| %>
+    <% if list.posts.published.count != 0 %>
+        <div class="tag">
+          <%= link_to  tag_posts_path(tag_id: list.id) do %>
+            <i class="fa-solid fa-tag"></i>&nbsp;<%= "#{list.tag_name}(#{list.posts.published.count})" %>
+          <% end %>
+        </div>
     <% end %>
-  </div>
+  <% end %>
 </div>

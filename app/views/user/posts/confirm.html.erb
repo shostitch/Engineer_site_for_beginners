@@ -1,34 +1,34 @@
 <div class='container margin'>
   <div class='row circle'>
-    <div class='col'>
-      <% if @posts.count == 0 %>
-        <h2>下書き途中のものがありません。</h2>
-      <% else %>
-        <h2>下書き一覧</h2>
-        <table class='table table-striped'>
-          <thead>
+    <% if @posts.count == 0 %>
+      <h2>下書き途中のものがありません。</h2>
+    <% else %>
+      <h2>下書き一覧</h2>
+      <table class='table table-striped'>
+        <thead>
+          <tr>
+            <th>ニックネーム</th>
+            <th>タイトル</th>
+            <th>内容</th>
+            <th>タグ</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @posts.each do |post| %>
             <tr>
-              <th>ニックネーム</th>
-              <th>タイトル</th>
-              <th>内容</th>
-              <th></th>
-              <th></th>
+              <td class='col-2'><%= link_to post.member.nickname, member_path(post.member_id) %></td>
+              <td class='col-3'><%= link_to post.title, post_path(post.id) %></td>
+              <td class='col-3'><%= post.content.truncate(20) %></td>
+              <td class='col-2'><%= post.tags.pluck(:tag_name).join(',') %></td>
+              <td class='col-1'><%= link_to '編集', edit_post_path(post.id),class: 'btn btn-success' %></td>
+              <td class='col-1'><%= link_to '削除', post_path(post.id),method: :delete, data: { confirm: "削除してもよろしいですか？" },class: 'btn btn-danger' %></td>
             </tr>
-          </thead>
-          <tbody>
-            <% @posts.each do |post| %>
-              <tr>
-                <td><%= link_to post.member.nickname, member_path(post.member_id) %></td>
-                <td><%= link_to post.title, post_path(post.id) %></td>
-                <td><%= post.content.truncate(30) %></td>
-                <td><%= link_to '編集する', edit_post_path(post.id),class: 'btn btn-success' %></td>
-                <td><%= link_to '削除する', post_path(post.id),method: :delete, data: { confirm: "削除してもよろしいですか？" },class: 'btn btn-danger' %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      <% end %>
-      <div><%= paginate @posts %></div>
-    </div>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+    <div><%= paginate @posts %></div>
   </div>
 </div>

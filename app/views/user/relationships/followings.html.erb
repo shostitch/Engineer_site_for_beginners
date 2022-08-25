@@ -1,7 +1,7 @@
 <div class='container margin'>
   <div class='row circle'>
     <div class='col'>
-      <h2>フォローしている人一覧</h2>
+      <h2><%= @member.nickname %>さんがフォローしている人一覧</h2>
       <% if @members.exists? %>
         <table class='table'>
           <thead>
@@ -15,7 +15,8 @@
             <% @members.each do |member| %>
               <tr>
                 <td><%= link_to member.full_name, member_path(member.id) %></td>
-                <td><%= member.posts.published.count %>件</td＞
+                <td><%= member.posts.published.count %>件</td>
+                <td></td>
               </tr>
             <% end %>
           </tbody>

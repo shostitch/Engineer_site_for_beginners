@@ -2,106 +2,104 @@
   <div class='sidebar'>
     <%= render 'user/posts/tag_lists', tag_lists: Tag.tag_order('desc') %>
   </div>
-  <div class='container margin'>
-    <div class='row circle'>
-      <div class='col'>
-        <table class='table table-striped'>
-          <tbody>
-            <div class='profile'>
-              <% if current_member.id == @member.id %>
-                <h2><%= image_tag current_member.get_profile_image(100,100),class: 'image mr-5' %>マイページ</h2>
-              <% else %>
-                <div class="flex">
-                  <h2><%= image_tag @member.get_profile_image(100,100),class: 'image mr-5 ' %><%= @member.nickname %>さんのページ</h2>
-                  <div id="follow_button_<%= @member.id %>" class="follow">
-                      <%= render 'user/relationships/follow_btn', member: @member %>
-                  </div>
-                </div>
-              <% end %>
+  <div class='container margin circle'>
+    <table class='table table-striped'>
+      <tbody>
+        <div class='profile'>
+          <% if current_member.id == @member.id %>
+            <h2><%= image_tag current_member.get_profile_image(100,100),class: 'image mr-5' %>マイページ</h2>
+          <% else %>
+            <div class="flex">
+              <h2><%= image_tag @member.get_profile_image(100,100),class: 'image mr-5 ' %><%= @member.nickname %>さんのページ</h2>
               <% if current_member.guest? %>
-                <div class='level'>Lv.<%= @member.level %></div>
-                <div class='text-right'>次のレベルまで<%= @member.level*50 - @member.exp_sum %>exp</div>
-                <div class="progress mb-5">
-                  <div class="progress-bar" role="progressbar" style=<%= "width:" + number_to_percentage(@exp_sum_percent.to_s); %> aria-valuenow=<%= number_to_percentage(@exp_sum_percent.to_s) %> aria-valuemin="0" aria-valuemax="100"><%= number_to_percentage(@exp_sum_percent).to_f.ceil(2) %>%</div>
+                <div id="follow_button_<%= @member.id %>" class="follow">
+                  <%= render 'user/relationships/follow_btn', member: @member %>
                 </div>
               <% end %>
             </div>
-
-            <tr>
-              <th>名前</th>
-              <td><%= @member.full_name %></td>
-            </tr>
-            <tr>
-              <th>ニックネーム</th>
-              <td><%= @member.nickname %></td>
-            </tr>
-            <tr>
-              <th>自己紹介</th>
-              <td><%= @member.introduction %></td>
-            </tr>
-            <tr>
-              <th>投稿数</th>
-              <td><%= @member.posts.count %>件</td>
-            </tr>
-            <tr>
-              <th>勉強を始めた日</th>
-              <td><%= @member.start_date.strftime('%Y年 %m月 %d日') %></td>
-            </tr>
-            <tr>
-              <th>学び初めて何ヶ月になりますか？？</th>
-              <td>
-                <% if (Date.today - @member.start_date).to_i / 365 != 0 %>
-                  <%= (Date.today - @member.start_date).to_i / 365 %>年
-                <% end %>
-                <%= (Date.today - @member.start_date).to_i % 365 / 30 %>ヶ月です
-              </td>
-            </tr>
-              <% if current_member.guest? %>
-                <tr>
-                  <th>フォロー</th>
-                  <td id='follow_count_<%= @member.id %>'>
-                    <%= link_to "#{@member.followings.count}人", member_followings_path(@member.id) %>
-                  </td>
-                </tr>
-                <tr>
-                  <th>フォロワー</th>
-                  <td id='follower_count_<%= @member.id %>'>
-                    <%= link_to "#{@member.followers.count}人", member_followers_path(@member.id) %>
-                  </td>
-                </tr>
-              <% end %>
-          </tbody>
-        </table>
-        <div class='mb-5 text-right'>
-          <% if current_member.guest? && current_member.id == @member.id %>
-            <%= link_to "いいねした投稿", likes_member_path(@member),class: 'btn btn-primary mr-4' %>
-            <%= link_to '編集する', edit_member_path(@member.id), class: 'btn btn-success mr-4' %>
-            <%= link_to '退会する',check_path,class: 'btn btn-danger mr-4' %>
+          <% end %>
+          <% if current_member.guest? %>
+            <div class='level'>Lv.<%= @member.level %></div>
+            <div class='text-right'>次のレベルまで<%= @member.level*50 - @member.exp_sum %>exp</div>
+            <div class="progress mb-5">
+              <div class="progress-bar" role="progressbar" style=<%= "width:" + number_to_percentage(@exp_sum_percent.to_s); %> aria-valuenow=<%= number_to_percentage(@exp_sum_percent.to_s) %> aria-valuemin="0" aria-valuemax="100"><%= number_to_percentage(@exp_sum_percent).to_f.ceil(2) %>%</div>
+            </div>
           <% end %>
         </div>
 
-        <% if @member.guest? %>
-          <table class='table'>
-            <% if current_member.id == @member.id %>
-              <h2>自分の投稿一覧</h2>
-            <% else %>
-              <h2><%= "#{@member.full_name}さんの投稿一覧" %></h2>
+        <tr>
+          <th>名前</th>
+          <td><%= @member.full_name %></td>
+        </tr>
+        <tr>
+          <th>ニックネーム</th>
+          <td><%= @member.nickname %></td>
+        </tr>
+        <tr>
+          <th>自己紹介</th>
+          <td><%= @member.introduction %></td>
+        </tr>
+        <tr>
+          <th>投稿数</th>
+          <td><%= @member.posts.count %>件</td>
+        </tr>
+        <tr>
+          <th>勉強を始めた日</th>
+          <td><%= @member.start_date.strftime('%Y年 %m月 %d日') %></td>
+        </tr>
+        <tr>
+          <th>学び初めて何ヶ月になりますか？？</th>
+          <td>
+            <% if (Date.today - @member.start_date).to_i / 365 != 0 %>
+              <%= (Date.today - @member.start_date).to_i / 365 %>年
             <% end %>
-            <thead>
-              <tr>
-                <th class='col-2'>ニックネーム</th>
-                <th class='col-6'>タイトル</th>
-                <th class='col-3'>内容</th>
-                <th class='col-1'></th>
-              </tr>
-            </thead>
-            <tbody>
-              <%= render 'user/posts/index', posts: @posts %>
-            </tbody>
-          </table>
+            <%= (Date.today - @member.start_date).to_i % 365 / 30 %>ヶ月
+          </td>
+        </tr>
+        <% if current_member.guest? %>
+          <tr>
+            <th>フォロー</th>
+            <td id='follow_count_<%= @member.id %>'>
+              <%= link_to "#{@member.followings.count}人", member_followings_path(@member.id) %>
+            </td>
+          </tr>
+          <tr>
+            <th>フォロワー</th>
+            <td id='follower_count_<%= @member.id %>'>
+              <%= link_to "#{@member.followers.count}人", member_followers_path(@member.id) %>
+            </td>
+          </tr>
         <% end %>
-        <div><%= paginate @posts %></div>
-      </div>
+      </tbody>
+    </table>
+    <div class='mb-5 text-right'>
+      <% if current_member.guest? && current_member.id == @member.id %>
+        <%= link_to "いいねした投稿", likes_member_path(@member),class: 'btn btn-primary mr-4' %>
+        <%= link_to '編集する', edit_member_path(@member.id), class: 'btn btn-success mr-4' %>
+        <%= link_to '退会する',check_path,class: 'btn btn-danger mr-4' %>
+      <% end %>
     </div>
+    <% if @member.guest? %>
+      <table class='table'>
+        <% if current_member.id == @member.id %>
+          <h2>自分の投稿一覧</h2>
+        <% else %>
+          <h2><%= "#{@member.full_name}さんの投稿一覧" %></h2>
+        <% end %>
+        <thead>
+          <tr>
+            <th class='col-2'>ニックネーム</th>
+            <th class='col-4'>タイトル</th>
+            <th class='col-3'>内容</th>
+            <th class='col-2'>投稿日(最終更新日)</th>
+            <th class='col-1'>いいね</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render 'user/posts/index', posts: @posts %>
+        </tbody>
+      </table>
+    <% end %>
+    <div><%= paginate @posts %></div>
   </div>
 </div>

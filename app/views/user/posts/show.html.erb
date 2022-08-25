@@ -24,25 +24,34 @@
               <th>タグ:</th>
               <td><%= @post.tags.pluck(:tag_name).join(',') %></td>
             </tr>
+            <tr>
+              <th>投稿日（更新日）</th>
+              <td><%= l @post.updated_at, format: :long %></td>
+            </tr>
           </tbody>
         </table>
+        
+        <div class="flex like">
+          <div class="mr-3">参考になったらいいねして保存しよう→</div>
+          <div id="like_buttons_<%= @post.id %>" >
+            <%= render "user/likes/like", post: @post %>
+          </div>
+        </div>
 
-            <% if current_member.guest? %>
-              <% if current_member.id == @post.member_id %>
-                <div class='text-right'>
-                  <%= link_to '編集する', edit_post_path(@post.id),class: 'btn btn-success mr-3 my-3' %>
-                  <%= link_to '削除する', post_path(@post.id),method: :delete, data: {confirm: "削除しますか？"} ,class: 'btn btn-danger my-3' %>
-                </div>
-              </tr>
-              <% else %>
-                <div class='new_comments'>
-                  <%= render 'user/post_comments/form', post: @post, post_comment: @post_comment %>
-                </div>
-                <div id="like_buttons_<%= @post.id %>" class='text-right'>
-                  <%= render "user/likes/like", post: @post %>
-                </div>
-              <% end %>
-            <% end %>
+        <% if current_member.guest? %>
+          <% if current_member.id == @post.member_id %>
+            <div class='text-right'>
+              <%= link_to '編集する', edit_post_path(@post.id),class: 'btn btn-success mr-3 my-3' %>
+              <%= link_to '削除する', post_path(@post.id),method: :delete, data: {confirm: "削除しますか？"} ,class: 'btn btn-danger my-3' %>
+            </div>
+          </tr>
+          <% else %>
+            <div class='new_comments'>
+              <%= render 'user/post_comments/form', post: @post, post_comment: @post_comment %>
+            </div>
+            
+          <% end %>
+        <% end %>
 
         <div>
           <h5>コメント一覧( <span id="comment_count"><%= @post.post_comments.count %></span> 件)</h5>

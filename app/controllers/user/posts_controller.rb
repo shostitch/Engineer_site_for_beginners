@@ -19,7 +19,7 @@ class User::PostsController < ApplicationController
     @post.exp = @post.status == "published" ? 50 : 0
     Member.exp_update(current_member, @post)
     if @post.save
-      tag_list = params[:post][:tag_name].split(/[,]/)#半角スペースで区切る
+      tag_list = params[:post][:tag_name].split(/[,]/)#,で1つずつ区切る
       @post.save_tag(tag_list)
       redirect_to  posts_path, notice: '投稿しました。'
     else
@@ -38,14 +38,13 @@ class User::PostsController < ApplicationController
   end
 
   def search_tag
-    @tag_lists=Tag.all
     @tag = Tag.find(params[:tag_id])
     @posts = @tag.posts.published
   end
 
   def show
     if @post.status == 'draft'
-      redirect_to posts_path, notice: '投稿を下書きとして保存しました。'
+      redirect_to posts_path, notice: 'この投稿は閲覧できません。'
     end
     @post_comment = PostComment.new
     @post_comments = @post.post_comments.page(params[:page]).reverse_order
@@ -63,7 +62,6 @@ class User::PostsController < ApplicationController
   def update
     tag_list=params[:post][:tag_name].split(/[,]/)
     if @post.update(post_params)
-
       if @post.saved_change_to_attribute?("status") == true
         @post.exp = 50
         Member.exp_update(current_member, @post)
@@ -88,7 +86,11 @@ class User::PostsController < ApplicationController
   def sort
     selection = params[:keyword]
     @posts = Post.sort(selection)
-    @posts = @posts.page(params[:page]).reverse_order
+    if selection == "likes"
+      @posts = Kaminari.paginate_array(@posts).page(params[:page])
+    else
+      @posts = @posts.page(params[:page])
+    end
   end
 
 

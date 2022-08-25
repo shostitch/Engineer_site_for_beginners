@@ -3,32 +3,28 @@
     <div class='sidebar'>
       <%= render 'user/posts/tag_lists', tag_lists: Tag.tag_order('desc') %>
     </div>
-    <div class='container margin'>
+    <div class='container margin circle'>
       <div class='row circle'>
-        <div class='col'>
-          <div class='row'>
-            <h2 class='col-5'>投稿一覧</h2>
-            <div class='text-right col-7'>
-              <%= render 'user/posts/post_search' %>
-            </div>
-          </div>
-          <table class='table'>
-            <thead>
-              <tr>
-                <th class='col-2'>投稿者</th>
-                <th class='col-3'>タイトル</th>
-                <th class='col-4'>内容</th>
-                <th class="col-2">投稿日(最終更新日)</th>
-                <th class='col-1'>いいね</th>
-              </tr>
-            </thead>
-            <tbody>
-              <%= render 'user/posts/index', posts: @posts %>
-            </tbody>
-          </table>
-          <%= paginate @posts %>
+        <h2 class='col-5'>投稿一覧</h2>
+        <div class='text-right col-7'>
+          <%= render 'user/posts/post_search' %>
         </div>
       </div>
+      <table class='table'>
+        <thead>
+          <tr>
+            <th class='col-2'>投稿者</th>
+            <th class='col-3'>タイトル</th>
+            <th class='col-4'>内容</th>
+            <th class="col-2">投稿日(最終更新日)</th>
+            <th class='col-1'>いいね</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render 'user/posts/index', posts: @posts %>
+        </tbody>
+      </table>
+      <%= paginate @posts %>
     </div>
   </div>
 </div>

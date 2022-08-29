@@ -13,12 +13,12 @@ class Admin::PostsController < ApplicationController
 
   def edit
     @member = @post.member
-    @tag_list = @post.tags.pluck(:name).join(',')
+    @tag_list = @post.tags.pluck(:tag_name).join(',')
     @post_status = @post.status == 'draft'
   end
 
   def update
-    tag_list = params[:post][:name].split(/[,、 　]/)
+    tag_list = params[:post][:tag_name].split(/[,]/)
     if @post.update(post_params)
       @old_relations = PostTag.where(post_id: @post.id)
         @old_relations.each do |relation|
